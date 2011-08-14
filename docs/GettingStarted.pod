@@ -5,12 +5,13 @@ Wubot::Guide::GettingStarted - monitoring and reacting to a feed
 =head1 DESCRIPTION
 
 This recipe downloads worldwide earthquake data from the USGS RSS
-feed.  The feed gives all earthquakes 5.0 and greater.  The recipe
-below filters out earthquakes that are less than 6.0, and sends them
-as console and growl notifications.  Earthquakes of 7 or greater get a
-colorized growl notification.  Earthquakes of 8 or greater get a
-sticky growl notification.  The filtered feed is then stored in a
-SQLite database and fed back out again to your favorite RSS reader.
+feed.  The feed contains an item for each earthquake 5.0 and greater.
+The recipe below filters out earthquakes that are less than 6.0, and
+sends a console and growl notification for each.  Earthquakes of 7 or
+greater get a colorized growl notification.  Earthquakes of 8 or
+greater get a sticky growl notification.  The filtered feed is then
+stored in a SQLite database and fed back out again to your favorite
+RSS reader.
 
 
 =head1 RSS Monitor
@@ -30,7 +31,8 @@ is an example of a minimalist RSS monitor config:
 
 
 The 'delay' param tells wubot-monitor how frequently to run the check,
-and the 'url' tag is the URL of the RSS/Atom feed.
+and the 'url' tag is the URL of the RSS/Atom feed.  For more info on
+the RSS monitor, see L<Wubot::Plugin::RSS>.
 
 After creating this config file, run wubot-monitor.  It will find the
 new config file and will schedule an immediate check of the RSS feed.
@@ -85,8 +87,9 @@ need a reactor config to determine what action to take when the
 message arrives.
 
 The reactor is configured with a series of rules.  For a list of the
-properties of a rule, have a peak at [[rules.txt]].  For an overview
-of the available reactor plugins, see [[reactor_plugins.txt]].
+properties of a rule, have a peak at L<Wubot::Guide::Rules>.  For an
+overview of the available reactor plugins, see
+L<Wubot::Guide::ReactorPlugins>.
 
 Let's start with the individual rules and work up to the full rule
 tree.
@@ -148,7 +151,7 @@ set the 'sticky' and 'yellow' properties on the rule.
         sticky: 1
         color: yellow
 
-To enable the notifications, see [[notifications.txt]].
+To enable the notifications, see L<Wubot::Guide::Notifications>.
 
 After enabling the notifications, go to images.google.com and find a
 .png file that you would like to use for this feed (try searching for
@@ -166,7 +169,7 @@ So now let's put it all together.  The reactor config lives here:
   ~/wubot/config/reactor.yaml
 
 Here are the final contents of the reactor config, including some
-notifications rules discussed in [[notifications.txt]].
+notifications rules discussed in L<Wubot::Guide::Notifications>.
 
 Warning: if you are not familiar with YAML, it is extremely sensitive
 to whitespace!

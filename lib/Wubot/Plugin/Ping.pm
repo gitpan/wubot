@@ -1,7 +1,7 @@
 package Wubot::Plugin::Ping;
 use Moose;
 
-our $VERSION = '0.1_7'; # VERSION
+our $VERSION = '0.1_8'; # VERSION
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -59,3 +59,38 @@ sub check {
 
 1;
 
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::Ping - monitor ping response from a remote host
+
+=head1 VERSION
+
+version 0.1_8
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/Ping/google.yaml.bsd-02
+
+  ---
+  host: google.com
+  num_packets: 3
+  delay: 5m
+
+=head1 DESCRIPTION
+
+Monitor the ping response time and number of packets dropped from a
+remote host.
+
+The generated message will contain:
+
+  host: remote host name/ip from configuration
+  count: number of packets transmitted
+  average: average ping response time
+  loss: number of packets that were lost
+
+If all packets were lost, the message will contain a subject field
+that contains the text:
+
+  Unable to ping host {$host}

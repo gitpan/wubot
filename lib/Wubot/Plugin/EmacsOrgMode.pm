@@ -1,7 +1,7 @@
 package Wubot::Plugin::EmacsOrgMode;
 use Moose;
 
-our $VERSION = '0.1_7'; # VERSION
+our $VERSION = '0.1_8'; # VERSION
 
 use Date::Manip;
 use File::chdir;

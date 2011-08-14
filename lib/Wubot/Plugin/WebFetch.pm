@@ -1,7 +1,7 @@
 package Wubot::Plugin::WebFetch;
 use Moose;
 
-our $VERSION = '0.1_7'; # VERSION
+our $VERSION = '0.1_8'; # VERSION
 
 # todo: select with xpath in addition to regexp
 

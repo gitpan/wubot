@@ -88,7 +88,7 @@ dist.ini
 docs/ArduinoSensors.pod
 docs/Conditions.pod
 docs/Debugging.pod
-docs/FilteringRss.pod
+docs/GettingStarted.pod
 docs/Guide.pod
 docs/MonitorPlugins.pod
 docs/MultipleBots.pod

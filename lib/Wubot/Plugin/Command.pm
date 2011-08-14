@@ -1,7 +1,7 @@
 package Wubot::Plugin::Command;
 use Moose;
 
-our $VERSION = '0.1_7'; # VERSION
+our $VERSION = '0.1_8'; # VERSION
 
 use Log::Log4perl;
 

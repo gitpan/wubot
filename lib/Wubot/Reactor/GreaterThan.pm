@@ -1,7 +1,7 @@
 package Wubot::Reactor::GreaterThan;
 use Moose;
 
-our $VERSION = '0.1_7'; # VERSION
+our $VERSION = '0.1_8'; # VERSION
 
 use YAML;
 
@@ -46,7 +46,7 @@ Wubot::Reactor::GreaterThan - set keys and values if the value of a field exceed
 
 =head1 VERSION
 
-version 0.1_7
+version 0.1_8
 
 =head1 DESCRIPTION
 
