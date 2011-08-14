@@ -1,7 +1,7 @@
 package Wubot::Reactor::User;
 use Moose;
 
-our $VERSION = '0.1_5'; # VERSION
+our $VERSION = '0.1_6'; # VERSION
 
 use Log::Log4perl;
 use YAML;
@@ -72,7 +72,7 @@ Wubot::Reactor::User - try to identify user from the 'username' field
 
 =head1 VERSION
 
-version 0.1_5
+version 0.1_6
 
 =head1 SYNOPSIS
 

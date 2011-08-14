@@ -1,7 +1,7 @@
 package Wubot::Reactor::TransformField;
 use Moose;
 
-our $VERSION = '0.1_5'; # VERSION
+our $VERSION = '0.1_6'; # VERSION
 
 use YAML;
 

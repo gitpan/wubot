@@ -5,7 +5,7 @@ use Moose;
 use Capture::Tiny;
 use Device::SerialPort qw( :PARAM :STAT :ALL );
 
-our $VERSION = '0.1_5'; # VERSION
+our $VERSION = '0.1_6'; # VERSION
 
 use Log::Log4perl;
 

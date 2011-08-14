@@ -2,7 +2,7 @@ package Wubot::Logger;
 use strict;
 use warnings;
 
-our $VERSION = '0.1_5'; # VERSION
+our $VERSION = '0.1_6'; # VERSION
 
 use Log::Log4perl qw(:easy);
 

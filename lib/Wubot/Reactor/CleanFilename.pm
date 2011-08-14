@@ -1,7 +1,7 @@
 package Wubot::Reactor::CleanFilename;
 use Moose;
 
-our $VERSION = '0.1_5'; # VERSION
+our $VERSION = '0.1_6'; # VERSION
 
 use Log::Log4perl;
 
@@ -65,7 +65,7 @@ Wubot::Reactor::CleanFilename - build a clean filename or directory name from a 
 
 =head1 VERSION
 
-version 0.1_5
+version 0.1_6
 
 =head1 SYNOPSIS
 

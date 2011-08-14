@@ -1,7 +1,7 @@
 package Wubot::Plugin::Twitter;
 use Moose;
 
-our $VERSION = '0.1_5'; # VERSION
+our $VERSION = '0.1_6'; # VERSION
 
 use Net::Twitter::Lite;
 use Storable;

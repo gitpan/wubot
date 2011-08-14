@@ -1,7 +1,7 @@
 package Wubot::Plugin::MoonPhase;
 use Moose;
 
-our $VERSION = '0.1_5'; # VERSION
+our $VERSION = '0.1_6'; # VERSION
 
 use Astro::MoonPhase;
 
@@ -60,3 +60,29 @@ sub check {
 }
 
 1;
+
+
+__END__
+
+
+=head1 NAME
+
+Wubot::Plugin::MoonPhase - monitor the phase of the moon
+
+
+=head1 VERSION
+
+version 0.1_6
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/MoonPhase/home.yaml
+
+  ---
+  delay: 24h
+
+
+=head1 DESCRIPTION
+
+Reports the amount of time remaining until the next full or new moon,
+whichever is closer.
