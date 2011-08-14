@@ -78,8 +78,6 @@ show up in the feed.  If you remove the cache file and restart
 wubot-monitor, it will schedule another immediate check and will
 re-send all the data from the feed.
 
-
-
 =head1 Rules
 
 Now that the messages have been delivered to the reactor queue, you
@@ -232,6 +230,9 @@ to whitespace!
         - name: growl notify
           plugin: Growl
 
+=head1 Starting the Reactor
+
+To start the reactor, simply run:  wubot-reactor
 
 =head1 Web UI
 
@@ -349,8 +350,9 @@ reactor are separate processes is by design.  This ensures that the
 monitors can continually gather data on schedule and won't get hung up
 waiting for a reaction to occur.
 
-To start the webui process, run the script wubot-webui.  Once the
-process is started up, point your RSS reader here, and enjoy your
-filtered feed:
+To start the webui process, copy the 'webui' directory out of the
+distribution tarball, set into the 'webui' directory, and run the
+script ./wubot-webui.  Once the process is started up, point your RSS
+reader here, and enjoy your filtered feed:
 
   http://localhost:3000/rss/earthquake.xml

@@ -1,7 +1,7 @@
 package Wubot::Plugin::FileRegexp;
 use Moose;
 
-our $VERSION = '0.1_8'; # VERSION
+our $VERSION = '0.1_9'; # VERSION
 
 use Log::Log4perl;
 

@@ -1,7 +1,7 @@
 package Wubot::Plugin::Roles::Cache;
 use Moose::Role;
 
-our $VERSION = '0.1_8'; # VERSION
+our $VERSION = '0.1_9'; # VERSION
 
 use YAML;
 

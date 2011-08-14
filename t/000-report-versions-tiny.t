@@ -50,6 +50,8 @@ sub pmver {
 
 eval { $v .= pmver('AnyEvent','any version') };
 eval { $v .= pmver('AnyEvent::IRC::Client','any version') };
+eval { $v .= pmver('AnyEvent::Watchdog','any version') };
+eval { $v .= pmver('AnyEvent::Watchdog::Util','any version') };
 eval { $v .= pmver('AnyEvent::XMPP::Client','any version') };
 eval { $v .= pmver('Astro::MoonPhase','any version') };
 eval { $v .= pmver('Astro::Sunrise','any version') };
@@ -73,6 +75,7 @@ eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('File::chdir','any version') };
 eval { $v .= pmver('FileHandle','any version') };
 eval { $v .= pmver('FindBin','any version') };
+eval { $v .= pmver('Getopt::Long','any version') };
 eval { $v .= pmver('HTML::Strip','any version') };
 eval { $v .= pmver('HTML::TableExtract','any version') };
 eval { $v .= pmver('HTTP::Message','any version') };

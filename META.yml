@@ -21,6 +21,8 @@ name: wubot
 requires:
   AnyEvent: 0
   AnyEvent::IRC::Client: 0
+  AnyEvent::Watchdog: 0
+  AnyEvent::Watchdog::Util: 0
   AnyEvent::XMPP::Client: 0
   Astro::MoonPhase: 0
   Astro::Sunrise: 0
@@ -41,6 +43,7 @@ requires:
   File::chdir: 0
   FileHandle: 0
   FindBin: 0
+  Getopt::Long: 0
   HTML::Strip: 0
   HTML::TableExtract: 0
   HTTP::Message: 0
@@ -70,4 +73,4 @@ requires:
   YAML::XS: 0
 resources:
   repository: http://github.com/wu/wubot
-version: 0.1_8
+version: 0.1_9

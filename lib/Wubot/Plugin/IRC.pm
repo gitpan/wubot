@@ -1,7 +1,7 @@
 package Wubot::Plugin::IRC;
 use Moose;
 
-our $VERSION = '0.1_8'; # VERSION
+our $VERSION = '0.1_9'; # VERSION
 
 use AnyEvent;
 use AnyEvent::IRC::Client;

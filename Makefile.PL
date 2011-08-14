@@ -23,12 +23,19 @@ my %WriteMakefileArgs = (
     'ExtUtils::MakeMaker' => '6.30'
   },
   'DISTNAME' => 'wubot',
-  'EXE_FILES' => [],
+  'EXE_FILES' => [
+    'bin/wubot-check',
+    'bin/wubot-monitor',
+    'bin/wubot-reactor',
+    'bin/wubot-workhours'
+  ],
   'LICENSE' => 'bsd',
   'NAME' => 'wubot',
   'PREREQ_PM' => {
     'AnyEvent' => '0',
     'AnyEvent::IRC::Client' => '0',
+    'AnyEvent::Watchdog' => '0',
+    'AnyEvent::Watchdog::Util' => '0',
     'AnyEvent::XMPP::Client' => '0',
     'Astro::MoonPhase' => '0',
     'Astro::Sunrise' => '0',
@@ -49,6 +56,7 @@ my %WriteMakefileArgs = (
     'File::chdir' => '0',
     'FileHandle' => '0',
     'FindBin' => '0',
+    'Getopt::Long' => '0',
     'HTML::Strip' => '0',
     'HTML::TableExtract' => '0',
     'HTTP::Message' => '0',
@@ -77,7 +85,7 @@ my %WriteMakefileArgs = (
     'YAML' => '0',
     'YAML::XS' => '0'
   },
-  'VERSION' => '0.1_8',
+  'VERSION' => '0.1_9',
   'test' => {
     'TESTS' => 't/*.t'
   }

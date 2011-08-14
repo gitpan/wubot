@@ -1,7 +1,7 @@
 package Wubot::Plugin::TaskDB;
 use Moose;
 
-our $VERSION = '0.1_8'; # VERSION
+our $VERSION = '0.1_9'; # VERSION
 
 use DBI;
 use POSIX qw(strftime);
