@@ -1,7 +1,7 @@
 package Wubot::Check;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use Benchmark;
 use Log::Log4perl;
@@ -20,7 +20,7 @@ Wubot::Check - perform checks for an instance of a monitor
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 SYNOPSIS
 

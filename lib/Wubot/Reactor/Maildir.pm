@@ -1,7 +1,7 @@
 package Wubot::Reactor::Maildir;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use Maildir::Lite;
 use MIME::Entity;

@@ -3,7 +3,7 @@ use Moose;
 
 use Log::Log4perl;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use Wubot::TimeLength;
 
@@ -202,7 +202,7 @@ Wubot::Plugin::OsxIdle - monitor idle time on OS X
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 SYNOPSIS
 

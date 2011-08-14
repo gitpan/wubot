@@ -1,7 +1,7 @@
 package Wubot::Plugin::Pulse;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use POSIX qw(strftime);
 
@@ -82,7 +82,7 @@ Wubot::Plugin::Pulse - send a message once per minute
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 SYNOPSIS
 

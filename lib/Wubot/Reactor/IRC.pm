@@ -1,7 +1,7 @@
 package Wubot::Reactor::IRC;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use AnyEvent;
 use AnyEvent::IRC::Client;
@@ -128,7 +128,7 @@ Wubot::Reactor::IRC - public and private IRC notifications
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 DESCRIPTION
 

@@ -1,7 +1,7 @@
 package Wubot::Reactor;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use Class::Load qw/load_class/;
 use Log::Log4perl;

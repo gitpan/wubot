@@ -1,7 +1,7 @@
 package Wubot::Reactor::ImageStrip;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use HTML::Strip;
 use YAML;
@@ -39,7 +39,7 @@ Wubot::Reactor::ImageStrip - strip image tags from a field
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 SYNOPSIS
 

@@ -1,7 +1,7 @@
 package Wubot::Reactor::Console;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use Log::Log4perl;
 use POSIX qw(strftime);
@@ -84,7 +84,7 @@ Wubot::Reactor::Console - display a notification to stdout
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 SYNOPSIS
 

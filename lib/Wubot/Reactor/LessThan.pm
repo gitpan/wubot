@@ -1,7 +1,7 @@
 package Wubot::Reactor::LessThan;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use YAML;
 
@@ -46,7 +46,7 @@ Wubot::Reactor::LessThan - set keys and values if the value of a field is less t
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 DESCRIPTION
 

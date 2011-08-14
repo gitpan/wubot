@@ -1,7 +1,7 @@
 package Wubot::Reactor::DeleteField;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 sub react {
     my ( $self, $message, $config ) = @_;
@@ -23,7 +23,7 @@ Wubot::Reactor::DeleteField - remove a field from the message
 
 =head1 VERSION
 
-version 0.1_6
+version 0.1_7
 
 =head1 SYNOPSIS
 

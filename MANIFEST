@@ -173,14 +173,13 @@ lib/Wubot/TimeLength.pm
 lib/Wubot/Util/Tasks.pm
 lib/Wubot/Util/WebFetcher.pm
 lib/Wubot/Util/XMLTV.pm
-public/sort/CHANGELOG.txt
-public/sort/README.txt
+public/sort/CHANGELOG.txt.orig
+public/sort/README.txt.orig
 public/sort/common.js
 public/sort/css.js
-public/sort/index.html
+public/sort/index.html.orig
 public/sort/standardista-table-sorting.js
 public/sort/style.css
-public/sort/timer.html
 t/000-report-versions-tiny.t
 t/arp.t
 t/author-critic.t

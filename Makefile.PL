@@ -24,7 +24,7 @@ my %WriteMakefileArgs = (
   },
   'DISTNAME' => 'wubot',
   'EXE_FILES' => [],
-  'LICENSE' => 'open_source',
+  'LICENSE' => 'bsd',
   'NAME' => 'wubot',
   'PREREQ_PM' => {
     'AnyEvent' => '0',
@@ -77,7 +77,7 @@ my %WriteMakefileArgs = (
     'YAML' => '0',
     'YAML::XS' => '0'
   },
-  'VERSION' => '0.1_6',
+  'VERSION' => '0.1_7',
   'test' => {
     'TESTS' => 't/*.t'
   }

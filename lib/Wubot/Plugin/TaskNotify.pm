@@ -1,7 +1,7 @@
 package Wubot::Plugin::TaskNotify;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use DBI;
 use POSIX qw(strftime);

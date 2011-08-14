@@ -1,7 +1,7 @@
 package Wubot::Reactor::MakeDirectory;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use File::Path;
 use Log::Log4perl;

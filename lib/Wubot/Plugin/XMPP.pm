@@ -1,7 +1,7 @@
 package Wubot::Plugin::XMPP;
 use Moose;
 
-our $VERSION = '0.1_6'; # VERSION
+our $VERSION = '0.1_7'; # VERSION
 
 use AnyEvent::XMPP::Client;
 use Encode;
