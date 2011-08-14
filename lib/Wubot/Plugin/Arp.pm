@@ -1,7 +1,7 @@
 package Wubot::Plugin::Arp;
 use Moose;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -62,7 +62,7 @@ Wubot::Plugin::Arp - monitor the arp table for new entries
 
 =head1 VERSION
 
-version 0.1_9
+version 0.1_10
 
 =head1 SYNOPSIS
 

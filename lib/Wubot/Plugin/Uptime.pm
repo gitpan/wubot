@@ -1,7 +1,7 @@
 package Wubot::Plugin::Uptime;
 use Moose;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 use Log::Log4perl;
 
@@ -94,7 +94,7 @@ Wubot::Plugin::Uptime - monitor system load
 
 =head1 VERSION
 
-version 0.1_9
+version 0.1_10
 
 =head1 SYNOPSIS
 

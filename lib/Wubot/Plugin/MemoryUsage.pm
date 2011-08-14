@@ -1,7 +1,7 @@
 package Wubot::Plugin::MemoryUsage;
 use Moose;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 use Devel::Size;
 

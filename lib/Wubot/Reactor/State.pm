@@ -1,7 +1,7 @@
 package Wubot::Reactor::State;
 use Moose;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 use File::Path;
 use YAML;

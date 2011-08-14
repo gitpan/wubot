@@ -1,7 +1,7 @@
 package Wubot::Plugin::Roles::RetryDelay;
 use Moose::Role;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 use Log::Log4perl;
 

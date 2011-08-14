@@ -1,7 +1,7 @@
 package Wubot::Reactor::WebFetch;
 use Moose;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 use Wubot::Util::WebFetcher;
 
@@ -71,7 +71,7 @@ Wubot::Reactor::WebFetch - fetch data from a URL
 
 =head1 VERSION
 
-version 0.1_9
+version 0.1_10
 
 =head1 SYNOPSIS
 

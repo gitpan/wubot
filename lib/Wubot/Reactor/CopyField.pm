@@ -1,7 +1,7 @@
 package Wubot::Reactor::CopyField;
 use Moose;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 use YAML;
 
@@ -49,7 +49,7 @@ Wubot::Reactor::CopyField - copy the value from one field to another field
 
 =head1 VERSION
 
-version 0.1_9
+version 0.1_10
 
 =head1 SYNOPSIS
 

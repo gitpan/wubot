@@ -223,9 +223,9 @@ t/workhours.t
 t/wubot_sqlite.t
 t/wubot_util_webfetcher.t
 webui/public/sort/CHANGELOG.txt.orig
-webui/public/sort/README.txt.orig
 webui/public/sort/common.js
 webui/public/sort/css.js
+webui/public/sort/doc.txt.orig
 webui/public/sort/index.html.orig
 webui/public/sort/standardista-table-sorting.js
 webui/public/sort/style.css

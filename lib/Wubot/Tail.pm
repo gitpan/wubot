@@ -1,7 +1,7 @@
 package Wubot::Tail;
 use Moose;
 
-our $VERSION = '0.1_9'; # VERSION
+our $VERSION = '0.1_10'; # VERSION
 
 use Fcntl qw( SEEK_END SEEK_CUR SEEK_SET O_NONBLOCK O_RDONLY );
 
