@@ -1,0 +1,46 @@
+;; Object templates/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "templates/"
+  :tables (list 
+   (semanticdb-table "tasks.html.ep"
+    :major-mode 'html-mode
+    :tags '(("Tasks" section nil nil [21 114]) ("a {
+  color: #000000;
+  text-decoration: none;
+}" section nil nil [114 180]) ("a {
+  color: #000000;
+  text-decoration: none;
+}" section nil nil [180 243]) ("a {
+  color: #000000;
+  text-decoration: none;
+}" section nil nil [243 417]) ("|
+    <a href=\"/notify\" style=\"color: #cccccc\">notifications" section (:members (("notifications" section nil nil [488 557]) ("tags" section nil nil [557 615]) ("graphs" section nil nil [615 1018]) (".org/<%= $row->{emacs_link} %>'><%= $row->{file} %>" section nil nil [1018 1147]) (".org/<%= $row->{emacs_link} %>?done=1'>*" section nil nil [1147 1150]))) nil [417 423]))
+    :file "tasks.html.ep"
+    :pointmax 1429
+    )
+   (semanticdb-table "graphs.html.ep"
+    :major-mode 'html-mode
+    :tags '(("Graphs" section nil nil [21 101]) ("|
+    <a href=\"/notify\" style=\"color: #cccccc\">notifications" section (:members (("notifications" section nil nil [170 239]) ("tags" section nil nil [239 297]) ("graphs" section nil nil [297 406]) ("|
+    <% } %>
+    <hr>
+
+
+    <% for my $graph ( @$images ) { %>
+      <img src=\"<%= $graph %>\">
+    <% } %>" section nil nil [406 409]))) nil [101 107]))
+    :file "graphs.html.ep"
+    :pointmax 582
+    )
+   (semanticdb-table "notify.html.ep"
+    :major-mode 'html-mode
+    :tags '(("wubot notifications" section nil nil [21 768]) ("|
+        <a href=\"/notify\"><%= $count %> unread" section (:members (("unread" section nil nil [872 933]) ("tags" section nil nil [933 976]) ("tasks" section nil nil [976 1021]) ("graphs" section nil nil [1021 1068]) ("all seen" section nil nil [1068 1610]) ("{key1} %>" section nil nil [1610 1712]) ("{key2} %>" section nil nil [1712 1827]) ("seen" section nil nil [1827 2293]) ("{subject} %>" section nil nil [2293 2516]) ("link" section nil nil [2516 2519]))) nil [768 774]))
+    :file "notify.html.ep"
+    :pointmax 2819
+    )
+   )
+  :file "semantic.cache"
+  :semantic-tag-version "2.0pre4"
+  :semanticdb-version "2.0pre4"
+  )

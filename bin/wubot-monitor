@@ -1,0 +1,178 @@
+#!/usr/local/bin/perl -w
+use strict;
+
+use AnyEvent::Watchdog autorestart => 1, heartbeat => 300;
+
+$| = 1;
+
+use AnyEvent;
+use AnyEvent::Watchdog::Util;
+use File::Path;
+use FindBin;
+use Getopt::Long;
+use Log::Log4perl qw(:easy);
+use POSIX qw(strftime);
+use YAML;
+
+use lib "$FindBin::Bin/../lib";
+
+use Wubot::Logger;
+my $logger = Log::Log4perl::get_logger( 'default' );
+
+use Wubot::Check;
+use Wubot::Config;
+use Wubot::LocalMessageStore;
+use Wubot::TimeLength;
+
+my $cache_directory = "$ENV{HOME}/wubot/cache";
+unless ( -d $cache_directory ) {
+    mkpath( $cache_directory );
+}
+
+my $config_directory = "$ENV{HOME}/wubot/config";
+unless ( -d $config_directory ) {
+    mkpath( $config_directory );
+}
+
+our $plugin_objs;
+my $schedule;
+
+my $config  = Wubot::Config->new( { root => $config_directory } );
+
+my $timelength = Wubot::TimeLength->new();
+
+# all the plugins share a message store object rather than letting
+# each create their own
+my $message_store = Wubot::LocalMessageStore->new();
+
+my $count;
+
+PLUGIN:
+for my $plugin ( $config->get_plugins() ) {
+    create_plugin_instance( $plugin );
+}
+
+if ( $count ) {
+    $logger->info( "Initialized $count enabled plugin instances" );
+}
+else {
+    $logger->logdie( "ERROR: no plugin config files processed in $config_directory" );
+}
+
+my $start_date = strftime( "%Y-%m-%d", localtime() );
+
+$logger->info( "Setting up timer..." );
+my $end = AnyEvent->condvar;
+
+my $loops;
+
+my $timer = AnyEvent->timer( after    => 1,
+                             interval => 5,
+                             cb       => sub {
+
+                                 $loops++;
+
+                                 my $now = time;
+
+                                 for my $time ( sort keys %{ $schedule } ) {
+
+                                     next if $time > $now;
+
+                                     for my $plugin ( @{ $schedule->{$time} } ) {
+                                         my $plugin_config = $config->get_plugin_config( $plugin );
+
+                                         my $results = $plugin_objs->{$plugin}->check( $plugin_config );
+
+                                         my $delay = $plugin_config->{delay} || 60;
+
+                                         if ( ref $results eq "HASH" ) {
+                                             if ( $results->{delay} ) {
+                                                 $delay = $results->{delay};
+                                                 $logger->debug( "Check $plugin rescheduled itself in $delay seconds" );
+                                             }
+                                         }
+
+                                         my $next = time + $delay;
+                                         push @{ $schedule->{$next} }, $plugin;
+                                     }
+
+                                     delete $schedule->{$time};
+                                 }
+
+                                 # daily restart
+                                 my $current_date = strftime( "%Y-%m-%d", localtime() );
+                                 unless ( $start_date eq $current_date ) {
+                                     $logger->warn( "Date changed" );
+
+                                     $logger->warn( "Restarting..." );
+                                     AnyEvent::Watchdog::Util::restart;
+                                 }
+
+                                 # for profiling
+                                 # if ( $loops > 10 ) {
+                                 #     $end->recv;
+                                 # }
+
+                             } );
+
+$logger->error( "Running..." );
+$end->recv;
+$logger->error( "Ended..." );
+
+
+sub create_plugin_instance {
+    my ( $plugin ) = @_;
+
+    $logger->debug( "Creating check instance for plugin: $plugin" );
+
+    my $plugin_config = $config->get_plugin_config( $plugin );
+
+    if ( exists $plugin_config->{enabled} ) {
+        unless ( $plugin_config->{enabled} ) {
+            $logger->warn( "Plugin disabled: $plugin" );
+            return;
+        }
+    }
+
+    $plugin_objs->{ $plugin }
+        = Wubot::Check->new( { class         => $plugin_config->{plugin},
+                               cache_file    => "$cache_directory/$plugin.yaml",
+                               key           => $plugin,
+                               reactor_queue => $message_store,
+                           } );
+
+    $plugin_objs->{ $plugin }->init( $plugin_config );
+
+    my $now        = time;
+    my $delay      = $plugin_config->{delay} || 1;
+
+    if ( $delay =~ m|\w| ) {
+        $delay = $timelength->get_seconds( $delay );
+        $plugin_config->{delay} = $delay;
+    }
+
+    my $cache = $plugin_objs->{ $plugin }->instance->get_cache;
+
+    my $lastupdate = 0;
+    if ( $cache && $cache->{lastupdate} ) {
+        $lastupdate = $plugin_objs->{ $plugin }->instance->get_cache->{lastupdate};
+    }
+
+    my $schedule_time;
+    if ( ! $lastupdate && $plugin_config->{rand} ) {
+        $schedule_time = $now + int rand( $plugin_config->{rand} );
+    }
+    elsif ( $lastupdate + $delay > $now ) {
+        $schedule_time = $lastupdate + $delay + int rand( $plugin_config->{rand} || 0 );
+    }
+    else {
+        $schedule_time = $now;
+    }
+
+    my $diff = $schedule_time - $now;
+    $logger->debug( "Scheduling next run of $plugin in $diff seconds" );
+
+    push @{ $schedule->{$schedule_time} }, $plugin;
+
+    $count++;
+}

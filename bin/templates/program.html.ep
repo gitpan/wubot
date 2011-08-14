@@ -1,0 +1,189 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+    <title>Wubot: <%= $program->{title} %></title>
+
+     <script language="javascript">
+     function HideFrame(){
+      fr = document.getElementById ("blah");
+      if (fr.style.display!='none'){
+       fr.style.display="none";
+      }
+      else {
+       fr.style.display="block";
+      }
+     }
+     </script>
+    
+  </head>
+  <body bgcolor=gray>
+
+<table width=100%><tr><td valign='top'>
+    
+    <table width=100% border=1 cellpadding=3>
+      <tr>
+        <td>lastupdate</td>
+        <td><%= scalar localtime $program->{lastupdate} %></td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td> <%= $program->{date} %> </td>
+      </tr>
+      <tr>
+        <td>Title</td>
+        <td bgcolor='<%= $program->{color}  %>'>
+          <%= $program->{title} %>
+          <a href='/tv/schedule?all=1&search=<%= $program->{title} %>'>+</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Score</td>
+        <td>
+          <%= $program->{score} %>
+          <a href='/tv/score/<%= $program->{program_id} %>/1' target='blah'>-</a><a href='/tv/score/<%= $program->{program_id} %>/2' target='blah'>-</a><a href='/tv/score/<%= $program->{program_id} %>/3' target='blah'>+</a><a href='/tv/score/<%= $program->{program_id} %>/4' target='blah'>+</a><a href='/tv/score/<%= $program->{program_id} %>/5' target='blah'>+</a><a href='/tv/score/<%= $program->{program_id} %>/D' target='blah'>X</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Series ID</td>
+        <td><%= $program->{series_id} %></td>
+      </tr>
+      <tr>
+        <td>Program ID</td>
+        <td>
+          <a href='/tv/program/<%= $program->{program_id} %>'><%= $program->{program_id} %></a>
+          <a href='/tv/schedule/<%= $program->{program_id} %>'>[->] </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Episode</td>
+        <td><%= $program->{subtitle} %></td>
+      </tr>
+      <tr>
+        <td>Episode ID</td>
+        <td>
+          <a href='/tv/program/<%= $program->{ep_id} %>'><%= $program->{ep_id} %></a>
+          <a href='/tv/schedule/<%= $program->{ep_id} %>'>[->] </a>
+        </td>
+      </tr>
+      <tr>
+        <td>Episode Number</td>
+        <td><%= $program->{episode_id} %></td>
+      </tr>
+      <tr>
+        <td>Runtime</td>
+        <td><%= $program->{runtime} %></td>
+      </tr>
+      <tr>
+        <td>Description</td>
+        <td><%= $program->{description} %></td>
+      </tr>
+      <tr>
+        <td>Type</td>
+        <td><%= $program->{show_type} %></td>
+      </tr>
+      <tr>
+        <td>Stars</td>
+        <td><%= $program->{stars} %></td>
+      </tr>
+      <tr>
+        <td>RT</td>
+        <td>
+          <% if ( $program->{rottentomato} ) { %>
+          <a href='<%= $program->{rottentomato_link} %>'><%= $program->{rottentomato} %></a>
+          <% } %>
+          <a href='/tv/rt/<%= $program->{program_id}  %>'>(fetch)</a>
+        </td>
+      </tr>
+      <tr>
+        <td>Rating</td>
+        <td><%= $program->{mpaa_rating} %></td>
+      </tr>
+      <tr>
+        <td>Color</td>
+        <td><%= $program->{color} %></td>
+      </tr>
+      <tr>
+        <td>IMDB</td>
+        <td>
+          <a href='http://www.imdb.com/find?s=tt&q=<%= $program->{title} %>'><%= $program->{title} %></a>
+          <a href='http://www.imdb.com/find?s=tt&q=<%= $program->{title} %>+<%= $program->{subtitle} %>'><%= $program->{subtitle} %></a></td>
+      </tr>
+      <tr>
+        <td>Roles</td>
+        <td>
+          <table border=1 cellspacing=0 cellpadding=5>
+            
+            <% for my $row ( @{ $program->{crew} } ) { %>
+            <tr>
+              <td>
+                <%= $row->{role} %></td><td><a href='/tv/schedule/crew/<%= $row->{givenname} %>/<%= $row->{surname} %>'><%= $row->{givenname} %> <%= $row->{surname} %></a><BR>
+              </td>
+              <td>
+                <table width=100% cellspacing=0>
+                <% for my $other ( sort { $row->{other}->{$a}->{date} cmp $row->{other}->{$b}->{date} } keys %{ $row->{other} } ) { %>
+
+                  <tr>
+                    <td width='300' bgcolor='<%= $row->{other}->{$other}->{color} %>'>
+                      <a href='/tv/program/<%= $row->{other}->{$other}->{program_id} %>'><%= $other %></a>
+                      <a href='/tv/schedule/<%= $row->{other}->{$other}->{program_id} %>'>[->]</a>
+                    </td>
+                    <td width='100'>
+                      <%= $row->{other}->{$other}->{date} %>
+                    </td>
+                    <td width=40>
+                      <%= $row->{other}->{$other}->{program_id} =~ m|^MV| ? " " : "($row->{other}->{$other}->{count})"  %>
+                    </td>
+                    <td>
+                      <% if ( $row->{other}->{$other}->{rottentomato} ) { %>
+                      <a href='<%= $row->{other}->{$other}->{rottentomato_link} %>'><%= $row->{other}->{$other}->{rottentomato} %></a>
+                      <% } elsif ( $row->{other}->{$other}->{program_id} =~ m|^MV| ) { %>
+                      <a href='/tv/rt/<%= $row->{other}->{$other}->{program_id} %>'>?</a>
+                      <% } %>
+                    </td>
+                  </tr>
+
+                <% } %>
+                </table>
+                
+              </td>
+            </tr>
+            <% } %>
+          </table>
+        </td>
+      </tr>
+
+
+    </table>
+    </td>
+<td valign='top'>
+
+  <table>
+      <tr>
+        <td>
+          <table border=1 cellspacing=0 cellpadding=5>
+            
+            <% for my $row ( sort { $a->{date} cmp $b->{date}  } @{ $program->{episodes} } ) { %>
+            <tr>
+              <td>
+                <a href='/tv/program/<%= $row->{ep_id} %>'><%= $row->{subtitle} %></a>
+              </td>
+              <td>
+                <%= $row->{episode_id}  %>
+              </td>
+              <td>
+                <%= $row->{date} %>
+              </td>
+            </tr>
+            <% } %>
+          </table>
+        </td>
+      </tr>
+      </table>
+
+</td></tr></table>
+
+    <iframe name='blah' id='blah' width="1" height="1"></iframe>
+  </body>
+</html>
+
+

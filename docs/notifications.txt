@@ -1,0 +1,328 @@
+* Notifications
+
+This document describes how to enable notifications.  You probably
+should not start at this document, as there will be no notifications
+unless you have figured out how to use the monitor and reactor.  A
+good place to start is probably [[filtering_rss.txt]].
+
+
+** Notification reactors
+
+There are currently three notification reactors:
+
+  - Console
+  - Growl
+  - IRC
+
+The 'Growl' reactor currently only works on OS X.  These plugins could
+easily be adapated to use pop-up notifications on other operating
+systems, but that has not yet been done.
+
+All three reactors look for a 'subject' field on a message, and use
+that for the notification.  Messages that do not have a 'subject'
+field are ignored.  Many monitors will set the 'subject' field to
+something useful.  For example, the RSS plugin will set the 'subject'
+field of RSS feed items to be the RSS title.  You can easily use the
+reactor to remove the subject from messages when you want to suppress
+notifications.
+
+In addition to the 'subject' field, the message key will be prefixed
+with the 'key' of the original monitor that generated the message, and
+a timestamp of when the message was originally generated.  If the
+message contains a 'username' that is also included in the
+notification.
+
+To enable the notifications, start with a rule tree that selects
+messages that contain subjects.  For the complete config, skip to the
+bottom.
+
+  - name: notifications
+    condition: subject is true
+    rules:
+
+** User
+
+The User reactor will parse the username field and extract any
+information such as the domain name or full name from an email
+address, or IRC-style username comments.  See the User reactor
+documentation for more information.  This will leave you with a short
+username which works better in notifications and makes it easier to
+locate an icon for the user.
+
+
+** Console
+
+Begin by enabing the 'Console' plugin.  This will send all subjects to
+stdout in the terminal that is running wubot-reactor.  If the message
+contains a 'color' field, the Console plugin will attempt to display
+the message in the closest ANSI color.
+
+      - name: console
+        plugin: Console
+
+
+** Growl
+
+If you have 'Growl' installed on OS X, and you have the 'growlnotify'
+command line tool installed, and the Growl::Tiny perl library
+installed, then wubot can send a growl notification.  Enabling the
+growl notifications is easy, just add a 'Growl' rule.
+        
+      - name: growl notify
+        plugin: Growl
+
+*** Icons
+
+It is very nice to have icons, e.g. for the growl notifications or the
+web ui.  The Icon plugin can be used to locate one.  This plugin looks
+at a series of fields on the message (e.g. the username, the key, the
+plugin, the instance name) and tries to find a custom .png file in
+your icons directory that is appropriate.
+
+      - name: growl icon
+        plugin: Icon
+        config:
+          image_dir: /Users/your_id/.icons
+
+*** Growl Colors
+
+It is also nice to have colorized growl messages.  Unfortunately you
+can't just pass a color into growl.  One trick I've found here is to
+use the 'smoke' theme and then configure a different color for each
+priority.  For very low, I use blue, moderate is green, normal is
+black, high is orange, and emergency is red.  Then I have a rule in
+the reactor which maps the name of a color to the growl priority:
+
+      - name: growl color
+        plugin: HashLookup
+        config:
+          source_field: color
+          target_field: growl_priority
+          lookup:
+            red: 2
+            yellow: 1
+            orange: 1
+            grey: 0
+            bold black: 0
+            green: -1
+            magenta: -2
+            purple: -2
+            blue: -2
+            cyan: -2
+
+Now if I have a rule that runs before this rule that sets the 'color'
+field to blue, this rule will set a field called 'growl_priority' in
+the message which will have the priority that corresponds to the color
+i set for that priority in the growl preferences.
+
+*** Growl identifier
+
+Growl has a feature called 'coalescing'.  This allows multiple
+notifications to re-use a sigle bubble for notifications, with the
+latest notification taking precedence.
+
+By default, wubot will set the growl identifier for each growl
+notification to be the message key.  This helps prevent message
+floods, especially when starting up wubot if there are a lot of
+notifications waiting in the queue.  Without a growl identifier,
+dozens (or even hundreds) of notification bubbles could queue up and
+prevent you from being able to work.
+
+In some cases this may work against you.  For example, if you use the
+Twitter plugin, then all notifications for a given twitter account use
+the same key.  So, if multiple tweets come through quickly from
+different users, they will re-use the same notification bubble--and
+you may only get a chance to read the last one.  So in these
+situations, you can override the default behavior by setting
+'growl_id'.  For example:
+
+  - name: twitter growl id
+    condition: key matches ^Twitter AND username is true
+    plugin: Template
+    config:
+      template: 'Twitter-{$username}'
+      target_field: growl_id
+
+This would give each person you follow on twitter a separate
+notification bubble.
+
+When overiding the default growl id, one thing to note is that if you
+send a sticky notification, and then you send a non-sticky
+notification with the same growl id, the non-sticky notification will
+replace the sticky notification (since it will use the same bubble),
+and will time out and go away like a normal non-sticky notification.
+This means that your sticky window will get cleared.  Wubot tries to
+prevent this sort of thing by using separate id for sticky
+notifications and non-sticky notifications.  That way a sticky window
+can nevery be cleared by a non-sticky window.
+
+
+** IRC
+
+The IRC notification lets you send a public IRC message to a channel
+or a private message to a user.  For more information, see
+[[irc.txt]].
+
+** subject_text field
+
+If your message has a field 'subject_text', then that field will be
+used for the notifications instead of the 'subject' field.  This makes
+it easy to do things like strip HTML without alterting the original
+subject field.  You most likely will not want html to be displayed in
+the console notification or be read aloud.  You can strip HTML from
+any field using the HTMLStrip plugin, e.g.:
+
+      - name: strip HTML from subject
+        condition: contains subject
+        plugin: HTMLStrip
+        config:
+          field: subject
+          target_field: subject_text
+
+Keep this field in mind if you delete the subject field.  If you have
+created a subject_text field, then even if you delete the subject
+field, you could still receive a notification.  This can be confusing
+if you have set 'subject_text' and then you change 'subject'--since
+the changed subject won't be reflected in the notification.  The
+easiest way to avoid this is simply to avoid using the subject_text
+field.
+
+** Notifications Web UI
+
+The notifications web ui allows you to browse your notification
+history, and to mark notifications as 'seen', or apply tags to them.
+The notifications web ui is still in its infancy, but can be quite
+useful.
+
+To use the notifications web ui, begin by creating a reactor rule in
+your notifications rule tree that saves messages containing a subject
+to the notifications table.
+
+      - name: notify sql table
+        plugin: SQLite
+        config:
+          file: /Users/wu/wubot/sqlite/notify.sql
+          tablename: notifications
+
+Make sure you have copied the 'notifications.yaml' and 'tags.yaml'
+schema files from config/schemas/ in the wubot distribution into your
+~/wubot/schemas/.
+
+Next, start up the wubot-webui process if you haven't already done so.
+By default you can hit the notification web interface at:
+
+  http://localhost:3000/notify/
+
+Notifications will be displayed in reverse order with the newest
+notification at the top.  The last 100 notifications will be
+displayed.  Duplicate notifications will be collapsed into a single
+line and will contain a 'count' field that will show how many of the
+last 100 notifications were duplicates of this notification.  Note
+that duplicate collapsing is done entirely on the subject line, so if
+there were multiple plugins that produced the same subject, they will
+still be collapsed together.
+
+You can click on the 'seen' link to mark the item seen.  Also the
+message 'key' will be broken into its two component fields, the plugin
+name and the instance name.  Clicking on the instance name (key2) will
+mark all notifications from that instance seen, and clicking on the
+plugin name (key1) will mark all notifications generated by that
+plugin as seen.
+
+In addition there is a 'tag' field.  You can enter text into that
+field (and hit submit or enter) and it will create an entry in the
+'tag' table (e.g. readme, interesting, scifi, etc.) that will point to
+that item in the notification table.  A web ui to browse the tags is
+coming soon.
+
+There are also some special commands you can enter in the tags field:
+
+  r         mark a single item as seen
+  rr        mark all items with this subject as seen
+  r.*       mark all notifications as seen
+  r.regexp  mark all notifications whose subject matches /regexp/ as seen
+
+To ensure that the icons show up in the notifications web ui, you
+should do two things:
+
+  1. ensure that the 'icon' rule runs before the notifications sqlite
+  rule.  otherwise no icon will have been set in the message.
+
+  2. ensure that your icons directory is symlinked into the public/
+  directory.  for example, if your icons are in ~/.icons/ and you are
+  running wubot from ~/projects/wubot, then set into the
+  ~/projects/wubot/public directory and run 'ln -s ~/.icons ./'.  Then
+  you should be able to see one of your images in your ~/.icons
+  directory by navigating to, e.g.:
+
+    http://localhost:3000/images/wubot.png
+
+Lots more to come here!
+
+
+** Reactor Config
+
+So now let's put it all together.  The reactor config lives here:
+
+  ~/wubot/config/reactor.yaml
+
+Here are the final contents of the reactor config.
+
+Warning: if you are not familiar with YAML, it is extremely sensitive
+to whitespace!
+
+
+
+---
+rules:
+
+  - name: notifications
+    condition: subject is true
+    rules:
+
+      - name: strip HTML from subject
+        condition: contains subject
+        plugin: HTMLStrip
+        config:
+          field: subject
+          target_field: subject_text
+
+      - name: user field parser
+        plugin: User
+
+      - name: console
+        plugin: Console
+
+      - name: growl color
+        plugin: HashLookup
+        config:
+          source_field: color
+          target_field: growl_priority
+          lookup:
+            red: 2
+            yellow: 1
+            orange: 1
+            grey: 0
+            bold black: 0
+            green: -1
+            magenta: -2
+            purple: -2
+            blue: -2
+            cyan: -2
+    
+      - name: growl icon
+        plugin: Icon
+        config:
+          image_dir: /Users/your_id/.icons
+
+      - name: growl notify
+        plugin: Growl
+
+      - name: notify sql table
+        plugin: SQLite
+        config:
+          file: /Users/wu/wubot/sqlite/notify.sql
+          tablename: notifications
+
+
+

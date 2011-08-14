@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <title>wubot notifications</title>
+    <meta http-equiv="refresh" content="60">
+    <style type="text/css">
+
+a {
+  color: #cccccc;
+  text-decoration: none;
+}
+input {
+  color: #cccccc;
+}
+table {
+  width: 100%;
+  font-size: small;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+tr {
+  text-align: center
+}
+td {
+  border-color: #000;
+  border-width: 1px 0px 0 0;
+  border-style: solid;
+  margin: 0;
+  padding: 4px;
+  text-align: center;
+  color: #cccccc;
+}
+th {
+  background-color: purple;
+}
+th.key1, th.key2 {
+  width: 5%;
+}
+th.count, th.id {
+  width: 3%;
+}
+td.age {
+  color: #000000;
+  width: 4%;
+}
+td.seen, th.seen {
+  color: #000000;
+  width: 2%;
+}
+th.key, th.username {
+  width: 10%
+}
+th.subject {
+  width: 65%;
+}
+
+    </style>
+  </head>
+  <body bgcolor=black>
+    <form method="post">
+
+      <font size="-1" color="#FF00FF">
+        |
+        <a href="/notify"><%= $count %> unread</a>
+        |
+        <a href="/tags">tags</a>
+        |
+        <a href="/tasks">tasks</a>
+        |
+        <a href="/graphs">graphs</a>
+        |
+        <a href="?seen=<%= $ids %>">all seen</a>
+        |
+      </font>
+
+    <table>
+      <thead>
+        <tr>
+          <% for my $header ( @$headers ) { %>
+          <th class="<%= $header %>"><%= $header %></th>
+          <% } %>
+        </tr>
+      </thead>
+
+      <tbody>
+
+        <% for my $row ( @{ $body_data } ) { %>
+        <tr bgcolor="<%= $row->{color} %>">
+
+          <td><input type="text" name="tag_<%= $row->{id} %>" size="5" style="background-color: <%= $row->{color} %>; border: 1px solid black"></td>
+
+          <td>
+            <a href="?key=<%= $row->{key} %>"><%= $row->{key1} %></a>
+          </td>
+
+          <td>
+            <a href="?key=<%= $row->{key} %>"><%= $row->{key2} %></a>
+          </td>
+
+          <td class="seen">
+            <a href="?seen=<%= $row->{id} %>">seen</a>
+          </td>
+          <td align="center">
+            <% if ( $row->{count} && $row->{count} > 1 ) { %>
+            <%= $row->{count} %>
+            <% } %>
+          </td>
+
+          <td style="text-align: right"><%= $row->{username} %></td>
+
+          <td><img height="32" width="32" src="/images/<%= $row->{icon} %>"></td>
+
+          <td style="text-align: left">
+            <% if ( $row->{link} ) { %>
+            <a href="<%= $row->{link} %>"><%= $row->{subject} %></a>
+            <% } else { %>
+            <%= $row->{subject} %>
+            <% } %>
+          </td>
+
+          <td>
+            <% if ( $row->{link} ) { %>
+            <a href="<%= $row->{link} %>">link</a>
+            <% } %>
+          </td>
+
+          <td class="age" bgcolor="<%= $row->{age_color} %>"><%= $row->{age} %></td>
+
+        </tr>
+        <% } %>
+
+      </tbody>
+      <tfoot></tfoot>
+    </table>
+
+    <br><br>
+    <input type="image" src="images/wubot.png" border=0 height=32 width=32 alt="submit">
+
+    </form>
+
+  </body>
+</html>
+
+
