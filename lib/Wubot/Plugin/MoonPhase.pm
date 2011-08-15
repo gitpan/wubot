@@ -1,7 +1,7 @@
 package Wubot::Plugin::MoonPhase;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use Astro::MoonPhase;
 
@@ -72,7 +72,7 @@ Wubot::Plugin::MoonPhase - monitor the phase of the moon
 
 =head1 VERSION
 
-version 0.1_10
+version 0.2_001
 
 =head1 SYNOPSIS
 

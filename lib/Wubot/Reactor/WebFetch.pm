@@ -1,10 +1,11 @@
 package Wubot::Reactor::WebFetch;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use Wubot::Util::WebFetcher;
 
+use Log::Log4perl;
 use YAML;
 
 has 'fetcher' => ( is  => 'ro',
@@ -14,6 +15,15 @@ has 'fetcher' => ( is  => 'ro',
                        return Wubot::Util::WebFetcher->new();
                    },
                );
+
+has 'logger'  => ( is => 'ro',
+                   isa => 'Log::Log4perl::Logger',
+                   lazy => 1,
+                   default => sub {
+                       return Log::Log4perl::get_logger( __PACKAGE__ );
+                   },
+               );
+
 
 sub react {
     my ( $self, $message, $config ) = @_;
@@ -35,6 +45,8 @@ sub react {
         $self->logger->error( "WebFetch Reactor ERROR:: neither url nor url_field defined in config" );
         return $message;
     }
+
+    $self->logger->debug( "Fetching content from $url" );
 
     my $content;
     eval {                          # try
@@ -71,7 +83,7 @@ Wubot::Reactor::WebFetch - fetch data from a URL
 
 =head1 VERSION
 
-version 0.1_10
+version 0.2_001
 
 =head1 SYNOPSIS
 

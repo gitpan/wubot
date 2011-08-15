@@ -1,7 +1,7 @@
 package Wubot::LocalMessageStore;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 # todo - warn if queue length above a certain size
 

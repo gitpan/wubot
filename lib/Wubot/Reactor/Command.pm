@@ -1,7 +1,7 @@
 package Wubot::Reactor::Command;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use FileHandle;
 use File::Path;

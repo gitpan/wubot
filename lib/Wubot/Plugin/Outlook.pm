@@ -1,7 +1,7 @@
 package Wubot::Plugin::Outlook;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use Date::Manip;
 use Encode;

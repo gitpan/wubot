@@ -1,7 +1,7 @@
 package Wubot::Reactor::Dumper;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use Log::Log4perl;
 use YAML;
@@ -40,7 +40,7 @@ Wubot::Reactor::Dumper - display the contents of a field or an entire message
 
 =head1 VERSION
 
-version 0.1_10
+version 0.2_001
 
 =head1 SYNOPSIS
 

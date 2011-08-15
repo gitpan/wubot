@@ -1,7 +1,7 @@
 package Wubot::Util::XMLTV;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use Benchmark;
 use Capture::Tiny qw/capture/;

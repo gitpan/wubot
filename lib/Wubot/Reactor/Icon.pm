@@ -1,7 +1,7 @@
 package Wubot::Reactor::Icon;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use Log::Log4perl;
 use YAML;
@@ -111,7 +111,7 @@ Wubot::Reactor::Icon - search for an appropriate icon for a message
 
 =head1 VERSION
 
-version 0.1_10
+version 0.2_001
 
 =head1 SYNOPSIS
 

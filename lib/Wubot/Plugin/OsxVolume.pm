@@ -1,7 +1,7 @@
 package Wubot::Plugin::OsxVolume;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -44,7 +44,7 @@ Wubot::Plugin::OsxVolume - monitor OS X volume
 
 =head1 VERSION
 
-version 0.1_10
+version 0.2_001
 
 =head1 SYNOPSIS
 

@@ -1,7 +1,7 @@
 package Wubot::Plugin::XMPP;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use AnyEvent::XMPP::Client;
 use Encode;
@@ -142,5 +142,36 @@ sub check {
     return {};
 }
 
-
 1;
+
+__END__
+
+
+=head1 NAME
+
+Wubot::Plugin::XMPP - send and receive messages over XMPP
+
+
+=head1 VERSION
+
+version 0.2_001
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/XMPP/myhost.yaml
+
+  ---
+  account: wubot-myhost@server
+  host: localhost
+  port: 5222
+  password: supersecret
+  directory: /home/dude/wubot/notify
+  user: wubot-otherhost@server/myhost
+  delay: 5
+
+
+=head1 DESCRIPTION
+
+Sends and receive messages between wubot instances over XMPP.
+
+For more information, see L<Wubot::Guides::MultipleBOts>.

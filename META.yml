@@ -73,4 +73,4 @@ requires:
   YAML::XS: 0
 resources:
   repository: http://github.com/wu/wubot
-version: 0.1_10
+version: 0.2_001

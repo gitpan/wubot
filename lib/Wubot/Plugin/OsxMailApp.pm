@@ -1,7 +1,7 @@
 package Wubot::Plugin::OsxMailApp;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use Date::Manip;
 use Log::Log4perl;

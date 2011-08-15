@@ -1,7 +1,7 @@
 package Wubot::Plugin::RSS;
 use Moose;
 
-our $VERSION = '0.1_10'; # VERSION
+our $VERSION = '0.2_001'; # VERSION
 
 use XML::Feed;
 
@@ -116,7 +116,7 @@ Wubot::Plugin::RSS - monitor an RSS feed
 
 =head1 VERSION
 
-version 0.1_10
+version 0.2_001
 
 =head1 SYNOPSIS
 
@@ -176,3 +176,7 @@ The monitor caches all subject in the feed.  When a new (previously
 unseen) subject shows up on the feed, the message will be sent, and
 the cache will be updated.  Removing the cache file will cause all
 items in the feed to be sent again.
+
+=head1 SEE ALSO
+
+This plugin uses L<Wubot::Util::WebFetcher>.
