@@ -1,16 +1,17 @@
 package Wubot::SQLite;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Capture::Tiny;
 use DBI;
 use DBD::SQLite;
 use Devel::StackTrace;
 use FindBin;
-use Log::Log4perl;
 use SQL::Abstract;
 use YAML;
+
+use Wubot::Logger;
 
 # only initialize one connection to each database handle
 my %sql_handles;
@@ -446,9 +447,11 @@ sub get_schema {
     unless ( $table ) {
         $self->logger->logconfess( "ERROR: get_schema called but no table specified" );
     }
-    unless ( $table =~ m|^[\w\d\_]+$| ) {
-        $self->logger->logconfess( "ERROR: table name contains invalid characters: $table" );
-    }
+
+    # table name may contain 'join'
+    # unless ( $table =~ m|^[\w\d\_]+$| ) {
+    #     $self->logger->logconfess( "ERROR: table name contains invalid characters: $table" );
+    # }
 
     my $schema_file = join( "/", $self->schema_dir, "$table.yaml" );
     $self->logger->debug( "looking for schema file: $schema_file" );

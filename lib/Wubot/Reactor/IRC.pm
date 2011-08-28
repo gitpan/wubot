@@ -1,14 +1,14 @@
 package Wubot::Reactor::IRC;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use AnyEvent;
 use AnyEvent::IRC::Client;
-use Log::Log4perl;
 use POSIX qw(strftime);
 use YAML;
 
+use Wubot::Logger;
 
 has 'logger'  => ( is => 'ro',
                    isa => 'Log::Log4perl::Logger',
@@ -128,7 +128,7 @@ Wubot::Reactor::IRC - public and private IRC notifications
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 DESCRIPTION
 

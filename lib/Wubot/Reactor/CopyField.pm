@@ -1,9 +1,11 @@
 package Wubot::Reactor::CopyField;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use YAML;
+
+use Wubot::Logger;
 
 has 'logger'  => ( is => 'ro',
                    isa => 'Log::Log4perl::Logger',
@@ -49,7 +51,7 @@ Wubot::Reactor::CopyField - copy the value from one field to another field
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

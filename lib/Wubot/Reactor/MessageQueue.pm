@@ -1,11 +1,11 @@
 package Wubot::Reactor::MessageQueue;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use Log::Log4perl;
 use YAML;
 
+use Wubot::Logger;
 use Wubot::LocalMessageStore;
 
 has 'mailbox'   => ( is      => 'ro',

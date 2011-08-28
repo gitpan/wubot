@@ -1,10 +1,21 @@
 package Wubot::Plugin::EmacsOrgMode;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Date::Manip;
 use File::chdir;
+
+use Wubot::Logger;
+use Wubot::Util::Tasks;
+
+has 'taskutil' => ( is => 'ro',
+                    isa => 'Wubot::Util::Tasks',
+                    lazy => 1,
+                    default => sub {
+                        return Wubot::Util::Tasks->new();
+                    },
+                );
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -69,84 +80,9 @@ sub check {
             }
         }
 
-        my @tasks;
+        my @tasks = $self->taskutil->parse_emacs_org_page( $entry, $content );
 
-        for my $block ( split /(?:^|\n)\*+\s/, $content ) {
-
-            $block =~ s|^\s*\*\s+||mg;
-
-            $block =~ m|^(\w+)|;
-            my $name = $1;
-
-            next unless $name;
-
-            if ( $name =~ m|meta|i ) {
-                if ( $block =~ m|^\s+\-\scolor\:\s([\w]+)$|m ) {
-                    $color = "$1";
-                }
-            }
-            elsif ( $name eq "TODO" || $name eq "DONE" ) {
-
-                #next if $name eq "DONE";
-
-                $block =~ s|^\w+\s+||;
-
-                my $task;
-                $task->{type} = 'task';
-
-                my $priorities = { C => 0, B => 1, A => 2 };
-                if ( $block =~ s|^\[\#(\w)\]\s|| ) {
-                    $task->{priority} = $priorities->{ $1 };
-                }
-                else {
-                    $task->{priority} = -1;
-                }
-
-                if ( $block =~ s|^((?:\d+[smhd])+)\s|| ) {
-                    $task->{duration} = $1;
-                }
-
-                $task->{status} = lc( $name );
-
-                $task->{file} = $filename;
-
-                $block =~ s|^(.*)||;
-                $task->{title} = $1;
-
-                if ( $task->{title} =~ s|\s*\[(\d+.*?)\]\s*$|| ) {
-                    $task->{progress} = $1;
-                }
-
-                $task->{taskid} = join( ".", $task->{file}, $task->{title} );
-
-                # deadline may be listed before or after schedule.
-                # this is an ugly solution that gets it either way
-                if ( $block =~ s|^\s+DEADLINE\:\s\<(.*?)(?:\s\.?(\+\d+\w))?\>||m ) {
-                    $task->{deadline_text} = $1;
-                    $task->{deadline}      = UnixDate( ParseDate( $1 ), "%s" );
-                    $task->{deadline_recurrence}    = $2;
-                }
-                if ( $block =~ s|^\s+SCHEDULED\:\s\<(.*?)(?:\s\.?(\+\d+\w))?\>||m ) {
-                    $task->{scheduled_text} = $1;
-                    $task->{scheduled}      = UnixDate( ParseDate( $1 ), "%s" );
-                    $task->{scheduled_recurrence}     = $2;
-                }
-                if ( $block =~ s|^\s+DEADLINE\:\s\<(.*?)(?:\s\.?(\+\d+\w))?\>||m ) {
-                    $task->{deadline_text} = $1;
-                    $task->{deadline}      = UnixDate( ParseDate( $1 ), "%s" );
-                    $task->{deadline_recurrence}    = $2;
-                }
-
-                $block =~ s|^\s+\- State "DONE"\s+from "TODO"\s+\[.*$||mg;
-
-                $block =~ s|^\s+\n||s;
-
-                $task->{body} = $block;
-
-                push @tasks, $task;
-            }
-
-        }
+        $self->taskutil->sync_tasks( $entry, @tasks );
 
         push @react, { name      => $filename,
                        file      => $filename,
@@ -176,3 +112,17 @@ sub check {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::EmacsOrgMode - parse tasks from Emacs Org-Mode files
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

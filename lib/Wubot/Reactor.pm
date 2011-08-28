@@ -1,12 +1,13 @@
 package Wubot::Reactor;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Class::Load qw/load_class/;
-use Log::Log4perl;
 use Scalar::Util qw/looks_like_number/;
 use YAML;
+
+use Wubot::Logger;
 
 has 'config' => ( is => 'ro',
                   isa => 'HashRef',

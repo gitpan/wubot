@@ -1,9 +1,11 @@
 package Wubot::Plugin::Pulse;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use POSIX qw(strftime);
+
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -15,17 +17,23 @@ sub check {
 
     my $cache = $inputs->{cache};
 
-    my $now = time;
+    my $now = $inputs->{now} || time;
 
     my $lastupdate = $cache->{lastupdate} || $now;
 
-    my $minutes_old = int( ( $now - $lastupdate ) / 60 );
-    $self->logger->debug( "minutes old: $minutes_old" );
+    # the number of minutes that have occurred on the clock since the
+    # last notification.
+    my $seconds = strftime( "%S", localtime( $now ) );
+
+    my $diff = $now - $lastupdate;
+    my $minutes_old = int( $diff / 60 );
+    $self->logger->debug( "minutes old: $minutes_old => $diff diff seconds, $seconds seconds past minute" );
 
     my @minutes;
     if ( ! $cache->{lastupdate} ) {
-        $self->logger->warn( "First pulse, no pulse cache data found" );
+        $self->logger->warn( "Pulse: no pulse cache data found, first pulse" );
         @minutes = ( 0 );
+        $minutes_old = 0;
     }
     elsif ( $minutes_old ) {
         if ( $minutes_old > 10 ) {
@@ -35,10 +43,16 @@ sub check {
             $self->logger->info( "Minutes since last pulse: $minutes_old" );
         }
         @minutes = reverse ( 0 .. $minutes_old - 1 );
+
+        $self->logger->trace( "updating lastupdate to: ", scalar localtime $now );
     }
     else {
+        # we have already sent the pulse for this minute
         @minutes = ();
     }
+
+    # set the 'lastupdate' time to be the beginning of the current minute
+    $cache->{lastupdate} = $now - $seconds;
 
     for my $age ( @minutes ) {
 
@@ -56,12 +70,11 @@ sub check {
                         time => $time,
                         day  => $weekday,
                         age  => $age,
+                        coalesce => $self->key,
                     };
 
         push @messages, $message;
     }
-
-    $cache->{lastupdate} = $now;
 
     # attempt to sync up pulses with the minute
     my $second = strftime( "%S", localtime() );
@@ -82,7 +95,7 @@ Wubot::Plugin::Pulse - send a message once per minute
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

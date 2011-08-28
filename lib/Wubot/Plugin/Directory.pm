@@ -1,7 +1,9 @@
 package Wubot::Plugin::Directory;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
+
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -53,6 +55,18 @@ sub check {
     return { cache => $cache, react => \@react };
 }
 
-
-
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::Directory - monitor a directory for new files
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

@@ -1,10 +1,12 @@
 package Wubot::Reactor::ImageStrip;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use HTML::Strip;
 use YAML;
+
+use Wubot::Logger;
 
 sub react {
     my ( $self, $message, $config ) = @_;
@@ -39,7 +41,7 @@ Wubot::Reactor::ImageStrip - strip image tags from a field
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

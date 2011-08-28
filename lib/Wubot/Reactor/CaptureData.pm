@@ -1,11 +1,13 @@
 package Wubot::Reactor::CaptureData;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 # todo: enable using Regexp::Common regexps here
 
 use YAML;
+
+use Wubot::Logger;
 
 sub react {
     my ( $self, $message, $config ) = @_;
@@ -43,7 +45,7 @@ Wubot::Reactor::CaptureData - capture data from a field using a regexp
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

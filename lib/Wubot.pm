@@ -1,7 +1,7 @@
 package Wubot;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 #_* Libraries
 
@@ -16,11 +16,13 @@ Wubot - personal distributed reactive automation
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 DESCRIPTION
 
-Please see the README for a full description.
+For an overview of wubot, please see L<Wubot::Guide::Overview>.
+
+For more information, see the L<Wubot::Guide>.
 
 =cut
 
@@ -31,11 +33,9 @@ Please see the README for a full description.
 
 __END__
 
-=back
+=head1 LICENSE AND COPYRIGHT
 
-=head1 LICENCE AND COPYRIGHT
-
-Copyright (c) 2009, VVu@geekfarm.org
+Copyright (c) 2011, VVu@geekfarm.org
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without

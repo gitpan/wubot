@@ -1,7 +1,9 @@
 package Wubot::Plugin::Arp;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
+
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -62,7 +64,7 @@ Wubot::Plugin::Arp - monitor the arp table for new entries
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -88,7 +90,7 @@ on your private network.
 
 =head1 CACHE
 
-THe Arp monitor uses the global cache mechanism, so each time the
+The Arp monitor uses the global cache mechanism, so each time the
 check runs, it will update a file such as:
 
   ~/wubot/cache/Arp-myhostname.yaml
@@ -100,7 +102,7 @@ cause all arp entries to be sent again.
 
 =head1 SQLite
 
-If you wanted to store all ARP addresses in a sqlite datbase, you
+If you wanted to store all ARP addresses in a sqlite database, you
 could use a rule such as this in the reactor:
 
   - name: Arp

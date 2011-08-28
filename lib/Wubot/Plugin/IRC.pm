@@ -1,13 +1,13 @@
 package Wubot::Plugin::IRC;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use AnyEvent;
 use AnyEvent::IRC::Client;
-use Log::Log4perl;
 use YAML;
 
+use Wubot::Logger;
 
 has 'logger'  => ( is => 'ro',
                    isa => 'Log::Log4perl::Logger',
@@ -72,6 +72,8 @@ sub check {
                                                my $user = $ircmsg->{prefix};
                                                $user =~ s|\!.*||;
 
+                                               $channel =~ s|^\#||;
+
                                                $self->reactor->( { subject  => "$user: $channel: $text",
                                                                    text     => $text,
                                                                    channel  => $channel,
@@ -100,6 +102,8 @@ sub check {
                     );
 
     $self->con->reg_cb( join          => sub { my ( $foo, $nick, $channel, $is_myself ) = @_;
+                                               $channel =~ s|^\#||;
+
                                                $self->reactor->( { subject  => "join: $nick: $channel",
                                                                    username => $nick,
                                                                    channel  => $channel,
@@ -109,6 +113,8 @@ sub check {
                     );
 
     $self->con->reg_cb( part          => sub { my ( $foo, $nick, $channel, $is_myself, $message ) = @_;
+
+                                               $channel =~ s|^\#||;
 
                                                my $subject = "part: $nick: $channel";
                                                if ( $message ) { $subject .= ": $message"; }
@@ -142,6 +148,8 @@ sub check {
                     );
 
     $self->con->reg_cb( channel_topic => sub { my ( $foo, $channel, $topic, $who ) = @_;
+
+                                               $channel =~ s|^\#||;
 
                                                my $subject = "topic: $channel [[ $topic ]]";
                                                if ( $who ) { $subject .= " ($who)"; }
@@ -183,7 +191,7 @@ Wubot::Plugin::IRC - monitor IRC channels
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -222,7 +230,7 @@ Monitor IRC.  A message will be sent for the following events:
   subject: ping: no response received
 
 A ping will be sent every 60 seconds.  If no ping response is
-receieved, the connection will be terminated and automatic reconnect
+received, the connection will be terminated and automatic reconnect
 will begin.
 
 =item publicmsg

@@ -1,13 +1,13 @@
 package Wubot::Reactor::State;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use File::Path;
 use YAML;
 
+use Wubot::Logger;
 use Wubot::TimeLength;
-
 
 has 'cache'   => ( is => 'ro',
                    isa => 'HashRef',

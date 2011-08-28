@@ -1,14 +1,15 @@
 package Wubot::Plugin::Outlook;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Date::Manip;
 use Encode;
 use HTML::TableExtract;
-use Log::Log4perl;
 use LWP::UserAgent;
 use YAML;
+
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -38,7 +39,7 @@ sub check {
 
     my $count = scalar $self->get_msgids( $content );
 
-    my $message = { count => $count };
+    my $message = { count => $count, coalesce => $self->key };
 
     if ( $count ) {
         $message->{subject} = "$count messages in your inbox";
@@ -96,3 +97,17 @@ sub get_content {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::Outlook - monitor number of emails in the inbox using Outlook Web
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

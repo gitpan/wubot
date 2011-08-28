@@ -1,10 +1,12 @@
 package Wubot::Util::WebFetcher;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use HTTP::Message;
 use LWP::UserAgent;
+
+use Wubot::Logger;
 
 sub fetch {
     my ( $self, $url, $config ) = @_;
@@ -53,7 +55,7 @@ sub fetch {
         return { react => { 'failure getting updates: ' . $res->status_line } };
     }
 
-	my $content = $res->decoded_content;
+    my $content = $res->decoded_content;
 
     utf8::encode( $content );
 

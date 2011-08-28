@@ -1,10 +1,11 @@
 package Wubot::Plugin::OsxMailApp;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Date::Manip;
-use Log::Log4perl;
+
+use Wubot::Logger;
 
 has 'logger'  => ( is => 'ro',
                    isa => 'Log::Log4perl::Logger',
@@ -103,3 +104,17 @@ sub check {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::OsxMailApp - monitor OS X mailbox file for new messages
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

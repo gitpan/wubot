@@ -1,10 +1,11 @@
 package Wubot::Plugin::RSS;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use XML::Feed;
 
+use Wubot::Logger;
 use Wubot::Util::WebFetcher;
 
 with 'Wubot::Plugin::Roles::Cache';
@@ -90,6 +91,7 @@ sub check {
                         subject    => $subject,
                         link       => $link,
                         body       => $body,
+                        coalesce   => $self->key,
                     };
 
         push @react, $article;
@@ -116,7 +118,7 @@ Wubot::Plugin::RSS - monitor an RSS feed
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -167,7 +169,7 @@ If the feed contains no articles, the message will contain the text:
 
 =head1 CACHE
 
-THe RSS monitor uses the global cache mechanism, so each time the
+The RSS monitor uses the global cache mechanism, so each time the
 check runs, it will update a file such as:
 
   ~/wubot/cache/RSS-myfeed.yaml

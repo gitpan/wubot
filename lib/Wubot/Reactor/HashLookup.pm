@@ -1,7 +1,9 @@
 package Wubot::Reactor::HashLookup;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
+
+use Wubot::Logger;
 
 sub react {
     my ( $self, $message, $config ) = @_;
@@ -30,7 +32,7 @@ Wubot::Reactor::HashLookup - map the value of one field to a value for another u
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

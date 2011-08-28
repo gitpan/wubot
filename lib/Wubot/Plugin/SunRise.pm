@@ -1,12 +1,13 @@
 package Wubot::Plugin::SunRise;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Astro::Sunrise;
 use Date::Manip;
 use POSIX qw(strftime);
 
+use Wubot::Logger;
 use Wubot::TimeLength;
 
 has 'timelength' => ( is => 'ro',
@@ -25,7 +26,7 @@ sub check {
 
     my $now  = time;
 
-    my $message = {};
+    my $message = { coalesce => $self->key };
 
     # if the next sunrise/sunset event listed in the cache is in the
     # future, then use that date instead of re-calculating
@@ -47,6 +48,7 @@ sub check {
 
         my $diff_time = $self->timelength->get_human_readable( $mins*60 );
         $message->{subject} = "$cache->{next} in $diff_time";
+
         return { react => $message };
     }
 
@@ -110,7 +112,7 @@ Wubot::Plugin::SunRise - monitor the sunrise and sunset times
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

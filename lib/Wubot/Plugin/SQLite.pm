@@ -1,7 +1,9 @@
 package Wubot::Plugin::SQLite;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
+
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -19,7 +21,7 @@ sub check {
     my $sqlite =  Wubot::SQLite->new( { file => $file } );
 
     if ( $config->{statements} ) {
-        my $return;
+        my $return = { coalesce => $self->key };
 
         for my $statement ( @{ $config->{statements} } ) {
             for my $row ( $sqlite->query( $statement ) ) {
@@ -40,6 +42,8 @@ sub check {
                 $self->cache_mark_seen( $cache, $row->{id} );
             }
 
+            $row->{coalesce} = $self->key;
+
             push @react, $row;
         }
     }
@@ -50,3 +54,17 @@ sub check {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::SQLite - monitor results of SQLite queries
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

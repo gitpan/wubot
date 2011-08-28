@@ -1,10 +1,11 @@
 package Wubot::Reactor::SetField;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use Log::Log4perl;
 use YAML;
+
+use Wubot::Logger;
 
 has 'logger'  => ( is => 'ro',
                    isa => 'Log::Log4perl::Logger',
@@ -57,7 +58,7 @@ Wubot::Reactor::SetField - set one or more fields on the message to a configured
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

@@ -1,9 +1,11 @@
 package Wubot::Plugin::TiVo;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Net::TiVo;
+
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -33,7 +35,9 @@ sub check {
         my $pid = fork();
         if ( $pid ) {
             # parent process
-            return { react => { subject => "launched tivo child process: $pid" } }
+            return { react => { subject  => "launched tivo child process: $pid",
+                                coalesce => $self->key,
+                            } }
         }
     }
 
@@ -81,6 +85,7 @@ sub check {
                                     program_id  => $show->program_id(),
                                     series_id   => $show->series_id(),
                                     link        => $show->url(),
+                                    coalesce    => $self->key,
                                 } );
 
                 $cache->{shows}->{$show_string} = 1;
@@ -112,7 +117,7 @@ Wubot::Plugin::TiVo - monitor a tivo for new recordings
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -167,7 +172,7 @@ config/schema/ directory into your ~/wubot/schemas.
 
 =head1 DOWNLOADING TIVO PROGRAMS
 
-Tivo programs can be downloaded from the link specified in the
+TiVo programs can be downloaded from the link specified in the
 message.  It is possible to use wubot to fully automate this process,
 although that is not yet documented.
 

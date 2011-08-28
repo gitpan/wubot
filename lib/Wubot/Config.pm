@@ -1,11 +1,12 @@
 package Wubot::Config;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use Log::Log4perl;
 use Sys::Hostname qw();
 use YAML;
+
+use Wubot::Logger;
 
 has 'hostname' => ( is => 'ro',
                     isa => 'Str',

@@ -1,17 +1,17 @@
 package Wubot::LocalMessageStore;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 # todo - warn if queue length above a certain size
 
 use Digest::MD5 qw( md5_hex );
 use File::Path;
-use Log::Log4perl;
 use POSIX qw(strftime);
 use Sys::Hostname qw();
 use YAML::XS;
 
+use Wubot::Logger;
 use Wubot::Reactor;
 use Wubot::SQLite;
 

@@ -1,12 +1,12 @@
 package Wubot::Plugin::XMLTV;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Date::Manip;
-use Log::Log4perl;
 use YAML;
 
+use Wubot::Logger;
 use Wubot::SQLite;
 use Wubot::TimeLength;
 use Wubot::Util::XMLTV;
@@ -80,3 +80,17 @@ sub check {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::XMLTV - fetch data from XMLTV and store in the wubot tv db
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

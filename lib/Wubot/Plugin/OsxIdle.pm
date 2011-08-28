@@ -1,10 +1,9 @@
 package Wubot::Plugin::OsxIdle;
 use Moose;
 
-use Log::Log4perl;
+our $VERSION = '0.2_002'; # VERSION
 
-our $VERSION = '0.2_001'; # VERSION
-
+use Wubot::Logger;
 use Wubot::TimeLength;
 
 has 'timelength' => ( is => 'ro',
@@ -75,6 +74,8 @@ sub check {
             delete $cache->{$stat};
         }
     }
+
+    $results->{coalesce} = "OsxIdle";
 
     $self->logger->debug( "idle_min:$stats->{idle_min} idle_state:$stats->{idle_state} active_min:$stats->{active_min}" );
 
@@ -202,7 +203,7 @@ Wubot::Plugin::OsxIdle - monitor idle time on OS X
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -233,7 +234,7 @@ you the amount of time you have spent in that state.  This can be
 useful to remind you to stretch or take a break after a certain amount
 of time being active.
 
-This plugin is desiged to be run every 60 seconds.
+This plugin is designed to be run every 60 seconds.
 
 If anyone is aware of a command that can be run for other operating
 systems to provide idle time, please let me know.
@@ -273,6 +274,11 @@ active/idle, then you could use the following rule in the reactor:
             right-axis: 1:0
             width: 375
 
+
+See some example graphs here:
+
+  - http://www.geekfarm.org/wu/wubot/OsxIdle-navi-daily.png
+  - http://www.geekfarm.org/wu/wubot/OsxIdle-navi-weekly.png
 
 =head1 SEE ALSO
 

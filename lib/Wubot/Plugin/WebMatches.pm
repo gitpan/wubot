@@ -1,8 +1,9 @@
 package Wubot::Plugin::WebMatches;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
+use Wubot::Logger;
 use Wubot::Util::WebFetcher;
 
 with 'Wubot::Plugin::Roles::Cache';
@@ -79,7 +80,7 @@ Wubot::Plugin::WebMatches - monitor a web page for items matching a regexp
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

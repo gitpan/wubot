@@ -5,10 +5,9 @@ use Moose;
 use Capture::Tiny;
 use Device::SerialPort qw( :PARAM :STAT :ALL );
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use Log::Log4perl;
-
+use Wubot::Logger;
 use Wubot::Tail;
 
 has 'device'    => ( is      => 'rw',
@@ -99,3 +98,16 @@ sub check {
 
 1;
 
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::SerialPort - monitor data received over a serial port
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+More to come...

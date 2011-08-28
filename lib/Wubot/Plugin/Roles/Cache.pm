@@ -1,9 +1,11 @@
 package Wubot::Plugin::Roles::Cache;
 use Moose::Role;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use YAML;
+
+use Wubot::Logger;
 
 has 'cache_file' => ( is => 'ro',
                       isa => 'Str',

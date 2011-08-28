@@ -1,11 +1,12 @@
 package Wubot::Plugin::WorkHours;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use DBI;
 use POSIX qw(strftime);
 
+use Wubot::Logger;
 use Wubot::SQLite;
 
 has 'sql'    => ( is      => 'ro',
@@ -120,7 +121,7 @@ Wubot::Plugin::WorkHours - track of the number of hours you are active/idle
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -191,3 +192,7 @@ and to store your workhours data in a SQLite database.
               - LINE
             right-axis: 1:0
             width: 375
+
+=head1 EXAMPLE GRAPHS
+
+  - http://www.geekfarm.org/wu/wubot/WorkHours-navi-weekly.png

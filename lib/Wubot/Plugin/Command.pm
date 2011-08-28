@@ -1,9 +1,9 @@
 package Wubot::Plugin::Command;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use Log::Log4perl;
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -72,3 +72,18 @@ sub check {
 }
 
 1;
+
+__END__
+
+
+=head1 NAME
+
+Wubot::Plugin::Command - run an external command and capture the output and exit status
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

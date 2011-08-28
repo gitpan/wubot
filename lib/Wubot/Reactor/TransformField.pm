@@ -1,9 +1,11 @@
 package Wubot::Reactor::TransformField;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use YAML;
+
+use Wubot::Logger;
 
 sub react {
     my ( $self, $message, $config ) = @_;

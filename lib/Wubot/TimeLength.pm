@@ -1,7 +1,9 @@
 package Wubot::TimeLength;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
+
+use Wubot::Logger;
 
 has 'space' => ( is => 'ro', isa => 'Bool', default => 0 );
 

@@ -1,12 +1,14 @@
 package Wubot::Plugin::TaskDB;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use DBI;
 use POSIX qw(strftime);
 
+use Wubot::Logger;
 use Wubot::Util::Tasks;
+
 my $taskutil   = Wubot::Util::Tasks->new();
 
 with 'Wubot::Plugin::Roles::Cache';
@@ -54,5 +56,18 @@ sub check {
 
 }
 
-
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::TaskDB - monitor the highest priority task in the task db
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

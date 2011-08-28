@@ -1,7 +1,7 @@
 package Wubot::Reactor::Maildir;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Maildir::Lite;
 use MIME::Entity;
@@ -9,6 +9,7 @@ use POSIX qw(strftime);
 use Sys::Hostname qw();
 use YAML;
 
+use Wubot::Logger;
 
 BEGIN {
     # temporarily disable warnings for redefine while we monkey-patch Maildir::Lite

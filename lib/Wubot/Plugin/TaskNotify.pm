@@ -1,16 +1,17 @@
 package Wubot::Plugin::TaskNotify;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use DBI;
 use POSIX qw(strftime);
 
+use Wubot::Logger;
 use Wubot::Util::Tasks;
-my $taskutil   = Wubot::Util::Tasks->new();
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
+
+my $taskutil   = Wubot::Util::Tasks->new();
 
 sub check {
     my ( $self, $inputs ) = @_;
@@ -37,5 +38,18 @@ sub check {
     return { react => \@tasks };
 }
 
-
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::TaskNotify - monitor for upcoming scheduled tasks
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

@@ -1,9 +1,11 @@
 package Wubot::Plugin::Mbox;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use Mail::MboxParser;
+
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -86,7 +88,7 @@ Wubot::Plugin::Mbox - monitor an Mbox file
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -111,7 +113,7 @@ sent containing:
 
 =head1 CACHE
 
-THe Mbox monitor uses the global cache mechanism, so each time the
+The Mbox monitor uses the global cache mechanism, so each time the
 check runs, it will update a file such as:
 
   ~/wubot/cache/Mbox-inbox.yaml

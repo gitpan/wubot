@@ -1,10 +1,11 @@
 package Wubot::Reactor::MakeDirectory;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use File::Path;
-use Log::Log4perl;
+
+use Wubot::Logger;
 
 has 'logger'  => ( is => 'ro',
                    isa => 'Log::Log4perl::Logger',

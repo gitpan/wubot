@@ -1,10 +1,9 @@
 package Wubot::Plugin::FileTail;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use Log::Log4perl;
-
+use Wubot::Logger;
 use Wubot::Tail;
 
 has 'path'      => ( is      => 'rw',
@@ -77,3 +76,17 @@ sub check {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Plugin::FileTail - monitor a log file for all new lines
+
+=head1 VERSION
+
+version 0.2_002
+
+=head1 DESCRIPTION
+
+TODO: More to come...

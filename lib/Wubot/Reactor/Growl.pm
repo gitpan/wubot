@@ -1,7 +1,7 @@
 package Wubot::Reactor::Growl;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
 use POSIX qw(strftime);
 use YAML;
@@ -9,6 +9,8 @@ use YAML;
 my $growl_enabled = 1;
 eval "use Growl::Tiny";  ## no critic (ProhibitStringyEval)
 if ( $@ ) { $growl_enabled = 0 }
+
+use Wubot::Logger;
 
 sub react {
     my ( $self, $message, $config ) = @_;
@@ -66,6 +68,9 @@ sub react {
     if ( $message->{growl_id} ) {
         $notification->{identifier} = $message->{growl_id};
     }
+    elsif ( $message->{coalesce} ) {
+        $notification->{identifier} = $message->{coalesce};
+    }
     else {
         my $id = $message->{key} || $subject;
 
@@ -92,7 +97,7 @@ Wubot::Reactor::Growl - display a growl notification on OS X using Growl::Tiny
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 

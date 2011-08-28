@@ -1,9 +1,9 @@
 package Wubot::Plugin::Uptime;
 use Moose;
 
-our $VERSION = '0.2_001'; # VERSION
+our $VERSION = '0.2_002'; # VERSION
 
-use Log::Log4perl;
+use Wubot::Logger;
 
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
@@ -94,7 +94,7 @@ Wubot::Plugin::Uptime - monitor system load
 
 =head1 VERSION
 
-version 0.2_001
+version 0.2_002
 
 =head1 SYNOPSIS
 
@@ -138,3 +138,7 @@ accessible by ssh.  Simply set the command like so:
 
   ---
   command: ssh somehost /bin/uptime
+
+=head1 EXAMPLE GRAPHS
+
+  - http://www.geekfarm.org/wu/wubot/Uptime-navi-daily.png
