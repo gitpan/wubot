@@ -1,7 +1,7 @@
 package Wubot::Plugin::OsxIdle;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 use Wubot::TimeLength;
@@ -60,7 +60,7 @@ sub check {
     my $results;
 
     my $stats;
-    ( $stats, $cache ) = $self->calculate_idle_stats( time, $idle_sec, $config, $cache );
+    ( $stats, $cache ) = $self->_calculate_idle_stats( time, $idle_sec, $config, $cache );
 
     # add all stats to both the cache and results
     for my $stat ( keys %{ $stats } ) {
@@ -82,7 +82,7 @@ sub check {
     return { cache => $cache, react => $results };
 }
 
- sub calculate_idle_stats {
+ sub _calculate_idle_stats {
      my ( $self, $now, $seconds, $config, $cache ) = @_;
 
      my $stats;
@@ -203,7 +203,7 @@ Wubot::Plugin::OsxIdle - monitor idle time on OS X
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -284,3 +284,14 @@ See some example graphs here:
 
 If you use this plugin, you may also be interested in
 L<Wubot::Plugin::WorkHours>.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

@@ -1,7 +1,7 @@
 package Wubot::Reactor::Command;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use FileHandle;
 use File::Path;
@@ -92,7 +92,7 @@ sub react {
     }
 
     if ( $config->{fork} ) {
-        return $self->enqueue( $command, $message, $config );
+        return $self->_enqueue( $command, $message, $config );
     }
 
     $output = `$command 2>&1`;
@@ -149,7 +149,7 @@ sub monitor {
         my $id = $entry;
         $id =~ s|\.log$||;
 
-        next if $self->check_process( $id );
+        next if $self->_check_process( $id );
 
         $self->logger->debug( "Command: collecting finish process info for $id" );
 
@@ -304,7 +304,7 @@ sub monitor {
                 $self->logger->error( "Warning, no serialized message data for command: queue=$id id=$entry->{sqlid}" );
             }
 
-            if ( my $results = $self->try_fork( $entry ) ) {
+            if ( my $results = $self->_try_fork( $entry ) ) {
 
                 # TODO: react to message
                 #push @messages, { subject => "forked process for queue $id" };
@@ -319,7 +319,7 @@ sub monitor {
     return \@messages;
 }
 
-sub enqueue {
+sub _enqueue {
     my ( $self, $command, $message, $config ) = @_;
 
     my $id = $config->{fork};
@@ -348,7 +348,7 @@ sub enqueue {
     return $message;
 }
 
-sub try_fork {
+sub _try_fork {
     my ( $self, $process ) = @_;
 
     $self->logger->debug( "Forking new process for: $process->{id}" );
@@ -448,7 +448,7 @@ sub try_fork {
     exit;
 }
 
-sub check_process {
+sub _check_process {
     my ( $self, $id ) = @_;
 
     my $pidfile = join( "/", $self->logdir, "$id.pid" );
@@ -476,3 +476,40 @@ sub check_process {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Reactor::Command - run an external command using data from the message
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 DESCRIPTION
+
+TODO: More to come...
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=item monitor()
+
+The standard reactor monitor() method.
+
+TODO: exclude this from Test::Pod::Coverage
+
+=back
+
+=begin Pod::Coverage
+
+  WNOHANG
+
+=end Pod::Coverage

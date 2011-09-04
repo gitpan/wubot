@@ -1,7 +1,7 @@
 package Wubot::Reactor::CleanFilename;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -65,7 +65,7 @@ Wubot::Reactor::CleanFilename - build a clean filename or directory name from a 
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -104,3 +104,13 @@ Some additional cleanup is done to make the filename pretty:
   multiple consecutive underscores are replaced with a single underscore
   _-_ will be replaced with simply -
   "foo's thing" will become "foos_thing" rather than "foo_s_thing"
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

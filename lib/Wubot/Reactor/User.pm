@@ -1,7 +1,7 @@
 package Wubot::Reactor::User;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use YAML;
 
@@ -12,7 +12,7 @@ has 'userdb'  => ( is => 'ro',
                    lazy => 1,
                    default => sub {
                        my $self = shift;
-                       $self->read_user_info();
+                       $self->_read_user_info();
                    },
                );
 
@@ -93,7 +93,7 @@ sub react {
     return $message;
 }
 
-sub read_user_info {
+sub _read_user_info {
     my ( $self ) = @_;
 
     my $config = {};
@@ -141,7 +141,7 @@ Wubot::Reactor::User - try to identify user from the 'username' field
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -176,3 +176,13 @@ see the 'notifications' document.
 Eventually this plugin will be adapted to identify a user in a
 database of contacts, and optionally apply configuration data from the
 contact db, e.g. a nickname or a username_color.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

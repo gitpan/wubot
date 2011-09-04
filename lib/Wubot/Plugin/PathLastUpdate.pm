@@ -1,7 +1,7 @@
 package Wubot::Plugin::PathLastUpdate;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -52,7 +52,7 @@ Wubot::Plugin::PathLastUpdate - monitor the last modified time on a path
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -92,3 +92,14 @@ know when the feed is not being updated:
   path: /Users/wu/Music/iTunes/iTunes Media/Podcasts/Science Friday Audio Podcast
   age: 1w1d
   delay: 15m
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

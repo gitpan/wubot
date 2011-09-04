@@ -1,7 +1,7 @@
 package Wubot::Reactor::Icon;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use YAML;
 
@@ -29,14 +29,14 @@ sub react {
     my $image_dir = $config->{image_dir} || $self->icon_dir;
 
     if ( $message->{image} ) {
-        if ( my $icon = $self->check_for_image( $image_dir, $message->{image}, $config, 'image' ) ) {
+        if ( my $icon = $self->_check_for_image( $image_dir, $message->{image}, $config, 'image' ) ) {
             $message->{icon} = $icon;
             return $message;
         }
     }
 
     if ( $message->{username} && $message->{username} ne "wubot" ) {
-        if ( my $icon = $self->check_for_image( $image_dir, $message->{username}, $config, 'username' ) ) {
+        if ( my $icon = $self->_check_for_image( $image_dir, $message->{username}, $config, 'username' ) ) {
             $message->{icon} = $icon;
             return $message;
         }
@@ -45,7 +45,7 @@ sub react {
 
     if ( $message->{key} ) {
 
-        if ( my $icon = $self->check_for_image( $image_dir, $message->{key}, $config, 'key' ) ) {
+        if ( my $icon = $self->_check_for_image( $image_dir, $message->{key}, $config, 'key' ) ) {
             $message->{icon} = $icon;
             return $message;
         }
@@ -53,23 +53,23 @@ sub react {
         $message->{key} =~ m|^(.*?)\-(.*)$|;
         my ( $plugin, $instance ) = ( $1, $2 );
 
-        if ( my $icon = $self->check_for_image( $image_dir, $instance, $config, 'instance' ) ) {
+        if ( my $icon = $self->_check_for_image( $image_dir, $instance, $config, 'instance' ) ) {
             $message->{icon} = $icon;
             return $message;
         }
 
-        if ( my $icon = $self->check_for_image( $image_dir, $plugin, $config, 'plugin', ) ) {
+        if ( my $icon = $self->_check_for_image( $image_dir, $plugin, $config, 'plugin', ) ) {
             $message->{icon} = $icon;
             return $message;
         }
     }
 
     # last chance
-    $message->{icon} = $self->check_for_image( $image_dir, "wubot", $config, 'wubot' );
+    $message->{icon} = $self->_check_for_image( $image_dir, "wubot", $config, 'wubot' );
     return $message;
 }
 
-sub check_for_image {
+sub _check_for_image {
     my ( $self, $image_dir, $image, $config, $key ) = @_;
 
     if ( $config ) {
@@ -112,7 +112,7 @@ Wubot::Reactor::Icon - search for an appropriate icon for a message
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -146,3 +146,13 @@ reactor plugin prior to using the Icon plugin so that the username
 field is parsed appropriately.
 
 For more information, please see the 'notifications' document.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

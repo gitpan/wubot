@@ -1,7 +1,7 @@
 package Wubot::Reactor::False;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use YAML;
 
@@ -46,7 +46,7 @@ Wubot::Reactor::False - set keys and values if a field is false
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 DESCRIPTION
 
@@ -64,3 +64,13 @@ reactor plugin:
         key2: value2
 
 See the 'conditions' document for more information.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

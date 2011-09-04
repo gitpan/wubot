@@ -1,7 +1,7 @@
 package Wubot::Plugin::WebMatches;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 use Wubot::Util::WebFetcher;
@@ -80,7 +80,7 @@ Wubot::Plugin::WebMatches - monitor a web page for items matching a regexp
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -160,3 +160,14 @@ cause all matching items to be sent again.
 =head1 SEE ALSO
 
 This plugin uses L<Wubot::Util::WebFetcher>.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

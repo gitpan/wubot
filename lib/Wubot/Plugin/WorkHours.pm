@@ -1,7 +1,7 @@
 package Wubot::Plugin::WorkHours;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use DBI;
 use POSIX qw(strftime);
@@ -52,10 +52,10 @@ sub check {
                           callback  => sub { push @rows, $_[0] },
                       } );
 
-    return { react => $self->calculate_stats( \@rows ) };
+    return { react => $self->_calculate_stats( \@rows ) };
 }
 
-sub calculate_stats {
+sub _calculate_stats {
     my ( $self, $rows ) = @_;
 
     my $data;
@@ -121,7 +121,7 @@ Wubot::Plugin::WorkHours - track of the number of hours you are active/idle
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -196,3 +196,14 @@ and to store your workhours data in a SQLite database.
 =head1 EXAMPLE GRAPHS
 
   - http://www.geekfarm.org/wu/wubot/WorkHours-navi-weekly.png
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

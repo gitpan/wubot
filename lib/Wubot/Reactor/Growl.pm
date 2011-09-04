@@ -1,7 +1,7 @@
 package Wubot::Reactor::Growl;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use POSIX qw(strftime);
 use YAML;
@@ -97,7 +97,7 @@ Wubot::Reactor::Growl - display a growl notification on OS X using Growl::Tiny
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -108,3 +108,13 @@ version 0.2_002
 =head1 DESCRIPTION
 
 For more information, please see the 'notifications' document.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

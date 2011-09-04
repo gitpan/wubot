@@ -1,7 +1,7 @@
 package Wubot::Plugin::FileTail;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 use Wubot::Tail;
@@ -85,8 +85,23 @@ Wubot::Plugin::FileTail - monitor a log file for all new lines
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 DESCRIPTION
 
 TODO: More to come...
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item init( $inputs )
+
+The standard monitor init() method.
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

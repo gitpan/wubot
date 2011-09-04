@@ -1,13 +1,37 @@
 package Wubot::Util::Tasks;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Date::Manip;
 use POSIX qw(strftime);
 
 use Wubot::Logger;
 use Wubot::SQLite;
+
+=head1 NAME
+
+Wubot::Util::Tasks - utility for dealing with the Emacs Org-Mode files and tasks database
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 SYNOPSIS
+
+    use Wubot::Util::Tasks;
+
+=head1 DESCRIPTION
+
+The wubot tasks libraries are still under development.  I am using
+them now, but there are still a few rough edges.  More documentation
+will be published once the rough edges can be smoothed over a bit.
+
+For more details on Emacs org-mode, see:
+
+  http://orgmode.org/
+
+=cut
 
 has 'sql'    => ( is      => 'ro',
                   isa     => 'Wubot::SQLite',
@@ -45,6 +69,15 @@ my $colors = { deadline => { 2  => '#CC3300',
                          },
            };
 
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item $obj->get_tasks()
+
+TODO: documentation this method
+
+=cut
 
 sub get_tasks {
     my ( $self, $due ) = @_;
@@ -112,6 +145,12 @@ sub get_tasks {
     return @tasks;
 }
 
+=item $obj->check_schedule()
+
+TODO: documentation this method
+
+=cut
+
 sub check_schedule {
     my ( $self ) = @_;
 
@@ -147,15 +186,24 @@ sub check_schedule {
     return @tasks;
 }
 
+=item $obj->sync_tasks()
+
+TODO: documentation this method
+
+=cut
+
 sub sync_tasks {
     my ( $self, $file, @tasks ) = @_;
+
+    $self->logger->debug( "Syncing tasks for $file" );
 
     my %existing_task_ids;
 
     $self->sql->select( { tablename => 'tasks',
                           where     => { file => $file },
                           callback  => sub { my $task = shift;
-                                             $existing_task_ids{ $task->{taskid} } = 1;
+                                             $existing_task_ids{ $task->{taskid} } = $task->{id};
+                                             $self->logger->trace( "Existing task id: $task->{taskid} => $task->{id}" );
                                          },
                       } );
 
@@ -178,17 +226,28 @@ sub sync_tasks {
 
 
         $inserted_task_ids{ $task->{taskid} } = 1;
+        $self->logger->debug( "updated task id: $task->{taskid}" );
+
 
     }
 
     for my $taskid ( keys %existing_task_ids ) {
+        my $id = $existing_task_ids{$taskid};
+
         unless ( $inserted_task_ids{ $taskid } ) {
-            $self->sql->delete( 'tasks', { taskid => $taskid } );
+            $self->logger->debug( "Removed task: $taskid => $id" );
+            $self->sql->delete( 'tasks', { id => $id } );
         }
     }
 
     return 1;
 }
+
+=item $obj->parse_emacs_org_page()
+
+TODO: documentation this method
+
+=cut
 
 sub parse_emacs_org_page {
     my ( $self, $orig_filename, $content ) = @_;
@@ -241,6 +300,9 @@ sub parse_emacs_org_page {
         if ( $block =~ s|^((?:\d+[smhd])+)\s|| ) {
             $task->{duration} = $1;
         }
+        else {
+            $task->{duration} = undef;
+        }
 
         $task->{status} = lc( $name );
 
@@ -255,22 +317,29 @@ sub parse_emacs_org_page {
 
         $task->{taskid} = join( ".", $task->{file}, $task->{title} );
 
+        $task->{deadline_text}        = undef;
+        $task->{deadline_utime}       = undef;
+        $task->{deadline_recurrence}  = undef;
+        $task->{scheduled_text}       = undef;
+        $task->{scheduled_utime}      = undef;
+        $task->{scheduled_recurrence} = undef;
+
         # deadline may be listed before or after schedule.
         # this is an ugly solution that gets it either way
         if ( $block =~ s|^\s+DEADLINE\:\s\<(.*?)(?:\s\.?(\+\d+\w))?\>||m ) {
-            $task->{deadline_text} = $1;
-            $task->{deadline_utime}      = UnixDate( ParseDate( $1 ), "%s" );
-            $task->{deadline_recurrence}    = $2;
+            $task->{deadline_text}       = $1;
+            $task->{deadline_utime}      = UnixDate( ParseDate( $1 ), "%s" ) - 3600;
+            $task->{deadline_recurrence} = $2;
         }
         if ( $block =~ s|^\s+SCHEDULED\:\s\<(.*?)(?:\s\.?(\+\d+\w))?\>||m ) {
-            $task->{scheduled_text} = $1;
-            $task->{scheduled_utime}      = UnixDate( ParseDate( $1 ), "%s" );
-            $task->{scheduled_recurrence}     = $2;
+            $task->{scheduled_text}       = $1;
+            $task->{scheduled_utime}      = UnixDate( ParseDate( $1 ), "%s" ) - 3600;
+            $task->{scheduled_recurrence} = $2;
         }
         if ( $block =~ s|^\s+DEADLINE\:\s\<(.*?)(?:\s\.?(\+\d+\w))?\>||m ) {
-            $task->{deadline_text} = $1;
-            $task->{deadline_utime}      = UnixDate( ParseDate( $1 ), "%s" );
-            $task->{deadline_recurrence}    = $2;
+            $task->{deadline_text}       = $1;
+            $task->{deadline_utime}      = UnixDate( ParseDate( $1 ), "%s" ) - 3600;
+            $task->{deadline_recurrence} = $2;
         }
 
         $block =~ s|^\s+\- State "DONE"\s+from "TODO"\s+\[.*$||mg;
@@ -296,3 +365,6 @@ sub parse_emacs_org_page {
 
 1;
 
+__END__
+
+=back

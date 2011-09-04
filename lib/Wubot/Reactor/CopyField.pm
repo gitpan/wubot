@@ -1,7 +1,7 @@
 package Wubot::Reactor::CopyField;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use YAML;
 
@@ -51,7 +51,7 @@ Wubot::Reactor::CopyField - copy the value from one field to another field
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -104,3 +104,13 @@ that to the field named in myfield2 (bar):
   myfield1: foo
   myfield2: bar
   bar: foo
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

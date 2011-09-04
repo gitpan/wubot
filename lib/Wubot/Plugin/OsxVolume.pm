@@ -1,7 +1,7 @@
 package Wubot::Plugin::OsxVolume;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -46,7 +46,7 @@ Wubot::Plugin::OsxVolume - monitor OS X volume
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -77,3 +77,14 @@ When using voice notifications from wubot, it may sometimes be
 necessary to mute or lower the volume.  This monitor can alert you
 when you have accidentally left the volume too low so and thus may not
 be able to hear voice notifications.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

@@ -1,7 +1,7 @@
 package Wubot::Reactor::DeleteField;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -25,7 +25,7 @@ Wubot::Reactor::DeleteField - remove a field from the message
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -38,3 +38,13 @@ version 0.2_002
 =head1 DESCRIPTION
 
 Removes a field and its value from a message.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

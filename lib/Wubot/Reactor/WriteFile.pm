@@ -1,7 +1,7 @@
 package Wubot::Reactor::WriteFile;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use YAML;
 
@@ -54,3 +54,28 @@ sub react {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Reactor::WriteFile - write data from a message to an external file
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 DESCRIPTION
+
+TODO: More to come...
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

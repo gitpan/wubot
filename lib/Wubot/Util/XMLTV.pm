@@ -1,7 +1,7 @@
 package Wubot::Util::XMLTV;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Benchmark;
 use Capture::Tiny qw/capture/;
@@ -14,6 +14,32 @@ use YAML;
 use Wubot::Logger;
 use Wubot::SQLite;
 use Wubot::TimeLength;
+
+=head1 NAME
+
+Wubot::Util::XMLTV - utility method for dealing with XMLTV data
+
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 SYNOPSIS
+
+    use Wubot::Util::XMLTV;
+
+=head1 DESCRIPTION
+
+This library takes care of fetching XMLTV data using tv_grab_na_dd,
+parsing it using XML::Twig, and inserting it into a SQLite database.
+It also provides a number of methods to make it easy to retrieve data
+from the database and to display it in the web interface.
+
+This plugin is not yet documented.
+
+TODO: write more docs here!
+
+=cut
 
 has 'db' => ( is => 'ro',
               isa => 'Wubot::SQLite',
@@ -79,6 +105,15 @@ has 'score_colors' => ( is => 'ro',
                         },
                     );
 
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item $obj->fetch_process_data();
+
+TODO: documentation this method
+
+=cut
 
 sub fetch_process_data {
     my ( $self, $tmpfile ) = @_;
@@ -121,6 +156,12 @@ sub fetch_process_data {
     print "DONE PROCESSING XMLTV DATA\n";
 
 }
+
+=item $obj->process_data();
+
+TODO: documentation this method
+
+=cut
 
 sub process_data {
     my ( $self, $xmlfile ) = @_;
@@ -266,6 +307,12 @@ sub process_data {
 
 }
 
+=item $obj->get_data();
+
+TODO: documentation this method
+
+=cut
+
 sub get_data {
     my ( $self, $table, $where, $key, $order ) = @_;
 
@@ -293,6 +340,12 @@ sub get_data {
     return @data;
 }
 
+=item $obj->get_series_id();
+
+TODO: documentation this method
+
+=cut
+
 sub get_series_id {
     my ( $self, $name ) = @_;
 
@@ -311,6 +364,12 @@ sub get_series_id {
 
     return @ids;
 }
+
+=item $obj->get_program_id();
+
+TODO: documentation this method
+
+=cut
 
 sub get_program_id {
     my ( $self, $name, $like ) = @_;
@@ -339,6 +398,12 @@ sub get_program_id {
     return @ids;
 }
 
+=item $obj->get_episodes();
+
+TODO: documentation this method
+
+=cut
+
 sub get_episodes {
     my ( $self, $showid ) = @_;
 
@@ -364,6 +429,12 @@ sub get_episodes {
 
     return @ids;
 }
+
+=item $obj->get_program_details();
+
+TODO: documentation this method
+
+=cut
 
 sub get_program_details {
     my ( $self, $program_id ) = @_;
@@ -402,6 +473,12 @@ sub get_program_details {
     return @details;
 }
 
+=item $obj->get_station();
+
+TODO: documentation this method
+
+=cut
+
 sub get_station {
     my ( $self, $where ) = @_;
 
@@ -418,6 +495,11 @@ sub get_station {
     return @details;
 }
 
+=item $obj->get_program_crew();
+
+TODO: documentation this method
+
+=cut
 
 sub get_program_crew {
     my ( $self, $program_id ) = @_;
@@ -428,6 +510,12 @@ sub get_program_crew {
 
     return $self->get_data( 'crew', { program_id => $program_id } );
 }
+
+=item $obj->get_roles();
+
+TODO: documentation this method
+
+=cut
 
 sub get_roles {
     my ( $self, $first, $last ) = @_;
@@ -444,17 +532,35 @@ sub get_roles {
     return @programs;
 }
 
+=item $obj->get_program_genres();
+
+TODO: documentation this method
+
+=cut
+
 sub get_program_genres {
     my ( $self, $program_id ) = @_;
 
     return $self->get_data( 'genre', { program_id => $program_id }, 'genre', 'relevance' );
 }
 
+=item $obj->get_channel();
+
+TODO: documentation this method
+
+=cut
+
 sub get_channel {
     my ( $self, $station_id ) = @_;
 
     return ( $self->get_data( 'lineup', { station_id => $station_id }, 'channel' ) )[0];
 }
+
+=item $obj->get_station_id();
+
+TODO: documentation this method
+
+=cut
 
 sub get_station_id {
     my ( $self, $channel ) = @_;
@@ -463,6 +569,12 @@ sub get_station_id {
 
     return $station_id;
 }
+
+=item $obj->hide_station();
+
+TODO: documentation this method
+
+=cut
 
 sub hide_station {
     my ( $self, $station_id, $hide ) = @_;
@@ -474,6 +586,12 @@ sub hide_station {
                    );
 }
 
+=item $obj->is_station_hidden();
+
+TODO: documentation this method
+
+=cut
+
 sub is_station_hidden {
     my ( $self, $station_id ) = @_;
 
@@ -481,6 +599,12 @@ sub is_station_hidden {
 
     return $hidden_flag;
 }
+
+=item $obj->set_score();
+
+TODO: documentation this method
+
+=cut
 
 sub set_score {
     my ( $self, $program_id, $score ) = @_;
@@ -504,6 +628,12 @@ sub set_score {
     }
 }
 
+=item $obj->get_program_color();
+
+TODO: documentation this method
+
+=cut
+
 sub get_program_color {
     my ( $self, $program_id, $score ) = @_;
 
@@ -514,6 +644,12 @@ sub get_program_color {
     return $self->score_colors->{ $score || 0 };
 
 }
+
+=item $obj->clean_program_id();
+
+TODO: documentation this method
+
+=cut
 
 sub clean_program_id {
     my ( $self, $program_id ) = @_;
@@ -528,6 +664,12 @@ sub clean_program_id {
 
     return $program_id;
 }
+
+=item $obj->get_score();
+
+TODO: documentation this method
+
+=cut
 
 sub get_score {
     my ( $self, $program_id ) = @_;
@@ -545,6 +687,12 @@ sub get_score {
 
     return $score || 0;
 }
+
+=item $obj->get_schedule();
+
+TODO: documentation this method
+
+=cut
 
 sub get_schedule {
     my ( $self, $options ) = @_;
@@ -672,6 +820,11 @@ sub get_schedule {
     return @entries;
 }
 
+=item $obj->get_rt();
+
+TODO: documentation this method
+
+=cut
 
 sub get_rt {
     my ( $self, $program_id, $title ) = @_;
@@ -708,6 +861,12 @@ sub get_rt {
 
     return @{ $self->cache->{rt}->{ $program_id } };
 }
+
+=item $obj->fetch_rt_score();
+
+TODO: documentation this method
+
+=cut
 
 sub fetch_rt_score {
     my ( $self, $program_id, $program_title, $program_year ) = @_;
@@ -796,6 +955,12 @@ sub fetch_rt_score {
     return $results;
 }
 
+=item $obj->get_rt_search_results();
+
+TODO: documentation this method
+
+=cut
+
 sub get_rt_search_results {
     my ( $self, $title ) = @_;
 
@@ -830,3 +995,7 @@ sub get_rt_search_results {
 }
 
 1;
+
+__END__
+
+=back

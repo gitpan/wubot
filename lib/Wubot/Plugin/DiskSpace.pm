@@ -1,7 +1,7 @@
 package Wubot::Plugin::DiskSpace;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -83,7 +83,7 @@ Wubot::Plugin::DiskSpace - monitor disk space
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -126,3 +126,18 @@ is accessible by ssh.  Simply set the command like so:
 
   ---
   command: ssh somehost df -k
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item validate_config( $config )
+
+The standard monitor validate_config() method.
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

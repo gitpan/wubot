@@ -1,7 +1,7 @@
 package Wubot::Plugin::Uptime;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -39,7 +39,7 @@ sub check {
     my $uptime_output = `$inputs->{config}->{command}`;
     chomp $uptime_output;
 
-    my ( $load01, $load05, $load15 ) = $self->parse_uptime( $uptime_output );
+    my ( $load01, $load05, $load15 ) = $self->_parse_uptime( $uptime_output );
 
     unless ( defined $load01 && defined $load05 && defined $load15 ) {
         my $subject = $self->key . ": ERROR: unable to parse uptime output: $uptime_output";
@@ -72,7 +72,7 @@ sub check {
     return { react => $results };
 }
 
-sub parse_uptime {
+sub _parse_uptime {
     my ( $self, $string ) = @_;
 
     unless ( $string =~ m/load averages?\: ([\d\.]+)\,?\s+([\d\.]+),?\s+([\d\.]+)/ ) {
@@ -94,7 +94,7 @@ Wubot::Plugin::Uptime - monitor system load
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -142,3 +142,18 @@ accessible by ssh.  Simply set the command like so:
 =head1 EXAMPLE GRAPHS
 
   - http://www.geekfarm.org/wu/wubot/Uptime-navi-daily.png
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item validate_config( $config )
+
+The standard monitor validate_config() method.
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

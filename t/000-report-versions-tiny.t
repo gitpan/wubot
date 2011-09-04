@@ -116,6 +116,7 @@ eval { $v .= pmver('URI::Escape','any version') };
 eval { $v .= pmver('XML::Atom::SimpleFeed','any version') };
 eval { $v .= pmver('XML::Feed','any version') };
 eval { $v .= pmver('XML::RSS','any version') };
+eval { $v .= pmver('XML::Simple','any version') };
 eval { $v .= pmver('XML::Twig','any version') };
 eval { $v .= pmver('YAML','any version') };
 eval { $v .= pmver('YAML::XS','any version') };

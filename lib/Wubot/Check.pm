@@ -1,7 +1,7 @@
 package Wubot::Check;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Benchmark;
 use YAML;
@@ -11,8 +11,6 @@ use Wubot::LocalMessageStore;
 use Wubot::Reactor;
 use Wubot::SQLite;
 
-1;
-
 =head1 NAME
 
 Wubot::Check - perform checks for an instance of a monitor
@@ -20,7 +18,7 @@ Wubot::Check - perform checks for an instance of a monitor
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -320,7 +318,6 @@ either 'plugin' or 'key' is already defined, they will not be
 overwritten.  This ensures that results that are produced by one
 plugin and then collected by another plugin (e.g. on a remote host).
 
-
 =cut
 
 sub enqueue_results {
@@ -353,10 +350,3 @@ sub enqueue_results {
 __END__
 
 =back
-
-=head1 BUGS AND LIMITATIONS
-
-There are no known bugs in this module. Please report problems to
-VVu@geekfarm.org
-
-Patches are welcome.

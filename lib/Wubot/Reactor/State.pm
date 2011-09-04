@@ -1,7 +1,7 @@
 package Wubot::Reactor::State;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use File::Path;
 use YAML;
@@ -214,3 +214,32 @@ sub monitor {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Reactor::State - monitor the state of message fields over time
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 DESCRIPTION
+
+TODO: More to come...
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=item monitor()
+
+The standard reactor monitor() method.
+
+=back

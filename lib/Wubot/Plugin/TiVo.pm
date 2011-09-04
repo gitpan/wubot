@@ -1,7 +1,7 @@
 package Wubot::Plugin::TiVo;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Net::TiVo;
 
@@ -117,7 +117,7 @@ Wubot::Plugin::TiVo - monitor a tivo for new recordings
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -224,3 +224,14 @@ The monitor caches all shows in the feed in this file.  When a new
 (previously unseen) program shows up on the feed, the message will be
 sent, and the cache will be updated.  Removing the cache file will
 cause all matching items to be sent again.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

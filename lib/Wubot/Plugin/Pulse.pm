@@ -1,7 +1,7 @@
 package Wubot::Plugin::Pulse;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use POSIX qw(strftime);
 
@@ -95,7 +95,7 @@ Wubot::Plugin::Pulse - send a message once per minute
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -148,3 +148,14 @@ late, then the 'age' field on the message will indicate the number of
 minutes old that the message was at the time it was generated.  If the
 'age' field is false, that indicates that the message was sent during
 the minute that was indicated on the message.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

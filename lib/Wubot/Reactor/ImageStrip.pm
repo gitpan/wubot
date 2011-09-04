@@ -1,7 +1,7 @@
 package Wubot::Reactor::ImageStrip;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use HTML::Strip;
 use YAML;
@@ -41,7 +41,7 @@ Wubot::Reactor::ImageStrip - strip image tags from a field
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -67,3 +67,13 @@ but ends in _text.  If you specify a 'newfield' in the config, then
 the image-stripped text will be stored in that field.  If you want to
 replace the contents of an existing field with the image-stripped
 content, then use the same field for both 'field' and 'newfield'.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

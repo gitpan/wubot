@@ -1,7 +1,7 @@
 package Wubot::Plugin::Facebook;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use HTML::TokeParser::Simple;
 
@@ -62,6 +62,7 @@ sub check {
 
         my $username;
 
+      TOKEN:
         while ( my $token = $p->get_token ) {
 
             if ( $token->is_tag('div') && $token->as_is =~ m|actorName actorDescription| ) {
@@ -82,10 +83,17 @@ sub check {
                     $subject .= $token->as_is;
                 }
 
+                unless ( $subject ) {
+                    $self->logger->warn( "WARNING: no subject found!" );
+                    next TOKEN;
+                }
                 $subject =~ s|\s*\<wbr\/\>\s*||sg;
 
                 $subject = HTML::Entities::decode( $subject );
-                $username = HTML::Entities::decode( $username );
+
+                if ( $username ) {
+                    $username = HTML::Entities::decode( $username );
+                }
 
                 push @messages, { subject  => $subject,
                                   username => $username,
@@ -111,6 +119,8 @@ sub check {
                 }
 
                 $subject =~ s|\s*\<wbr\/\>\s*||sg;
+                $subject =~ s|\<div.*?\>||g;
+                $subject =~ s|\<span.*?\>||g;
 
                 $subject = HTML::Entities::decode( $subject );
                 $username = HTML::Entities::decode( $username );
@@ -146,7 +156,13 @@ sub check {
 
         $self->cache_expire( $cache );
 
-        return { cache => $cache, react => \@return };
+        my $return = { cache => $cache };
+
+        if ( scalar @return ) {
+            $return->{react} = \@return;
+        }
+
+        return $return;
     }
 }
 
@@ -160,8 +176,19 @@ Wubot::Plugin::Facebook - scrape facebook wall
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 DESCRIPTION
 
 TODO: More to come...
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

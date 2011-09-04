@@ -5,7 +5,7 @@ use Moose;
 use Capture::Tiny;
 use Device::SerialPort qw( :PARAM :STAT :ALL );
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 use Wubot::Tail;
@@ -47,7 +47,7 @@ sub init {
     return;
 }
 
-sub initalize_serial_port {
+sub _initialize_serial_port {
     my ( $self ) = @_;
 
     $self->port( Device::SerialPort->new( $self->device ) );
@@ -68,7 +68,7 @@ sub check {
     my ( $self, $inputs ) = @_;
 
     unless ( $self->port ) {
-        $self->initalize_serial_port();
+        $self->_initialize_serial_port();
     }
 
     my @react;
@@ -106,8 +106,23 @@ Wubot::Plugin::SerialPort - monitor data received over a serial port
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 DESCRIPTION
 
 More to come...
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item init( $inputs )
+
+The standard monitor init() method.
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

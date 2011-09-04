@@ -81,6 +81,7 @@ requires:
   XML::Atom::SimpleFeed: 0
   XML::Feed: 0
   XML::RSS: 0
+  XML::Simple: 0
   XML::Twig: 0
   YAML: 0
   YAML::XS: 0
@@ -88,4 +89,4 @@ requires:
   warnings: 0
 resources:
   repository: http://github.com/wu/wubot
-version: 0.2_002
+version: 0.2_003

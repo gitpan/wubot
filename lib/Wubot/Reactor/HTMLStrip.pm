@@ -1,7 +1,7 @@
 package Wubot::Reactor::HTMLStrip;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use HTML::Strip;
 use YAML;
@@ -46,7 +46,7 @@ Wubot::Reactor::HTMLStrip - strip HTML data from a field
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -81,3 +81,13 @@ with a single whitespace.
 
 If the new field is utf8 (according to utf8::is_utf8), then the new
 field will be passed to utf8::encode().
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

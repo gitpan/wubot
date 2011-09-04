@@ -1,7 +1,7 @@
 package Wubot::Plugin::IRC;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use AnyEvent;
 use AnyEvent::IRC::Client;
@@ -174,7 +174,7 @@ sub check {
     return { react => { subject => "Initialized connection $config->{server}:$config->{port} => $config->{nick}" } };
 }
 
-sub close {
+sub _close {
     my ( $self ) = @_;
     $self->con->disconnect;
 }
@@ -191,7 +191,7 @@ Wubot::Plugin::IRC - monitor IRC channels
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -282,5 +282,16 @@ will begin.
   username: username who set channel topic
   channel: channel where topic was set
   type: topic
+
+=back
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
 
 =back

@@ -1,6 +1,8 @@
 package Wubot::Util::Colors;
 use Moose;
 
+our $VERSION = '0.2_003'; # VERSION
+
 # solarized color schema: http://ethanschoonover.com/solarized
 my $pretty_colors = { pink      => '#FF33FF',
                       yellow    => '#b58900',
@@ -43,3 +45,36 @@ sub get_color {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Util::Colors - color themes for wubot
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 DESCRIPTION
+
+This module defines color codes for named colors for the wubot web ui.
+
+The web ui is still under development.  Current the colors are
+hard-coded.  In the future these will be configurable.
+
+TODO: finish docs
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item $obj->get_color( $color_name )
+
+if there is a hex code defined in the theme for the specified color
+name, return that hex code.
+
+If called with a hex color or a color name that is not defined in the
+theme, just returns the text that was passed in.
+
+=back

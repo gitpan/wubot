@@ -1,7 +1,7 @@
 package Wubot::Plugin::Arp;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -25,7 +25,7 @@ sub check {
 
         my ( $name, $ip, $mac ) = ( $1, $2, $3 );
 
-        $mac = $self->standardize_mac( $mac );
+        $mac = $self->_standardize_mac( $mac );
 
         $self->logger->debug( "LINE: $line" );
         $self->logger->debug( "\tname:$name ip:$ip mac:$mac" );
@@ -43,7 +43,7 @@ sub check {
     return { cache => $cache, react => \@react };
 }
 
-sub standardize_mac {
+sub _standardize_mac {
     my ( $self, $mac ) = @_;
 
     # add leading 0 to single-digit fields in mac address
@@ -64,7 +64,7 @@ Wubot::Plugin::Arp - monitor the arp table for new entries
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -114,3 +114,13 @@ could use a rule such as this in the reactor:
 
 The 'mac_address' schema is distributed in the config/schemas/
 directory in the wubot distribution.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

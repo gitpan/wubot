@@ -1,7 +1,7 @@
 package Wubot::Plugin::TaskNotify;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use POSIX qw(strftime);
 
@@ -48,8 +48,31 @@ Wubot::Plugin::TaskNotify - monitor for upcoming scheduled tasks
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/TaskNotify/org.yaml
+
+  ---
+  dbfile: /Users/wu/wubot/sqlite/tasks.sql
+  tablename: tasks
+  delay: 5m
+
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+The TaskNotify plugin looks in the tasks database for items that are
+within 15 minutes of coming due.  For each item, a notification is
+sent each time the plugin runs.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

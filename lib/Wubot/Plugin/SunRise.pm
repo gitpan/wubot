@@ -1,7 +1,7 @@
 package Wubot::Plugin::SunRise;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Astro::Sunrise;
 use Date::Manip;
@@ -112,7 +112,7 @@ Wubot::Plugin::SunRise - monitor the sunrise and sunset times
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -155,3 +155,14 @@ over.
 The cache file lives in:
 
   ~/wubot/cache/SunRise-home.yaml
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

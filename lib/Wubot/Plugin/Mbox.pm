@@ -1,7 +1,7 @@
 package Wubot::Plugin::Mbox;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Mail::MboxParser;
 
@@ -88,7 +88,7 @@ Wubot::Plugin::Mbox - monitor an Mbox file
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -122,3 +122,14 @@ The monitor caches all message IDs in the feed.  When a new
 (previously unseen) message id shows up on the feed, the message will
 be sent, and the cache will be updated.  Removing the cache file will
 cause all items in the feed to be sent again.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

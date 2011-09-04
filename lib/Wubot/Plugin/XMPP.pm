@@ -1,7 +1,7 @@
 package Wubot::Plugin::XMPP;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use AnyEvent::XMPP::Client;
 use Encode;
@@ -159,7 +159,7 @@ Wubot::Plugin::XMPP - send and receive messages over XMPP
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -180,3 +180,14 @@ version 0.2_002
 Sends and receive messages between wubot instances over XMPP.
 
 For more information, see L<Wubot::Guides::MultipleBOts>.
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

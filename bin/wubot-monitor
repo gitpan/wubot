@@ -1,6 +1,8 @@
 #!/usr/local/bin/perl -w
 use strict;
 
+our $VERSION = '0.2_003'; # VERSION
+
 use AnyEvent::Watchdog autorestart => 1, heartbeat => 300;
 
 $| = 1;
@@ -176,3 +178,22 @@ sub create_plugin_instance {
 
     $count++;
 }
+
+__END__
+
+=head1 NAME
+
+ wubot-monitor - start the wubot monitoring process
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 SYNOPSIS
+
+  wubot-monitor
+  wubot-monitor -v
+
+=head1 DESCRIPTION
+
+Start up the wubot monitoring process.

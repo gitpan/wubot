@@ -81,12 +81,14 @@ docs/Notifications.pod
 docs/Overview.pod
 docs/ReactorPlugins.pod
 docs/Rules.pod
+docs/WebUI.pod
 lib/Wubot.pm
 lib/Wubot/Check.pm
 lib/Wubot/Config.pm
 lib/Wubot/LocalMessageStore.pm
 lib/Wubot/Logger.pm
 lib/Wubot/Plugin/Arp.pm
+lib/Wubot/Plugin/CPAN.pm
 lib/Wubot/Plugin/Command.pm
 lib/Wubot/Plugin/Directory.pm
 lib/Wubot/Plugin/DiskSpace.pm
@@ -108,8 +110,8 @@ lib/Wubot/Plugin/Pulse.pm
 lib/Wubot/Plugin/RSS.pm
 lib/Wubot/Plugin/Roles/Cache.pm
 lib/Wubot/Plugin/Roles/Plugin.pm
-lib/Wubot/Plugin/Roles/RetryDelay.pm
 lib/Wubot/Plugin/SQLite.pm
+lib/Wubot/Plugin/SafariBookmarks.pm
 lib/Wubot/Plugin/SerialPort.pm
 lib/Wubot/Plugin/SunRise.pm
 lib/Wubot/Plugin/TaskDB.pm
@@ -233,7 +235,6 @@ t/react_webfetch.t
 t/react_writefile.t
 t/reactor.t
 t/release-pod-coverage.t
-t/release-pod-coverage.t.broken
 t/release-pod-syntax.t
 t/sunrise.t
 t/tail.t
@@ -264,4 +265,3 @@ templates/semantic.cache
 templates/tags.html.ep
 templates/tasks.html.ep
 templates/tv.html.ep
-webui/wubot-webui

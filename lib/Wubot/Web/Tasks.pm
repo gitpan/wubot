@@ -2,6 +2,8 @@ package Wubot::Web::Tasks;
 use strict;
 use warnings;
 
+our $VERSION = '0.2_003'; # VERSION
+
 use Mojo::Base 'Mojolicious::Controller';
 
 use Data::ICal;
@@ -207,3 +209,50 @@ sub open {
 }
 
 1;
+
+__END__
+
+=head1 NAME
+
+Wubot::Web::Tasks - wubot tasks web interface
+
+=head1 VERSION
+
+version 0.2_003
+
+=head1 SYNOPSIS
+
+   ~/wubot/config/webui.yaml
+
+    ---
+    plugins:
+      tasks:
+        '/tasks': tasks
+        '/ical': ical
+        '/open/org/(.file)/(.link)': open
+
+
+=head1 DESCRIPTION
+
+The wubot web interface is still under construction.  There will be
+more information here in the future.
+
+TODO: finish docs
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item tasks
+
+Display the tasks web ui.
+
+=item ical
+
+Export tasks as an ical.
+
+=item open
+
+Open the specified file to a specific link in emacs using emacsclient.
+
+=back

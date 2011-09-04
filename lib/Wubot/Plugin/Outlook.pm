@@ -1,7 +1,7 @@
 package Wubot::Plugin::Outlook;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Date::Manip;
 use Encode;
@@ -30,14 +30,14 @@ sub check {
 
     my @react;
 
-    my $content = $self->get_content( $config->{url}, $config );
+    my $content = $self->_get_content( $config->{url}, $config );
 
     unless ( $content ) {
         $self->logger->error( "Critical: outlook: No content retrieved!" );
         return;
     }
 
-    my $count = scalar $self->get_msgids( $content );
+    my $count = scalar $self->_get_msgids( $content );
 
     my $message = { count => $count, coalesce => $self->key };
 
@@ -50,7 +50,7 @@ sub check {
     return { react => \@react };
 }
 
-sub get_msgids {
+sub _get_msgids {
     my ( $self, $content ) = @_;
 
     my @msgids;
@@ -68,7 +68,7 @@ sub get_msgids {
     return @return;
 }
 
-sub get_content {
+sub _get_content {
     my ( $self, $url, $config ) = @_;
 
     my $ua = new LWP::UserAgent;
@@ -106,8 +106,19 @@ Wubot::Plugin::Outlook - monitor number of emails in the inbox using Outlook Web
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 DESCRIPTION
 
 TODO: More to come...
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back

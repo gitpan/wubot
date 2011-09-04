@@ -95,13 +95,14 @@ my %WriteMakefileArgs = (
     "XML::Atom::SimpleFeed" => 0,
     "XML::Feed" => 0,
     "XML::RSS" => 0,
+    "XML::Simple" => 0,
     "XML::Twig" => 0,
     "YAML" => 0,
     "YAML::XS" => 0,
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.2_002",
+  "VERSION" => "0.2_003",
   "test" => {
     "TESTS" => "t/*.t"
   }

@@ -1,7 +1,7 @@
 package Wubot::Reactor::Dumper;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use YAML;
 
@@ -41,7 +41,7 @@ Wubot::Reactor::Dumper - display the contents of a field or an entire message
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -64,3 +64,13 @@ If no configuration is specified, then the entire message will be
 displayed to stdout using YAML::Dump.  If a field is specified in the
 config, then the contents of that field will be dumped using
 YAML::Dump.
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item react( $message, $config )
+
+The standard reactor plugin react() method.
+
+=back

@@ -1,7 +1,7 @@
 package Wubot::Plugin::Ping;
 use Moose;
 
-our $VERSION = '0.2_002'; # VERSION
+our $VERSION = '0.2_003'; # VERSION
 
 use Wubot::Logger;
 
@@ -69,7 +69,7 @@ Wubot::Plugin::Ping - monitor ping response from a remote host
 
 =head1 VERSION
 
-version 0.2_002
+version 0.2_003
 
 =head1 SYNOPSIS
 
@@ -96,3 +96,14 @@ If all packets were lost, the message will contain a subject field
 that contains the text:
 
   Unable to ping host {$host}
+
+
+=head1 SUBROUTINES/METHODS
+
+=over 8
+
+=item check( $inputs )
+
+The standard monitor check() method.
+
+=back
