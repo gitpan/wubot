@@ -1,7 +1,7 @@
 package Wubot::Plugin::Twitter;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Net::Twitter::Lite;
 use Storable;
@@ -102,7 +102,7 @@ Wubot::Plugin::Twitter - monitor twitter friends timeline
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

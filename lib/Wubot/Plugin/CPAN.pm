@@ -1,7 +1,7 @@
 package Wubot::Plugin::CPAN;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Wubot::Logger;
 
@@ -122,12 +122,12 @@ __END__
 
 =head1 NAME
 
-Wubot::Plugin::CPAN - determine if any CPAN modules are up to the latest versions
+Wubot::Plugin::CPAN - verify that the latest versions of all Perl modules are installed
 
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

@@ -1,7 +1,7 @@
 package Wubot::Plugin::Command;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Wubot::Logger;
 
@@ -82,7 +82,7 @@ Wubot::Plugin::Command - run an external command and capture the output and exit
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

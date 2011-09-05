@@ -1,7 +1,7 @@
 package Wubot::Reactor::Icon;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use YAML;
 
@@ -112,7 +112,7 @@ Wubot::Reactor::Icon - search for an appropriate icon for a message
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

@@ -1,7 +1,7 @@
 package Wubot::Plugin::FileRegexp;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Wubot::Logger;
 use Wubot::Tail;
@@ -88,7 +88,7 @@ Wubot::Plugin::FileRegexp - monitor number of lines matching regular expressions
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

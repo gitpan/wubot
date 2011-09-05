@@ -2,7 +2,7 @@ package Wubot::Web;
 use strict;
 use warnings;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Mojo::Base 'Mojolicious';
 
@@ -44,9 +44,12 @@ Wubot::Web - Mojolicious web interface for wubot
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
+
+For more information on the wubot web user interface, please see the
+document L<Wubot::Guide::WebUI>.
 
 The wubot web interface is still under construction.  There will be
 more information here in the future.

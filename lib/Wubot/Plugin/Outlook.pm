@@ -1,7 +1,7 @@
 package Wubot::Plugin::Outlook;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Date::Manip;
 use Encode;
@@ -106,7 +106,7 @@ Wubot::Plugin::Outlook - monitor number of emails in the inbox using Outlook Web
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

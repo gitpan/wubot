@@ -1,7 +1,7 @@
 package Wubot::Plugin::DiskSpace;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Wubot::Logger;
 
@@ -83,7 +83,7 @@ Wubot::Plugin::DiskSpace - monitor disk space
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

@@ -2,7 +2,7 @@ package Wubot::Web::Graphs;
 use strict;
 use warnings;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Mojo::Base 'Mojolicious::Controller';
 
@@ -43,11 +43,11 @@ __END__
 
 =head1 NAME
 
-Wubot::Util::Graphs - web interface for wubot graphs
+Wubot::Web::Graphs - web interface for wubot graphs
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

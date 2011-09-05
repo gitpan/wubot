@@ -1,7 +1,7 @@
 package Wubot::Plugin::SafariBookmarks;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use LWP::Simple;
 use XML::Simple;
@@ -122,11 +122,11 @@ __END__
 
 =head1 NAME
 
-Wubot::Plugin::Directory - monitor a directory for new files
+Wubot::Plugin::SafariBookmarks - monitor a directory for new files
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

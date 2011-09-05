@@ -1,7 +1,7 @@
 package Wubot::Reactor::RRD;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Capture::Tiny;
 use File::Path;
@@ -163,7 +163,7 @@ Wubot::Reactor::RRD - store data in an RRD with RRD::Simple
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

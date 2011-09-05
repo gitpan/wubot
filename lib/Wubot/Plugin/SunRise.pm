@@ -1,7 +1,7 @@
 package Wubot::Plugin::SunRise;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Astro::Sunrise;
 use Date::Manip;
@@ -112,7 +112,7 @@ Wubot::Plugin::SunRise - monitor the sunrise and sunset times
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

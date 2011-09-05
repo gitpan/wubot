@@ -1,7 +1,7 @@
 package Wubot::Reactor;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Class::Load qw/load_class/;
 use Scalar::Util qw/looks_like_number/;
@@ -16,7 +16,7 @@ Wubot::Reactor - runs reactive rules on a message
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 
@@ -121,7 +121,7 @@ sub react {
 
 Process conditions defined on a rule.
 
-For more information, see L<Wubot::Guides::Conditions>.
+For more information, see L<Wubot::Guide::Conditions>.
 
 =cut
 

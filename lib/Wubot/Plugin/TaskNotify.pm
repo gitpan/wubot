@@ -1,7 +1,7 @@
 package Wubot::Plugin::TaskNotify;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use POSIX qw(strftime);
 
@@ -48,7 +48,7 @@ Wubot::Plugin::TaskNotify - monitor for upcoming scheduled tasks
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

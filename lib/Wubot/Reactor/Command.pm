@@ -1,7 +1,7 @@
 package Wubot::Reactor::Command;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use FileHandle;
 use File::Path;
@@ -485,7 +485,7 @@ Wubot::Reactor::Command - run an external command using data from the message
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

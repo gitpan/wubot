@@ -1,7 +1,7 @@
 package Wubot::Plugin::Ping;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Wubot::Logger;
 
@@ -69,7 +69,7 @@ Wubot::Plugin::Ping - monitor ping response from a remote host
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

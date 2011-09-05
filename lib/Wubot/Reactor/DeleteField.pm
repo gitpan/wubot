@@ -1,7 +1,7 @@
 package Wubot::Reactor::DeleteField;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Wubot::Logger;
 
@@ -25,7 +25,7 @@ Wubot::Reactor::DeleteField - remove a field from the message
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

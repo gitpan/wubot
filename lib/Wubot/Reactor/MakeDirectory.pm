@@ -1,7 +1,7 @@
 package Wubot::Reactor::MakeDirectory;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use File::Path;
 
@@ -53,7 +53,7 @@ Wubot::Reactor::MakeDirectory - create a subdirectory
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

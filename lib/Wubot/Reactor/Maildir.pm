@@ -1,7 +1,7 @@
 package Wubot::Reactor::Maildir;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Maildir::Lite;
 use MIME::Entity;
@@ -117,7 +117,7 @@ Wubot::Reactor::Maildir - store messages in maildir format
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

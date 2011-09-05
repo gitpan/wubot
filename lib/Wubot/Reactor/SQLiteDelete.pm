@@ -1,7 +1,7 @@
 package Wubot::Reactor::SQLiteDelete;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use YAML;
 
@@ -48,7 +48,7 @@ Wubot::Reactor::SQLiteDelete - delete a row from a SQLite table
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 DESCRIPTION
 

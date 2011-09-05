@@ -1,7 +1,7 @@
 package Wubot::Plugin::WebFetch;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 # todo: select with xpath in addition to regexp
 
@@ -54,7 +54,7 @@ Wubot::Plugin::WebFetch - fetch content from a URL
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

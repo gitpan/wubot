@@ -236,6 +236,7 @@ t/react_writefile.t
 t/reactor.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
+t/release-prereqs.t.broken
 t/sunrise.t
 t/tail.t
 t/taskdb.t.broken

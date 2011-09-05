@@ -1,7 +1,7 @@
 package Wubot::Util::XMLTV;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 use Benchmark;
 use Capture::Tiny qw/capture/;
@@ -22,7 +22,7 @@ Wubot::Util::XMLTV - utility method for dealing with XMLTV data
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 

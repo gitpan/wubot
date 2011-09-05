@@ -1,7 +1,7 @@
 package Wubot::Reactor::CaptureData;
 use Moose;
 
-our $VERSION = '0.2_003'; # VERSION
+our $VERSION = '0.2.004'; # VERSION
 
 # todo: enable using Regexp::Common regexps here
 
@@ -45,7 +45,7 @@ Wubot::Reactor::CaptureData - capture data from a field using a regexp
 
 =head1 VERSION
 
-version 0.2_003
+version 0.2.004
 
 =head1 SYNOPSIS
 
