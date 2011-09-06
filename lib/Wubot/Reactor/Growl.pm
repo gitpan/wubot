@@ -1,7 +1,7 @@
 package Wubot::Reactor::Growl;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use POSIX qw(strftime);
 use YAML;
@@ -94,7 +94,7 @@ Wubot::Reactor::Growl - display a growl notification on OS X using Growl::Tiny
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 SYNOPSIS
 

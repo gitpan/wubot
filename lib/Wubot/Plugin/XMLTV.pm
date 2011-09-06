@@ -1,7 +1,7 @@
 package Wubot::Plugin::XMLTV;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Date::Manip;
 use YAML;
@@ -89,7 +89,7 @@ Wubot::Plugin::XMLTV - fetch data from XMLTV and store in the wubot tv db
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 DESCRIPTION
 

@@ -1,7 +1,7 @@
 package Wubot::Plugin::Command;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Wubot::Logger;
 
@@ -82,11 +82,48 @@ Wubot::Plugin::Command - run an external command and capture the output and exit
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1
+
+  ~/wubot/config/plugins/Command/netstat.yaml
+
+  ---
+  command: netstat -s
+  delay: 1m
+
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+This plugin is useful for running a command at regular intervals, and
+then sending the output on to the reactor for further processing.
+
+The output of the command will be sent in the field 'command_output'.
+
+=head1 HINTS
+
+Here is an example to parses the packages sent and received of the
+output of 'netstat -s'.
+
+    ---
+    command: netstat -s
+    delay: 1m
+
+    react:
+
+      - name: command regexp packets sent
+        plugin: CaptureData
+        config:
+          source_field: command_output
+          target_field: packets_sent
+          regexp: '(\d+) packets sent'
+
+      - name: command regexp packets received
+        plugin: CaptureData
+        config:
+          source_field: command_output
+          target_field: packets_received
+          regexp: '(\d+) packets received'
 
 
 =head1 SUBROUTINES/METHODS

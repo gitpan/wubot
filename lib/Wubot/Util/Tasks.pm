@@ -1,7 +1,7 @@
 package Wubot::Util::Tasks;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Date::Manip;
 use POSIX qw(strftime);
@@ -15,7 +15,7 @@ Wubot::Util::Tasks - utility for dealing with the Emacs Org-Mode files and tasks
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 SYNOPSIS
 
@@ -23,13 +23,7 @@ version 0.2.004
 
 =head1 DESCRIPTION
 
-The wubot tasks libraries are still under development.  I am using
-them now, but there are still a few rough edges.  More documentation
-will be published once the rough edges can be smoothed over a bit.
-
-For more details on Emacs org-mode, see:
-
-  http://orgmode.org/
+Please see L<Wubot::Guide::Tasks>.
 
 =cut
 

@@ -1,7 +1,7 @@
 package Wubot::Reactor::False;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use YAML;
 
@@ -46,7 +46,7 @@ Wubot::Reactor::False - set keys and values if a field is false
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 DESCRIPTION
 

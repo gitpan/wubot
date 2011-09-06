@@ -1,7 +1,7 @@
 package Wubot::Plugin::FileTail;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Wubot::Logger;
 use Wubot::Tail;
@@ -85,11 +85,33 @@ Wubot::Plugin::FileTail - monitor a log file for all new lines
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/FileTail/bsd-01.messages.yaml
+
+  ---
+  delay: 30
+  path: /var/log/messages
+  ignore:
+    - my.ignore.string
+    - some\sregexp\d+
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+Monitor a log file for new lines.
+
+Each time a new line is seen in the file, a message will be sent
+containing the fields:
+
+  subject: {line}
+
+If 'ignore' is defined in your configuration, then it should be set to
+an array of regular expressions.  If any of the regular expressions
+matches, then no message will be sent.  All patterns in the 'ignore'
+array will get joined together with '|' and evaluated as a single
+regular expression.
 
 
 =head1 SUBROUTINES/METHODS

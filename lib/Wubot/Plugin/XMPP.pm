@@ -1,7 +1,7 @@
 package Wubot::Plugin::XMPP;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use AnyEvent::XMPP::Client;
 use Encode;
@@ -159,7 +159,7 @@ Wubot::Plugin::XMPP - send and receive messages over XMPP
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 SYNOPSIS
 

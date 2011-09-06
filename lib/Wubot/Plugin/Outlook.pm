@@ -1,7 +1,7 @@
 package Wubot::Plugin::Outlook;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Date::Manip;
 use Encode;
@@ -106,11 +106,48 @@ Wubot::Plugin::Outlook - monitor number of emails in the inbox using Outlook Web
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/Outlook/work.yaml
+
+  ---
+  url: https://webmail.something.net/owa/
+  user: username
+  pass: mypass
+  delay: 5m
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+This plugin is just a prototype!  It implements a very ugly and
+brittle mechanism for scraping the outlook web access HTML page for
+new items in the inbox.  It only returns the total number of emails in
+your inbox, up to the maximum number of emails configured to be shown
+per page.  If you inbox contains any email, a message will be sent
+containing the fields:
+
+  count: {number}
+
+This is probably only useful if you practice inbox zero.
+
+  - http://inboxzero.com/
+
+If anyone has a better way to parse information from outlook web,
+please let me know!
+
+
+=head1 HINTS
+
+You could easily add a rule to suppress the message until your email
+box gets beyond a certain number of emails.
+
+  react:
+
+    - name: minimum count notification
+      condition: contains count AND count < 5
+      last_rule: 1
+
 
 
 =head1 SUBROUTINES/METHODS

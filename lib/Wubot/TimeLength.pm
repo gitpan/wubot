@@ -1,7 +1,7 @@
 package Wubot::TimeLength;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Wubot::Logger;
 
@@ -12,7 +12,7 @@ Wubot::TimeLength - utilities for dealing with time durations
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 SYNOPSIS
 
@@ -237,7 +237,7 @@ sub get_age_color {
 
     # months
     my $c = $self->_range_map( $seconds, $constants->{M}, $constants->{y}, 250,  0 );
-    return $self->get_hex_color( $c, $c, 0 );
+    return $self->_get_hex_color( $c, $c, 0 );
 }
 
 sub _get_hex_color {

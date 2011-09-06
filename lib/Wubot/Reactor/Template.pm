@@ -1,7 +1,7 @@
 package Wubot::Reactor::Template;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Text::Template;
 use YAML;
@@ -66,7 +66,16 @@ Wubot::Reactor::Template - build a field using existing message fields as a temp
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  - name: build a subject that references the username field
+    plugin: Template
+    config:
+      template: 'Got username: {$username}'
+      target_field: subject
+
 
 =head1 DESCRIPTION
 

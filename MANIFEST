@@ -81,6 +81,7 @@ docs/Notifications.pod
 docs/Overview.pod
 docs/ReactorPlugins.pod
 docs/Rules.pod
+docs/Tasks.pod
 docs/WebUI.pod
 lib/Wubot.pm
 lib/Wubot/Check.pm

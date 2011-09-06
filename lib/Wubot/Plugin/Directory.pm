@@ -1,7 +1,7 @@
 package Wubot::Plugin::Directory;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Wubot::Logger;
 
@@ -65,11 +65,25 @@ Wubot::Plugin::Directory - monitor a directory for new files
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/Directory/scifri.yaml
+
+  ---
+  path: /Users/wu/Music/iTunes/iTunes Media/Podcasts/Science Friday Audio Podcast
+  delay: 15m
+
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+This plugin monitors a directory for newly added files.  When a new
+file is found, the message sent will contain the fields:
+
+  file: {filename}
+  subject: New: {filename}
+
 
 =head1 SUBROUTINES/METHODS
 

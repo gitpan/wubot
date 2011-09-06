@@ -1,7 +1,7 @@
 package Wubot::Plugin::SafariBookmarks;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use LWP::Simple;
 use XML::Simple;
@@ -11,7 +11,7 @@ use Wubot::Logger;
 with 'Wubot::Plugin::Roles::Cache';
 with 'Wubot::Plugin::Roles::Plugin';
 
-my $file = join( "/", $ENV{HOME}, "library", "Safari", "Bookmarks.plist" );
+my $file = join( "/", $ENV{HOME}, "Library", "Safari", "Bookmarks.plist" );
 
 my $xml = new XML::Simple;
 
@@ -122,15 +122,50 @@ __END__
 
 =head1 NAME
 
-Wubot::Plugin::SafariBookmarks - monitor a directory for new files
+Wubot::Plugin::SafariBookmarks - monitor for new safari bookmarks
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+This plugin is just a prototype!  Lots more to do here.
+
+Currently this plugin copies the safari bookmarks file:
+
+  ~/Library/Safari/Bookmarks.plist
+
+The file is copied to:
+
+  /tmp/bookmarks.plist
+
+Then the 'plutil' utility is used to convert the plist to XML:
+
+  plutil -convert xml1 /tmp/bookmarks.plist
+
+The file is then read in to a data structure using XML::Simple.  The
+data structure is walked recursively, and all unique URLs in the data
+structure are returned.  Only the URLs are matched; no further parsing
+of the file has been implemented yet.  An attempt is made to fetch the
+content of the URL using LWP::Simple in order to grab the page title.
+If the attempt succeeds, the resulting message will have the title set
+in the 'subject' field, e.g.:
+
+  subject: Slashdot: News for nerds, stuff that matters
+  link: http://www.slashdot.org/
+
+If the attempt to fetch the title fails, the subject will simply be
+set to the URL:
+
+  subject: http://www.slashdot.org/
+  link: http://www.slashdot.org/
+
+This plugin uses the wubot caching mechanism, so that messages are
+only sent when a new URL is found in your bookmarks.
+
+This does also find items added to the reading list in OS X Lion.
+
 
 =head1 SUBROUTINES/METHODS
 

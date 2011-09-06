@@ -1,7 +1,7 @@
 package Wubot::Reactor::Split;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use YAML;
 
@@ -31,7 +31,20 @@ Wubot::Reactor::Split - split a CSV field on a message out into multiple other f
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  - name: split
+    plugin: Split
+    config:
+      source_field: line
+      target_fields:
+        - source
+        - type
+        - value
+        - units
+
 
 =head1 DESCRIPTION
 

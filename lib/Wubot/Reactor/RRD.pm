@@ -1,7 +1,7 @@
 package Wubot::Reactor::RRD;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Capture::Tiny;
 use File::Path;
@@ -163,7 +163,25 @@ Wubot::Reactor::RRD - store data in an RRD with RRD::Simple
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  - name: rrd
+    plugin: RRD
+    config:
+      base_dir: /home/wu/wubot/rrd
+      fields:
+        packets_sent: COUNTER
+        packets_received: COUNTER
+      period:
+        - day
+        - week
+        - month
+      graph_options:
+        right-axis: 1:0
+        width: 375
+
 
 =head1 DESCRIPTION
 

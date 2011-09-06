@@ -1,7 +1,7 @@
 package Wubot::Reactor::User;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use YAML;
 
@@ -141,7 +141,7 @@ Wubot::Reactor::User - try to identify user from the 'username' field
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 SYNOPSIS
 

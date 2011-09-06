@@ -1,7 +1,7 @@
 package Wubot::Plugin::Twitter;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Net::Twitter::Lite;
 use Storable;
@@ -42,7 +42,7 @@ sub check {
     }
     else {
         my $auth_url = $self->twitter->get_authorization_url;
-        print " Authorize this application at: $auth_url\nThen, enter the PIN# provided to contunie: ";
+        print " Authorize this application at: $auth_url\nThen, enter the PIN# provided to continue: ";
 
         my $pin = <STDIN>; # wait for input
         chomp $pin;
@@ -102,11 +102,40 @@ Wubot::Plugin::Twitter - monitor twitter friends timeline
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  ~/wubot/config/plugins/Twitter/me.yaml
+
+  ---
+  delay: 5m
+
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+This plugin monitors a twitter account for new tweets in the friends
+timeline.  It uses L<Net::Twitter::Lite>.
+
+When a new tweet shows up in your timeline, the message sent will
+contain the following fields:
+
+  subject: {tweet text}
+  text: {tweet text}
+  username: {lowercase twitter user id}
+  profile_image_url: {user image url}
+  coalesce: Twitter-{username}
+
+
+=head1 OAuth
+
+To authorize wubot to monitor your twitter feed, start by creating the
+twitter config file.  Then run a single check using the wubot-check
+script, i.e.
+
+  wubot-check Twitter me
+
+Then follow the instructions to set up your authorization tokens.
 
 
 =head1 SUBROUTINES/METHODS

@@ -2,7 +2,7 @@ package Wubot::Web::Tasks;
 use strict;
 use warnings;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Mojo::Base 'Mojolicious::Controller';
 
@@ -218,7 +218,7 @@ Wubot::Web::Tasks - wubot tasks web interface
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 SYNOPSIS
 

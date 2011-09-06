@@ -1,7 +1,7 @@
 package Wubot::Plugin::Mbox;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Mail::MboxParser;
 
@@ -88,7 +88,7 @@ Wubot::Plugin::Mbox - monitor an Mbox file
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 SYNOPSIS
 

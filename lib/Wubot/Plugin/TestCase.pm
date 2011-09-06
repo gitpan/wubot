@@ -1,7 +1,7 @@
 package Wubot::Plugin::TestCase;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use Wubot::Logger;
 
@@ -39,11 +39,11 @@ Wubot::Plugin::TestCase - a plugin for testing purposes
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
 
 =head1 DESCRIPTION
 
-TODO: More to come...
+Not much to see here.  This plugin is only useful for testing.
 
 
 =head1 SUBROUTINES/METHODS

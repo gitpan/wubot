@@ -1,7 +1,7 @@
 package Wubot::Reactor::TransformField;
 use Moose;
 
-our $VERSION = '0.2.004'; # VERSION
+our $VERSION = '0.2.5'; # VERSION
 
 use YAML;
 
@@ -42,7 +42,17 @@ Wubot::Reactor::TransformField - use a regexps to transform the data in a field
 
 =head1 VERSION
 
-version 0.2.004
+version 0.2.5
+
+=head1 SYNOPSIS
+
+  - name: clean to beginning of line marker
+    plugin: TransformField
+    config:
+      source_field: line
+      regexp_search: '^.*\^'
+
+
 
 =head1 DESCRIPTION
 
