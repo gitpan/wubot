@@ -1,7 +1,7 @@
 #!/usr/local/bin/perl
 use strict;
 
-our $VERSION = '0.2.5'; # VERSION
+our $VERSION = '0.3.0'; # VERSION
 
 use Log::Log4perl qw(:easy);
 use YAML;
@@ -9,11 +9,11 @@ use YAML;
 Log::Log4perl->easy_init($INFO);
 my $logger = get_logger( 'default' );
 
-use Wubot::Plugin::WorkHours;
+use App::Wubot::Plugin::WorkHours;
 
 my $period = shift @ARGV;
 
-my $check = Wubot::Plugin::WorkHours->new( { class      => 'Wubot::Plugin::WorkHours',
+my $check = App::Wubot::Plugin::WorkHours->new( { class      => 'App::Wubot::Plugin::WorkHours',
                                              cache_file => '/dev/null',
                                              key        => 'WorkHours-testcase',
                                          } );
@@ -33,7 +33,7 @@ __END__
 
 =head1 VERSION
 
-version 0.2.5
+version 0.3.0
 
 =head1 SYNOPSIS
 
