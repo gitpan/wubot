@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::Twitter;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Net::Twitter::Lite;
 use Storable;
@@ -78,11 +78,8 @@ sub check {
                       username          => $username,
                       profile_image_url => $status->{user}->{profile_image_url},
                       coalesce          => "Twitter-$username",
+                      link              => "http://twitter.com/#!/$username/status/$status->{id}",
                   };
-
-        if ( $status->{text} =~ m|(https?\:\/\/\S+)| ) {
-            $entry->{link} = $1;
-        }
 
         push @react, $entry;
     }
@@ -91,6 +88,8 @@ sub check {
 
     return { cache => $cache, react => \@react };
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 
@@ -102,7 +101,7 @@ App::Wubot::Plugin::Twitter - monitor twitter friends timeline
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

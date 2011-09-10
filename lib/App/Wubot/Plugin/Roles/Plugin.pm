@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::Roles::Plugin;
 use Moose::Role;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -12,7 +12,7 @@ App::Wubot::Plugin::Roles::Plugin - a role that should be used by all wubot plug
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

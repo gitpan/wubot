@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::Arp;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -51,11 +51,11 @@ sub _standardize_mac {
 
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
-
 __END__
-
 
 =head1 NAME
 
@@ -64,7 +64,7 @@ App::Wubot::Plugin::Arp - monitor the arp table for new entries
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

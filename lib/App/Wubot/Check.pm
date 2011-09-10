@@ -1,7 +1,7 @@
 package App::Wubot::Check;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Benchmark;
 use YAML;
@@ -18,7 +18,7 @@ App::Wubot::Check - perform checks for an instance of a monitor
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
@@ -344,6 +344,8 @@ sub enqueue_results {
     $self->reactor_queue->store( $results, $self->reactor_queue_dir );
 
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 

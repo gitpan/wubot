@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::HashLookup;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -19,6 +19,8 @@ sub react {
     return $message;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -29,7 +31,7 @@ App::Wubot::Reactor::HashLookup - map the value of one field to a value for anot
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

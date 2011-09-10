@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::CaptureData;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 # todo: enable using Regexp::Common regexps here
 
@@ -33,6 +33,8 @@ sub react {
     return $message;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -45,7 +47,7 @@ App::Wubot::Reactor::CaptureData - capture data from a field using a regexp
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

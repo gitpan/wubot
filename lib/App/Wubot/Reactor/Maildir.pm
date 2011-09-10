@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::Maildir;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Maildir::Lite;
 use MIME::Entity;
@@ -107,6 +107,8 @@ sub react {
     return $message;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -117,7 +119,7 @@ App::Wubot::Reactor::Maildir - store messages in maildir format
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 DESCRIPTION
 

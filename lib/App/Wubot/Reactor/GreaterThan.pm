@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::GreaterThan;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use YAML;
 
@@ -35,8 +35,9 @@ sub react {
     return $message;
 }
 
-1;
+__PACKAGE__->meta->make_immutable;
 
+1;
 
 __END__
 
@@ -48,7 +49,7 @@ App::Wubot::Reactor::GreaterThan - set keys and values if the value of a field e
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 DESCRIPTION
 

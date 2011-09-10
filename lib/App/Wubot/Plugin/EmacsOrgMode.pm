@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::EmacsOrgMode;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Date::Manip;
 use File::chdir;
@@ -13,9 +13,18 @@ has 'taskutil' => ( is => 'ro',
                     isa => 'App::Wubot::Util::Tasks',
                     lazy => 1,
                     default => sub {
-                        return App::Wubot::Util::Tasks->new();
+                        my $self = shift;
+                        return App::Wubot::Util::Tasks->new( { dbfile => $self->dbfile } );
                     },
                 );
+
+has 'dbfile' => ( is      => 'rw',
+                  isa     => 'Str',
+                  lazy    => 1,
+                  default => sub {
+                      return join( "/", $ENV{HOME}, "wubot", "sqlite", "tasks.sql" );
+                  },
+              );
 
 with 'App::Wubot::Plugin::Roles::Cache';
 with 'App::Wubot::Plugin::Roles::Plugin';
@@ -127,6 +136,8 @@ sub check {
     return $results;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -137,11 +148,16 @@ App::Wubot::Plugin::EmacsOrgMode - parse tasks from Emacs Org-Mode files
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 DESCRIPTION
 
 Please see L<App::Wubot::Guide::Tasks>.
+
+=head1 PARSING ORG FILES
+
+Right now the emacs or parsing is not very good, but I am planning to
+use L<Org::Parser> in the future.
 
 =head1 SUBROUTINES/METHODS
 

@@ -2,7 +2,7 @@ package App::Wubot::Web::Rss;
 use strict;
 use warnings;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Mojo::Base 'Mojolicious::Controller';
 
@@ -159,9 +159,9 @@ App::Wubot::Web::Rss - serves outgoing wubot RSS feeds
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
-=head1 SYNOPSIS
+=head1 CONFIGURATION
 
    ~/wubot/config/webui.yaml
 

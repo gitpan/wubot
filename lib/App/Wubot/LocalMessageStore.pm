@@ -1,7 +1,7 @@
 package App::Wubot::LocalMessageStore;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Digest::MD5 qw( md5_hex );
 use File::Path;
@@ -19,7 +19,7 @@ App::Wubot::LocalMessageStore - add or remove messages from a local wubot SQLite
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
@@ -61,6 +61,7 @@ the wubot process gets shut down in the middle of processing a
 message, the message will not be removed from the queue.  This could
 sometimes lead to reacting to a message more than once, but ensures
 that the reaction will always occur.
+
 
 =cut
 
@@ -365,8 +366,18 @@ sub checksum {
     return md5_hex( $text );
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
 
 =back
+
+=head1 YAML::XS
+
+Everywhere else, the wubot libraries use YAML.  This module uses
+YAML::XS, as I have experienced issues serializing and/or
+deserializing messages with every other perl YAML library I have
+tried.  YAML::XS has been extremely reliable; I have yet to encounter
+a message that it can not handle.

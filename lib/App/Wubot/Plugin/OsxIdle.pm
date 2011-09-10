@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::OsxIdle;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 use App::Wubot::Util::TimeLength;
@@ -189,7 +189,9 @@ sub check {
      $last_notification = $stats->{subject};
 
      return ( $stats, $cache );
- }
+}
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 
@@ -203,7 +205,7 @@ App::Wubot::Plugin::OsxIdle - monitor idle time on OS X
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

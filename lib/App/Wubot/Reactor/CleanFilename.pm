@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::CleanFilename;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -52,11 +52,11 @@ sub react {
     return $message;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
-
 __END__
-
 
 =head1 NAME
 
@@ -65,7 +65,7 @@ App::Wubot::Reactor::CleanFilename - build a clean filename or directory name fr
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

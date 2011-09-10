@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::SafariBookmarks;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use LWP::Simple;
 use XML::Simple;
@@ -49,7 +49,7 @@ sub check {
     my @react;
 
     for my $url ( keys %{ $new } ) {
-        my $react = { url => $url };
+        my $react = { link => $url };
 
         my $content = get( $url );
 
@@ -115,6 +115,7 @@ sub _parse_data {
 
 }
 
+__PACKAGE__->meta->make_immutable;
 
 1;
 
@@ -126,7 +127,7 @@ App::Wubot::Plugin::SafariBookmarks - monitor for new safari bookmarks
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 DESCRIPTION
 

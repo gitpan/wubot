@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::Template;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Text::Template;
 use YAML;
@@ -56,6 +56,8 @@ sub react {
     return $message;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -66,7 +68,7 @@ App::Wubot::Reactor::Template - build a field using existing message fields as a
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::SQLite;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use YAML;
 
@@ -45,6 +45,8 @@ sub react {
     return $message;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -55,7 +57,7 @@ App::Wubot::Reactor::SQLite - insert or update a message in a SQLite table row
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 DESCRIPTION
 

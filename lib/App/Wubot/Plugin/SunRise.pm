@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::SunRise;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Astro::Sunrise;
 use Date::Manip;
@@ -99,11 +99,11 @@ sub check {
     return { react => $message, cache => $message };
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
-
 __END__
-
 
 =head1 NAME
 
@@ -112,22 +112,21 @@ App::Wubot::Plugin::SunRise - monitor the sunrise and sunset times
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
   ~/wubot/config/plugins/SunRise/home.yaml
 
   ---
-  enable: 1
   longitude: -123.4567890
   latitude: 46.8002468
   delay: 1m
 
 =head1 DESCRIPTION
 
-Uses Astro::Sunrise to monitor the sunrise and sunset times based on
-your location.
+Uses L<Astro::Sunrise> to monitor the sunrise and sunset times based
+on your location.
 
 A notification will be sent after a state change, and then each hour
 before the event.  For example, if the plugin is first run at 6:45pm,

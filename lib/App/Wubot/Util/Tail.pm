@@ -1,7 +1,7 @@
 package App::Wubot::Util::Tail;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Fcntl qw( SEEK_END SEEK_CUR SEEK_SET O_NONBLOCK O_RDONLY );
 
@@ -14,7 +14,7 @@ App::Wubot::Util::Tail - follow the tail of a growing file
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
@@ -235,6 +235,8 @@ sub _get_lines_nonblock {
 
   return $count;
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 

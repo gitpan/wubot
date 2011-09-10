@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::XMLTV;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Date::Manip;
 use YAML;
@@ -79,6 +79,8 @@ sub check {
     exit 0;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -89,7 +91,7 @@ App::Wubot::Plugin::XMLTV - fetch data from XMLTV and store in the wubot tv db
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 DESCRIPTION
 

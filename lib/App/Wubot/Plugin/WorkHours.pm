@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::WorkHours;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use DBI;
 use POSIX qw(strftime);
@@ -108,8 +108,9 @@ sub _calculate_stats {
     return $data;
 }
 
-1;
+__PACKAGE__->meta->make_immutable;
 
+1;
 
 __END__
 
@@ -121,7 +122,7 @@ App::Wubot::Plugin::WorkHours - track of the number of hours you are active/idle
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

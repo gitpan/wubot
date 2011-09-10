@@ -1,7 +1,7 @@
 package App::Wubot::Util::Tasks;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Date::Manip;
 use POSIX qw(strftime);
@@ -15,7 +15,7 @@ App::Wubot::Util::Tasks - utility for dealing with the Emacs Org-Mode files and 
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
@@ -24,6 +24,7 @@ version 0.3.0
 =head1 DESCRIPTION
 
 Please see L<App::Wubot::Guide::Tasks>.
+
 
 =cut
 
@@ -239,7 +240,8 @@ sub sync_tasks {
 
 =item $obj->parse_emacs_org_page()
 
-TODO: documentation this method
+TODO: replace my ugly emacs org mode parsing with L<Org::Parser>
+
 
 =cut
 
@@ -356,6 +358,8 @@ sub parse_emacs_org_page {
 
     return @tasks;
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 

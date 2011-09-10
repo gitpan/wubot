@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::WebFetch;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 # todo: select with xpath in addition to regexp
 
@@ -23,6 +23,7 @@ sub check {
     my ( $self, $inputs ) = @_;
 
     my $config = $inputs->{config};
+    my $cache  = $inputs->{cache};
 
     $self->logger->debug( "Fetching content from: $config->{url}" );
 
@@ -39,8 +40,10 @@ sub check {
 
     my $field = $config->{field} || 'content';
 
-    return { react => { $field => $content } };
+    return { react => { $field => $content }, cache => $cache };
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 
@@ -54,7 +57,7 @@ App::Wubot::Plugin::WebFetch - fetch content from a URL
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

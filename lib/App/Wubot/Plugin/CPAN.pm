@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::CPAN;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -92,6 +92,7 @@ sub check {
                                 installed => $installed,
                                 lastest   => $latest,
                                 path      => $path,
+                                link      => "http://search.cpan.org/perldoc?$module",
                             } );
         }
         close $run;
@@ -116,6 +117,8 @@ sub check {
     exit 0;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -127,7 +130,7 @@ App::Wubot::Plugin::CPAN - verify that the latest versions of all Perl modules a
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

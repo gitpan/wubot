@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::Mbox;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Mail::MboxParser;
 
@@ -75,11 +75,11 @@ sub check {
     return { cache => $cache, react => \@react };
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
-
 __END__
-
 
 =head1 NAME
 
@@ -88,7 +88,7 @@ App::Wubot::Plugin::Mbox - monitor an Mbox file
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

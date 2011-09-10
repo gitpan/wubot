@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::OsxActiveApp;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -40,6 +40,8 @@ sub check {
     return { react => { application => $output } };
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -50,7 +52,7 @@ App::Wubot::Plugin::OsxActiveApp - monitor current active application in OS X
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

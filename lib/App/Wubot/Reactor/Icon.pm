@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::Icon;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use YAML;
 
@@ -99,11 +99,11 @@ sub _check_for_image {
     return $image;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
-
 __END__
-
 
 =head1 NAME
 
@@ -112,7 +112,7 @@ App::Wubot::Reactor::Icon - search for an appropriate icon for a message
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

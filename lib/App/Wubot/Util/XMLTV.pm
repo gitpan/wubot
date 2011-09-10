@@ -1,7 +1,7 @@
 package App::Wubot::Util::XMLTV;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use Benchmark;
 use Capture::Tiny qw/capture/;
@@ -22,7 +22,7 @@ App::Wubot::Util::XMLTV - utility method for dealing with XMLTV data
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
@@ -993,6 +993,8 @@ sub get_rt_search_results {
     return $results;
 
 }
+
+__PACKAGE__->meta->make_immutable;
 
 1;
 

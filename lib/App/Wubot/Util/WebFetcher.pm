@@ -1,7 +1,7 @@
 package App::Wubot::Util::WebFetcher;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use HTTP::Message;
 use LWP::UserAgent;
@@ -17,7 +17,7 @@ App::Wubot::Util::WebFetcher - fetch content from the web
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
@@ -94,8 +94,6 @@ If true, sets the Accept-Encoding using HTTP::message::decodable.
 
 =back
 
-=back
-
 =cut
 
 sub fetch {
@@ -149,4 +147,10 @@ sub fetch {
     return $content;
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
+
+__END__
+
+=back

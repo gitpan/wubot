@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::WebMatches;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use App::Wubot::Logger;
 use App::Wubot::Util::WebFetcher;
@@ -68,6 +68,8 @@ sub check {
     return { react => \@react, cache => $cache };
 }
 
+__PACKAGE__->meta->make_immutable;
+
 1;
 
 __END__
@@ -80,7 +82,7 @@ App::Wubot::Plugin::WebMatches - monitor a web page for items matching a regexp
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 

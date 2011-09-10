@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::CopyField;
 use Moose;
 
-our $VERSION = '0.3.0'; # VERSION
+our $VERSION = '0.3.1'; # VERSION
 
 use YAML;
 
@@ -38,8 +38,9 @@ sub react {
     return $message;
 }
 
-1;
+__PACKAGE__->meta->make_immutable;
 
+1;
 
 __END__
 
@@ -51,7 +52,7 @@ App::Wubot::Reactor::CopyField - copy the value from one field to another field
 
 =head1 VERSION
 
-version 0.3.0
+version 0.3.1
 
 =head1 SYNOPSIS
 
