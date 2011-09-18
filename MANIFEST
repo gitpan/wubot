@@ -232,7 +232,6 @@ config/webui.yaml
 cronjobs/coopduino-graphs.sh
 dist.ini
 docs/ArduinoSensors.pod
-docs/Conditions.pod
 docs/Debugging.pod
 docs/GettingStarted.pod
 docs/Guide.pod
@@ -244,8 +243,16 @@ docs/ReactorPlugins.pod
 docs/Rules.pod
 docs/Tasks.pod
 docs/WebUI.pod
+docs/img/OsxIdle-navi-weekly.png
+docs/img/WorkHours-navi-weekly.png
+docs/img/multibot.graffle
+docs/img/multibot.png
+docs/img/notification_webui.png
+docs/img/wubot.graffle
+docs/img/wubot.png
 lib/App/Wubot.pm
 lib/App/Wubot/Check.pm
+lib/App/Wubot/Conditions.pm
 lib/App/Wubot/Config.pm
 lib/App/Wubot/LocalMessageStore.pm
 lib/App/Wubot/Logger.pm
@@ -315,6 +322,7 @@ lib/App/Wubot/Reactor/Split.pm
 lib/App/Wubot/Reactor/State.pm
 lib/App/Wubot/Reactor/Template.pm
 lib/App/Wubot/Reactor/TransformField.pm
+lib/App/Wubot/Reactor/UrlLengthen.pm
 lib/App/Wubot/Reactor/User.pm
 lib/App/Wubot/Reactor/WebFetch.pm
 lib/App/Wubot/Reactor/WriteFile.pm
@@ -363,6 +371,7 @@ t/moon_phase.t
 t/no_tabs.t
 t/org/2/scheduled_deadline.org
 t/org/3/first_task.org
+t/org/4/tagged_task.org
 t/org/file1.org
 t/org/file2.org
 t/org/file3.org
@@ -392,6 +401,7 @@ t/react_setfield.t
 t/react_state.t
 t/react_template.t
 t/react_transformfield.t
+t/react_urllengthen.t
 t/react_user.t
 t/react_webfetch.t
 t/react_writefile.t

@@ -2,7 +2,7 @@ package App::Wubot::Web::Tasks;
 use strict;
 use warnings;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use Mojo::Base 'Mojolicious::Controller';
 
@@ -30,8 +30,9 @@ sub tasks {
     my $self = shift;
 
     my $due = $self->param( 'due' );
+    my $tag = $self->param( 'tag' );
 
-    my @tasks = $taskutil->get_tasks( $due );
+    my @tasks = $taskutil->get_tasks( $due, $tag );
 
     my $now = time;
 
@@ -71,7 +72,13 @@ sub tasks {
         $task->{emacs_link} = uri_escape( $task->{emacs_link} );
     }
 
-    $self->stash( 'headers', [qw/count lastupdate file title priority scheduled deadline/ ] );
+    $self->stash( 'headers', [qw/count lastupdate tag file title priority scheduled deadline/ ] );
+
+    my $tagcolors = { 'null' => 'black', chores => 'blue', work => 'orange', geektank => 'purple' };
+    for my $tag ( keys %{ $tagcolors } ) {
+        $tagcolors->{$tag} = $colors->get_color( $tagcolors->{$tag} );
+    }
+    $self->stash( 'tagcolors', $tagcolors );
 
     $self->stash( 'body_data', \@tasks );
 
@@ -218,7 +225,7 @@ App::Wubot::Web::Tasks - wubot tasks web interface
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 CONFIGURATION
 

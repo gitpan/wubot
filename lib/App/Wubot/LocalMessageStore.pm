@@ -1,7 +1,7 @@
 package App::Wubot::LocalMessageStore;
 use Moose;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use Digest::MD5 qw( md5_hex );
 use File::Path;
@@ -19,7 +19,7 @@ App::Wubot::LocalMessageStore - add or remove messages from a local wubot SQLite
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 SYNOPSIS
 
@@ -32,7 +32,7 @@ version 0.3.1
 
     # scalar context, get the message, immediately deleting it from
     # the queue
-    my $got_message = $messenger->get( $directory ),
+    my $got_message = $messenger->get( $directory );
 
     # array context, get the message and return a callback that can be
     # called to delete the message after it has been successfully
@@ -220,6 +220,8 @@ sub store {
 Delete all queue items where the 'seen' time is older than the
 specified 'age' in seconds.
 
+Also calls the 'vacuum' command on the database to reclaim any unused
+space and improve performance.
 
 =cut
 
@@ -243,6 +245,10 @@ sub delete_seen {
 
    my $conditions = { seen => { '<' => $time } };
    $self->sqlite->{ $dbfile }->delete( 'message_queue', $conditions );
+
+   $self->sqlite->{ $dbfile }->vacuum();
+
+   return 1;
 }
 
 =item get( $directory )

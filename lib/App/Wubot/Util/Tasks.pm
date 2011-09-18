@@ -1,7 +1,7 @@
 package App::Wubot::Util::Tasks;
 use Moose;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use Date::Manip;
 use POSIX qw(strftime);
@@ -15,7 +15,7 @@ App::Wubot::Util::Tasks - utility for dealing with the Emacs Org-Mode files and 
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 SYNOPSIS
 
@@ -75,7 +75,7 @@ TODO: documentation this method
 =cut
 
 sub get_tasks {
-    my ( $self, $due ) = @_;
+    my ( $self, $due, $tag ) = @_;
 
     my @tasks;
 
@@ -90,6 +90,10 @@ sub get_tasks {
                           order     => [ 'priority DESC', 'deadline_utime', 'scheduled_utime', 'lastupdate DESC' ],
                           callback  => sub {
                               my $task = shift;
+
+                              unless ( $task->{tag} ) { $task->{tag} = "null" }
+                              if ( $tag ) { return unless $task->{tag} eq $tag }
+
                               $seen->{$task->{file}}->{$task->{title}} = 1;
                               $task->{subject} = "Past Deadline: $task->{file}.org: $task->{title}\n";
 
@@ -107,6 +111,10 @@ sub get_tasks {
                           order     => [ 'priority DESC', 'scheduled_utime', 'lastupdate DESC' ],
                           callback  => sub {
                               my $task = shift;
+
+                              unless ( $task->{tag} ) { $task->{tag} = "null" }
+                              if ( $tag ) { return unless $task->{tag} eq $tag }
+
                               return if $seen->{$task->{file}}->{$task->{title}};
                               $seen->{$task->{file}}->{$task->{title}} = 1;
                               $task->{subject} = "Overdue: $task->{file}.org: $task->{title}\n";
@@ -126,6 +134,10 @@ sub get_tasks {
                               order     => [ 'priority DESC', 'lastupdate DESC' ],
                               callback  => sub {
                                   my $task = shift;
+
+                                  unless ( $task->{tag} ) { $task->{tag} = "null" }
+                                  if ( $tag ) { return unless $task->{tag} eq $tag }
+
                                   next if $seen->{$task->{file}}->{$task->{title}};
                                   $seen->{$task->{file}}->{$task->{title}} = 1;
                                   $task->{subject} = "Priority: $task->{file}.org: $task->{title}\n";
@@ -306,6 +318,11 @@ sub parse_emacs_org_page {
 
         $block =~ s|^(.*)||;
         $task->{title} = $1;
+
+        if ( $task->{title} =~ m|^(.*?)\s+\:(\w+)\:$| ) {
+            $task->{title} = $1;
+            $task->{tag}   = $2;
+        }
 
         if ( $task->{title} =~ s|\s*\[(\d+.*?)\]\s*$|| ) {
             $task->{progress} = $1;

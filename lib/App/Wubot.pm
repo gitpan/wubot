@@ -1,7 +1,7 @@
 package Wubot;
 use Moose;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 #_* Libraries
 
@@ -16,7 +16,7 @@ Wubot - personal distributed reactive automation
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 DESCRIPTION
 

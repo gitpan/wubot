@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::GreaterThan;
 use Moose;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use YAML;
 
@@ -49,7 +49,7 @@ App::Wubot::Reactor::GreaterThan - set keys and values if the value of a field e
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 DESCRIPTION
 

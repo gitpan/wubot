@@ -1,7 +1,7 @@
 package App::Wubot::Util::Tail;
 use Moose;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use Fcntl qw( SEEK_END SEEK_CUR SEEK_SET O_NONBLOCK O_RDONLY );
 
@@ -14,7 +14,7 @@ App::Wubot::Util::Tail - follow the tail of a growing file
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 SYNOPSIS
 

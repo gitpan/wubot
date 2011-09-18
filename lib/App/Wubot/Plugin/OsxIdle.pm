@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::OsxIdle;
 use Moose;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use App::Wubot::Logger;
 use App::Wubot::Util::TimeLength;
@@ -205,7 +205,7 @@ App::Wubot::Plugin::OsxIdle - monitor idle time on OS X
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 SYNOPSIS
 

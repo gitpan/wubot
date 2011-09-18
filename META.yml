@@ -6,7 +6,7 @@ build_requires: {}
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300000, CPAN::Meta::Converter version 2.112150'
+generated_by: 'Dist::Zilla version 4.300000, CPAN::Meta::Converter version 2.112580'
 license: bsd
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -33,6 +33,8 @@ recommends:
   Net::Twitter::Lite: 0
   RRD::Simple: 0
   RRDs: 0
+  URI::Find: 0
+  WWW::LongURL: 0
   XML::Atom::SimpleFeed: 0
   XML::Feed: 0
   XML::RSS: 0
@@ -83,6 +85,7 @@ requires:
   Test::Exception: 0
   Test::Mojo: 0
   Test::More: 0
+  Test::Routine: 0
   Text::Template: 0
   URI::Escape: 0
   YAML: 0
@@ -92,4 +95,4 @@ requires:
   warnings: 0
 resources:
   repository: http://github.com/wu/wubot
-version: 0.3.1
+version: 0.3.2

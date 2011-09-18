@@ -70,6 +70,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::Mojo" => 0,
     "Test::More" => 0,
+    "Test::Routine" => 0,
     "Text::Template" => 0,
     "URI::Escape" => 0,
     "YAML" => 0,
@@ -78,7 +79,7 @@ my %WriteMakefileArgs = (
     "utf8" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.3.1",
+  "VERSION" => "0.3.2",
   "test" => {
     "TESTS" => "t/*.t"
   }

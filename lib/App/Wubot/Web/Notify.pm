@@ -2,7 +2,7 @@ package App::Wubot::Web::Notify;
 use strict;
 use warnings;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use Mojo::Base 'Mojolicious::Controller';
 
@@ -105,6 +105,10 @@ sub notify {
                 print "Removing tag readme from id $id\n";
                 $sqlite_notify->delete( 'tags',
                                         { remoteid => $id, tag => 'readme', tablename => 'notifications' },
+                                    );
+                $sqlite_notify->update( 'notifications',
+                                        { seen => $now },
+                                        { id   => $id  },
                                     );
             } elsif ( $tag eq "m" ) {
                 print "Setting README tag on id $id and marking seen\n";
@@ -223,6 +227,8 @@ sub notify {
         unless ( $message->{mailbox} ) { $message->{mailbox} = 'null' }
 
         utf8::decode( $message->{subject} );
+        utf8::decode( $message->{subject_text} );
+        utf8::decode( $message->{username} );
 
         my $coalesce = $message->{mailbox};
         if ( ! $expand ) {
@@ -278,6 +284,12 @@ sub notify {
                                           where     => { seen => \$is_null },
                                       } );
     $self->stash( 'count', $total->{count} );
+
+    my ( $readme ) = $sqlite_notify->select( { fields    => 'count(*) as count',
+                                               tablename => 'tags',
+                                               where     => { tag => 'readme' },
+                                           } );
+    $self->stash( 'readme', $readme->{count} );
 
     $self->render( template => 'notify' );
 
@@ -346,7 +358,7 @@ App::Wubot::Web::Notify - web interface for wubot notifications
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 CONFIGURATION
 

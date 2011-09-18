@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::Outlook;
 use Moose;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use Date::Manip;
 use Encode;
@@ -108,7 +108,7 @@ App::Wubot::Plugin::Outlook - monitor number of emails in the inbox using Outloo
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 SYNOPSIS
 

@@ -1,7 +1,7 @@
 #!/usr/local/bin/perl -w
 use strict;
 
-our $VERSION = '0.3.1'; # VERSION
+our $VERSION = '0.3.2'; # VERSION
 
 use AnyEvent::Watchdog autorestart => 1, heartbeat => 300;
 
@@ -106,14 +106,16 @@ my $timer = AnyEvent->timer( after    => 1,
                                  unless ( $start_date eq $current_date ) {
                                      $logger->warn( "Date changed" );
 
-                                     $logger->warn( "Restarting..." );
+                                     $logger->warn( "Restarting now..." );
                                      AnyEvent::Watchdog::Util::restart;
                                  }
 
-                                 # for profiling
-                                 # if ( $loops > 10 ) {
-                                 #     $end->recv;
-                                 # }
+                                 if ( $ENV{LIMIT} ) {
+                                     print "LOOPS: $loops\n";
+                                     if ( $loops > $ENV{LIMIT} ) {
+                                         $end->recv;
+                                     }
+                                 }
 
                              } );
 
@@ -187,7 +189,7 @@ __END__
 
 =head1 VERSION
 
-version 0.3.1
+version 0.3.2
 
 =head1 SYNOPSIS
 
