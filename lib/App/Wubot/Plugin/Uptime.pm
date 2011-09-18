@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::Uptime;
 use Moose;
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -96,7 +96,7 @@ App::Wubot::Plugin::Uptime - monitor system load
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 SYNOPSIS
 

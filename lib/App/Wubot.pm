@@ -1,7 +1,7 @@
-package Wubot;
+package App::Wubot;
 use Moose;
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 #_* Libraries
 
@@ -11,12 +11,12 @@ use Carp;
 
 =head1 NAME
 
-Wubot - personal distributed reactive automation
+App::Wubot - personal distributed reactive automation
 
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 DESCRIPTION
 

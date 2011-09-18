@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::OsxMailApp;
 use Moose;
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 use Date::Manip;
 
@@ -115,7 +115,7 @@ App::Wubot::Plugin::OsxMailApp - monitor OS X mailbox file for new messages
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 SYNOPSIS
 

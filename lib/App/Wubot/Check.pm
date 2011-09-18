@@ -1,7 +1,7 @@
 package App::Wubot::Check;
 use Moose;
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 use Benchmark;
 use YAML;
@@ -18,7 +18,7 @@ App::Wubot::Check - perform checks for an instance of a monitor
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 SYNOPSIS
 

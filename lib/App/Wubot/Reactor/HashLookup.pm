@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::HashLookup;
 use Moose;
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -31,7 +31,7 @@ App::Wubot::Reactor::HashLookup - map the value of one field to a value for anot
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 SYNOPSIS
 

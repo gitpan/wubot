@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 use File::Basename 'dirname';
 use File::Spec;
@@ -35,7 +35,7 @@ __END__
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 SYNOPSIS
 

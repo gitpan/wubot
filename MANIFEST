@@ -233,6 +233,7 @@ cronjobs/coopduino-graphs.sh
 dist.ini
 docs/ArduinoSensors.pod
 docs/Debugging.pod
+docs/FeedFu.pod
 docs/GettingStarted.pod
 docs/Guide.pod
 docs/MonitorPlugins.pod

@@ -5,7 +5,7 @@ use Moose;
 use Capture::Tiny;
 use Device::SerialPort qw( :PARAM :STAT :ALL );
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -107,7 +107,7 @@ App::Wubot::Plugin::SerialPort - monitor data received over a serial port
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 DESCRIPTION
 

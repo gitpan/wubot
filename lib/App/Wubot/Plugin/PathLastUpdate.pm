@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::PathLastUpdate;
 use Moose;
 
-our $VERSION = '0.3.2'; # VERSION
+our $VERSION = '0.3.3'; # VERSION
 
 use App::Wubot::Logger;
 
@@ -53,7 +53,7 @@ App::Wubot::Plugin::PathLastUpdate - monitor the last modified time on a path
 
 =head1 VERSION
 
-version 0.3.2
+version 0.3.3
 
 =head1 SYNOPSIS
 
