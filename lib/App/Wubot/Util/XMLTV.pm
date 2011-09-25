@@ -1,7 +1,7 @@
 package App::Wubot::Util::XMLTV;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Benchmark;
 use Capture::Tiny qw/capture/;
@@ -22,7 +22,7 @@ App::Wubot::Util::XMLTV - utility method for dealing with XMLTV data
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
@@ -46,7 +46,7 @@ has 'db' => ( is => 'ro',
               lazy => 1,
               default => sub {
                   my $self = shift;
-                  return App::Wubot::SQLite->new( { file => $self->dbfile } );
+                  return App::Wubot::SQLite->new( { file => join( "/", $ENV{HOME}, "wubot", "sqlite", "xml_tv.sql" ) } );
               },
           );
 
@@ -64,14 +64,6 @@ has 'logger'  => ( is => 'ro',
                    lazy => 1,
                    default => sub {
                        return Log::Log4perl::get_logger( __PACKAGE__ );
-                   },
-               );
-
-has 'schemas' => ( is => 'ro',
-                   isa => 'HashRef',
-                   lazy => 1,
-                   default => sub {
-                       return ( YAML::LoadFile( "config/schemas.yaml" ) );
                    },
                );
 
@@ -120,7 +112,7 @@ sub fetch_process_data {
 
     $self->logger->info( "Deleting schedule data older than 4 weeks" );
     my $oldest_date = time - 60*60*24*7*4;
-    $self->db->delete( "schedule", { start => { "<" => $oldest_date } } );
+    $self->db->delete( "schedule", { start => { "<" => $oldest_date } }, "tv" );
     $self->logger->info( "Deleting schedule data complete" );
 
     for my $day ( 0 .. 14 ) {
@@ -184,7 +176,7 @@ sub process_data {
 
                   $self->db->insert( 'station',
                                      $station,
-                                     $self->schemas->{tv_station}
+                                     "tv"
                                  );
 
               },
@@ -202,7 +194,7 @@ sub process_data {
 
                       $self->db->insert( 'lineup',
                                          $entry,
-                                         $self->schemas->{tv_lineup}
+                                         "tv"
                                      );
                   }
 
@@ -226,7 +218,7 @@ sub process_data {
 
                   $self->db->insert( 'schedule',
                                      $entry,
-                                     $self->schemas->{tv_schedule}
+                                     "tv"
                                  );
 
 
@@ -259,7 +251,7 @@ sub process_data {
                   $self->db->insert_or_update( 'program',
                                                $entry,
                                                { program_id => $entry->{program_id} },
-                                               $self->schemas->{tv_program}
+                                               "tv"
                                            );
 
 
@@ -277,7 +269,7 @@ sub process_data {
 
                       $self->db->insert( 'crew',
                                          $entry,
-                                         $self->schemas->{tv_crew}
+                                         "tv"
                                      );
 
                   }
@@ -294,7 +286,7 @@ sub process_data {
 
                       $self->db->insert( 'genre',
                                          $entry,
-                                         $self->schemas->{tv_genre}
+                                         "tv"
                                      );
                   }
 
@@ -325,6 +317,7 @@ sub get_data {
                          where     => $where,
                          fields    => $fields,
                          order     => $order,
+                         schema    => "tv",
                          callback  => sub {
                              my $entry = shift;
 
@@ -354,6 +347,7 @@ sub get_series_id {
     $self->db->select( { tablename => 'program',
                          where     => { title => $name },
                          fields    => 'series_id',
+                         schema    => 'tv',
                          callback  => sub {
                              my $entry = shift;
                              $ids{ $entry->{series_id} }++;
@@ -387,6 +381,7 @@ sub get_program_id {
     $self->db->select( { tablename => 'program',
                          fields    => 'program_id',
                          where     => $search,
+                         schema    => 'tv',
                          callback  => sub {
                              my $entry = shift;
                              $ids{ $entry->{program_id} }++;
@@ -419,6 +414,7 @@ sub get_episodes {
     $self->db->select( { tablename => 'program',
                          fields    => 'program_id',
                          where     => { program_id => { 'LIKE' => "$showid%" } },
+                         schema    => 'tv',
                          callback  => sub {
                              my $entry = shift;
                              $ids{ $entry->{program_id} }++;
@@ -447,6 +443,7 @@ sub get_program_details {
 
     $self->db->select( { tablename => 'program',
                          where     => { program_id => $program_id },
+                         schema    => 'tv',
                          callback  => sub {
                              my $entry = shift;
 
@@ -486,6 +483,7 @@ sub get_station {
 
     $self->db->select( { tablename => 'station',
                          where     => $where,
+                         schema    => 'tv',
                          callback  => sub {
                              my $entry = shift;
                              push @details, $entry;
@@ -582,7 +580,7 @@ sub hide_station {
     $self->db->update( 'station',
                        { hide => $hide, lastupdate => time },
                        { station_id => $station_id },
-                       $self->schemas->{tv_station}
+                       'tv'
                    );
 }
 
@@ -617,13 +615,13 @@ sub set_score {
         $self->db->insert_or_update( 'score',
                                      { score => $score, program_id => $program_id, lastupdate => time },
                                      { program_id => $program_id },
-                                     $self->schemas->{tv_score}
+                                     'tv'
                                  );
     }
     else {
         $self->db->delete( 'score',
                            { program_id => $program_id },
-                           $self->schemas->{tv_score}
+                           'tv'
                        );
     }
 }
@@ -754,10 +752,11 @@ sub get_schedule {
     my $seen;
 
     $self->db->select( { tablename => 'schedule left join program on schedule.program_id = program.program_id left join score on program.score_id = score.program_id left join lineup on schedule.station_id = lineup.station_id left join station on schedule.station_id = station.station_id',
-                          where     => $where,
+                         where     => $where,
                          limit     => $options->{limit} || 100,
                          order     => 'start',
                          fields    => 'program.program_id as x_program_id, station.station_id as x_station_id, schedule.lastupdate as lastupdate, *',
+                         schema    => 'tv.schedule',
                          callback  => sub {
                              my $entry = shift;
 
@@ -847,7 +846,7 @@ sub get_rt {
             $self->db->update( 'rottentomato',
                                $rt_data,
                                { title => $title },
-                               $self->schemas->{tv_rottentomato}
+                               'tv'
                            );
         }
     }
@@ -945,7 +944,7 @@ sub fetch_rt_score {
         $self->db->insert_or_update( 'rottentomato',
                                      $results,
                                      { program_id => $program_id },
-                                     $self->schemas->{tv_rottentomato}
+                                     'tv'
                                  );
 
         # update the cache

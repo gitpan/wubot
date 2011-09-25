@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::XMLTV;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Date::Manip;
 use YAML;
@@ -71,6 +71,7 @@ sub check {
         1;
     } or do {                   # catch
 
+        $self->logger->error( "ERROR processing XMLTV Data: $@" );
         $self->reactor->( { subject => "Error processing XMLTV Data: $@" } );
 
     };
@@ -91,7 +92,7 @@ App::Wubot::Plugin::XMLTV - fetch data from XMLTV and store in the wubot tv db
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 DESCRIPTION
 

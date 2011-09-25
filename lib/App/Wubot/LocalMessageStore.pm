@@ -1,7 +1,7 @@
 package App::Wubot::LocalMessageStore;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Digest::MD5 qw( md5_hex );
 use File::Path;
@@ -19,7 +19,7 @@ App::Wubot::LocalMessageStore - add or remove messages from a local wubot SQLite
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
@@ -54,6 +54,8 @@ stores messages for reactions by wubot-reactor.
 When a message in the queue has been processed, it will not be
 immediately removed from the queue.  Instead, the 'seen' flag will be
 set to the timestamp when the message was marked as processed.
+
+=head1 GUARANTEED MESSAGE PROCESSING
 
 The callback mechanism (see the example above) is used to ensure that
 the message has been successfully processed before it is deleted.  If

@@ -1,7 +1,7 @@
 package App::Wubot::SQLite;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Capture::Tiny;
 use DBI;
@@ -20,11 +20,22 @@ App::Wubot::SQLite - the wubot library for working with SQLite
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
     use App::Wubot::SQLite;
+
+    my $sqlite = App::Wubot::SQLite->new( { file => '/path/to/db.sqlite' } );
+
+    # insert data into 'mytable'.  table is automatically created if
+    # it doesn't exist.
+    $sqlite->insert( 'mytable', { abc => 'xyz' }, { abc => 'TEXT' } );
+
+    # insert another row into 'mytable'.  'xyz' column is
+    # automatically added.
+    $sqlite->insert( 'mytable', { abc => 'def', xyz => 'abc' }, { abc => 'TEXT', xyz => 'TEXT" } );
+
 
 =head1 DESCRIPTION
 
@@ -63,7 +74,7 @@ examples:
 
   # schema directory specified, look for the schema file in
   # ~/wubot/schemas/foo/mytable.yaml
-  $sqlite->insert( 'mytable', { abc => 'xyz' }, { abc => 'TEXT' }, 'foo' );
+  $sqlite->insert( 'mytable', { abc => 'xyz' }, 'foo' );
 
 A number of schemas are distributed in the wubot tarball in the
 config/schemas subdirectory.  These schemas should be copied to
@@ -734,10 +745,9 @@ sub get_schema {
         $self->logger->logconfess( "ERROR: get_schema called but no table specified" );
     }
 
-    # table name may contain 'join'
-    # unless ( $table =~ m|^[\w\d\_]+$| ) {
-    #     $self->logger->logconfess( "ERROR: table name contains invalid characters: $table" );
-    # }
+    if ( $directory && $directory =~ m|\.| ) {
+        ( $directory, $table ) = split /\./, $directory;
+    }
 
     my $schema_file;
     if ( $directory ) {

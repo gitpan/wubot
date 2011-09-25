@@ -1,7 +1,7 @@
 package App::Wubot::Util::Tasks;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Date::Manip;
 use POSIX qw(strftime);
@@ -15,7 +15,7 @@ App::Wubot::Util::Tasks - utility for dealing with the Emacs Org-Mode files and 
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 

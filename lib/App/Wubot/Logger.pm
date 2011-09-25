@@ -2,7 +2,7 @@ package App::Wubot::Logger;
 use strict;
 use warnings;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Log::Log4perl qw(:easy);
 
@@ -15,7 +15,7 @@ App::Wubot::Logger - wubot logging library
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
@@ -102,6 +102,7 @@ BEGIN {
         log4perl.appender.Screen.color.warn  = magenta
         log4perl.appender.Screen.color.error = yellow
         log4perl.appender.Screen.color.fatal = red
+        log4perl.appender.Screen.utf8        = 1
 
 END_SCREEN_CONF
 
@@ -116,6 +117,7 @@ my $log_conf = <<"END_LOG_CONF";
         log4perl.appender.Logfile.layout      = Log::Log4perl::Layout::PatternLayout
         log4perl.appender.Logfile.layout.ConversionPattern = %d %m %n
         log4perl.appender.Logfile.Threshold    = DEBUG
+        log4perl.appender.Logfile.utf8         = 1
 
 END_LOG_CONF
 

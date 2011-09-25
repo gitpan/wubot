@@ -2,9 +2,16 @@ package App::Wubot::Web::Tv;
 use strict;
 use warnings;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Mojo::Base 'Mojolicious::Controller';
+
+use Data::ICal;
+use Data::ICal::Entry::Event;
+use Data::ICal::Entry::Alarm::Audio;
+use Date::ICal;
+use DateTime;
+use Digest::MD5 qw(md5_hex);
 
 use App::Wubot::Logger;
 use App::Wubot::Util::TimeLength;
@@ -471,7 +478,7 @@ App::Wubot::Web::Tv - wubot tv web interface
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 CONFIGURATION
 

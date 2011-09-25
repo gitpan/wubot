@@ -1,13 +1,14 @@
 package App::Wubot::Reactor::UrlLengthen;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use LWP::UserAgent;
 use URI::Find;
 use WWW::LongURL;
 
 use App::Wubot::Logger;
+use App::Wubot::SQLite;
 
 =head1 NAME
 
@@ -15,7 +16,7 @@ App::Wubot::Reactor::UrlLengthen - lengthen URLs using WWW::LongURL
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
@@ -41,6 +42,7 @@ has 'ua'      => ( is => 'ro',
                        my $ua = LWP::UserAgent->new();
                        $ua->timeout(10);
                        $ua->max_redirect( 0 );
+                       $ua->agent("Mozilla/6.0");
                        return $ua;
                    },
                );
@@ -61,11 +63,33 @@ has 'urlfinder'  => ( is => 'ro',
                       },
                   );
 
-has 'cache'   => ( is => 'ro',
-                   isa => 'HashRef',
-                   lazy => 1,
-                   default => sub { {} },
-               );
+has 'dbfile' => ( is      => 'rw',
+                  isa     => 'Str',
+                  lazy    => 1,
+                  default => sub {
+                      return join( "/", $ENV{HOME}, "wubot", "sqlite", "short_urls.sql" );
+                  },
+              );
+
+has 'sqlite'    => ( is      => 'ro',
+                  isa     => 'App::Wubot::SQLite',
+                  lazy    => 1,
+                  default => sub {
+                      return App::Wubot::SQLite->new( { file => $_[0]->dbfile } );
+                  },
+              );
+
+has 'schema'    => ( is => 'ro',
+                     isa => 'HashRef',
+                     lazy => 1,
+                     default => sub {
+                         return { short_url   => 'VARCHAR( 1024 )',
+                                  long_url    => 'VARCHAR( 1024 )',
+                                  constraints => [ 'UNIQUE( short_url )' ],
+                              };
+                     },
+                 );
+
 
 has 'logger'  => ( is => 'ro',
                    isa => 'Log::Log4perl::Logger',
@@ -126,9 +150,20 @@ Given a URL, attempt to expand it.
 sub expand {
     my ( $self, $url ) = @_;
 
-    if ( $self->cache->{ $url } ) {
+    my ( $cache ) = $self->sqlite->select( { tablename => 'urls',
+                                             fields    => 'long_url',
+                                             where     => { short_url => $url },
+                                             schema    => $self->schema,
+
+                                         } );
+
+    if ( $cache->{long_url} ) {
         $self->logger->debug( "Cached url: $url" );
-        return $self->cache->{ $url };
+        return $cache->{long_url};
+    }
+
+    if ( $url =~ m|690\.jp| ) {
+        return $self->expand_location( $url );
     }
 
     $self->logger->debug( "Lookup url: $url" );
@@ -148,9 +183,35 @@ sub expand {
         $expanded_url = $self->expand_plusist( $expanded_url );
     }
 
-    $self->cache->{ $url } = $expanded_url;
+    $self->sqlite->insert( 'urls',
+                           { short_url => $url,
+                             long_url  => $expanded_url,
+                         },
+                           $self->schema
+                       );
 
     return $expanded_url;
+}
+
+=item expand_location( $url )
+
+Given a shortened URL, expand it by fetching the headers and getting
+the 'location' header.
+
+=cut
+
+sub expand_location {
+    my ( $self, $url ) = @_;
+
+    $self->logger->debug( "Checking for expanded url: $url" );
+
+    my $head = $self->ua->head($url);
+
+    my $expanded = $head->{_headers}->{location};
+
+    $self->logger->debug( "Expanded to: $expanded" );
+
+    return $expanded;
 }
 
 =item expand_pltme( $url )
@@ -163,7 +224,7 @@ do not get expanded by WWW::LongURL yet.
 sub expand_pltme {
     my ( $self, $url ) = @_;
 
-    $self->logger->debug( "Getting content of $url" );
+    $self->logger->debug( "Getting content of pltme url: $url" );
     my $response = $self->ua->get( $url );
 
     my $content = $response->decoded_content;
@@ -171,11 +232,10 @@ sub expand_pltme {
     return $url unless $content =~ m|window.location\s\=\s\"(.*)\"|;
 
     $url = $1;
-    $self->logger->debug( "Expanded url: $url" );
 
-    my $head = $self->ua->head($url);
+    $self->logger->debug( "Got expanded URL: $url" );
 
-    return $head->{_headers}->{location};
+    return $self->expand_location( $url );
 }
 
 =item expand_plusist( $url )
@@ -193,12 +253,12 @@ parses the link from the link-frame.
 sub expand_plusist {
     my ( $self, $url ) = @_;
 
-    $self->logger->debug( "Getting content of $url" );
+    $self->logger->debug( "Expanding plusist url: $url" );
     my $response = $self->ua->get( $url );
 
     my $content = $response->decoded_content;
 
-    return $url unless $content =~ m|iframe id=\"link-frame\" src=\"(.*?)\"|;
+    return $url unless $content =~ m|iframe id=\"link.frame\" src=\"(.*?)\"|;
 
     $url = $1;
     $self->logger->debug( "Expanded url: $url" );

@@ -1,7 +1,7 @@
 package App::Wubot::Plugin::EmacsOrgMode;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Date::Manip;
 use File::chdir;
@@ -148,7 +148,7 @@ App::Wubot::Plugin::EmacsOrgMode - parse tasks from Emacs Org-Mode files
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 DESCRIPTION
 

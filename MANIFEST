@@ -227,6 +227,14 @@ config/schemas/rottentomato.yaml
 config/schemas/sensors.yaml
 config/schemas/tags.yaml
 config/schemas/tasks.yaml
+config/schemas/tv/crew.yaml
+config/schemas/tv/genre.yaml
+config/schemas/tv/lineup.yaml
+config/schemas/tv/program.yaml
+config/schemas/tv/rottentomato.yaml
+config/schemas/tv/schedule.yaml
+config/schemas/tv/score.yaml
+config/schemas/tv/station.yaml
 config/schemas/workhours.yaml
 config/webui.yaml
 cronjobs/coopduino-graphs.sh
@@ -428,6 +436,7 @@ templates/crew.html.ep
 templates/css.html.ep
 templates/graphs.html.ep
 templates/index.html.ep
+templates/item.html.ep
 templates/layouts/funky.html.ep
 templates/nav.html.ep
 templates/newtv.html.ep

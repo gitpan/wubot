@@ -1,7 +1,7 @@
 package App::Wubot;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 #_* Libraries
 
@@ -16,9 +16,12 @@ App::Wubot - personal distributed reactive automation
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 DESCRIPTION
+
+This project is still in the alpha stage of development!  Data
+handling is reliable, but the user interface is still rough.
 
 For an overview of wubot, please see L<App::Wubot::Guide::Overview>.
 

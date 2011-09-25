@@ -1,7 +1,7 @@
 package App::Wubot::Reactor;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use Class::Load qw/load_class/;
 
@@ -15,12 +15,16 @@ App::Wubot::Reactor - runs reactive rules on a message
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
     use App::Wubot::Reactor;
 
+    my $reactor = App::Wubot::Reactor->new();
+
+    # run rules on message hash
+    $reactor->react( $message_h, $rules_h );
 
 =head1 DESCRIPTION
 
@@ -31,27 +35,27 @@ to true for the message.
 
 =cut
 
-has 'config' => ( is => 'ro',
-                  isa => 'HashRef',
-              );
+has 'config'     => ( is => 'ro',
+                      isa => 'HashRef',
+                  );
 
-has 'logger'  => ( is => 'ro',
-                   isa => 'Log::Log4perl::Logger',
-                   lazy => 1,
-                   default => sub {
-                       return Log::Log4perl::get_logger( __PACKAGE__ );
-                   },
-               );
+has 'logger'     => ( is => 'ro',
+                      isa => 'Log::Log4perl::Logger',
+                      lazy => 1,
+                      default => sub {
+                          return Log::Log4perl::get_logger( __PACKAGE__ );
+                      },
+                  );
 
-has 'plugins' => ( is => 'ro',
-                   isa => 'HashRef',
-                   default => sub { return {} },
-               );
+has 'plugins'    => ( is => 'ro',
+                      isa => 'HashRef',
+                      default => sub { return {} },
+                  );
 
-has 'monitors' => ( is => 'ro',
-                    isa => 'HashRef',
-                    default => sub { return {} },
-                );
+has 'monitors'   => ( is => 'ro',
+                      isa => 'HashRef',
+                      default => sub { return {} },
+                  );
 
 has 'conditions' => ( is => 'ro',
                       isa => 'App::Wubot::Conditions',
@@ -75,7 +79,8 @@ the rule will be evaluated.
 
 This method is recursive.  When a rule fires, if that rule contains a
 child 'rules' section, then the react() method will be called to
-process the child rules, and the 'depth' will be incremented.
+process the child rules, and the 'depth' will be incremented.  There
+is no need to pass in the 'depth' option when calling this method.
 
 If the rule fires, and the 'last_rule' param is set on the rule, then
 the 'last_rule' field will be set on the message to prevent any

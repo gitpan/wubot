@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::User;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 # todo
 #  - App::Wubot::Util::User
@@ -12,40 +12,47 @@ our $VERSION = '0.3.3'; # VERSION
 use YAML;
 
 use App::Wubot::Logger;
+use App::Wubot::Reactor;
 
-has 'userdb'  => ( is => 'ro',
-                   isa => 'HashRef',
-                   lazy => 1,
-                   default => sub { {} },
-               );
+has 'userdb'      => ( is => 'ro',
+                       isa => 'HashRef',
+                       lazy => 1,
+                       default => sub { {} },
+                   );
 
-has 'directory' => ( is => 'ro',
-                     isa => 'Str',
-                     lazy => 1,
-                     default => sub {
-                         return join( "/", $ENV{HOME}, "wubot", "userdb" );
-                     },
-                 );
+has 'directory'   => ( is => 'ro',
+                       isa => 'Str',
+                       lazy => 1,
+                       default => sub {
+                           return join( "/", $ENV{HOME}, "wubot", "userdb" );
+                       },
+                   );
 
-has 'logger'  => ( is => 'ro',
-                   isa => 'Log::Log4perl::Logger',
-                   lazy => 1,
-                   default => sub {
-                       return Log::Log4perl::get_logger( __PACKAGE__ );
-                   },
-               );
+has 'logger'      => ( is => 'ro',
+                       isa => 'Log::Log4perl::Logger',
+                       lazy => 1,
+                       default => sub {
+                           return Log::Log4perl::get_logger( __PACKAGE__ );
+                       },
+                   );
 
-has 'lastupdates'  => ( is => 'ro',
+has 'lastupdates' => ( is => 'ro',
                         isa => 'HashRef',
                         lazy => 1,
                         default => sub { {} },
                     );
 
-has 'aliases'  => ( is => 'ro',
-                    isa => 'HashRef',
-                    lazy => 1,
-                    default => sub { {} },
-                );
+has 'aliases'     => ( is => 'ro',
+                       isa => 'HashRef',
+                       lazy => 1,
+                       default => sub { {} },
+                   );
+
+has 'reactor'     => ( is => 'ro',
+                       isa => 'App::Wubot::Reactor',
+                       lazy => 1,
+                       default => sub { return App::Wubot::Reactor->new() },
+                   );
 
 sub react {
     my ( $self, $message, $config ) = @_;
@@ -105,9 +112,13 @@ sub react {
                 $message->{"$param\_orig"} = $message->{$param};
             }
             if ( $userdata->{ $param } ) {
-                $self->logger->trace( "Setting $param for $message->{username}" );
+                $self->logger->debug( "Setting $param for $message->{username}" );
                 $message->{$param} = $userdata->{ $param };
             }
+        }
+
+        if ( $userdata->{rules} ) {
+            $self->reactor->react( $message, $userdata->{rules} );
         }
     }
 
@@ -173,7 +184,15 @@ sub _read_userfile {
         return;
     }
 
-    my $userdata = YAML::LoadFile( $path );
+    my $userdata;
+    eval {                          # try
+        $userdata = YAML::LoadFile( $path );
+        1;
+    } or do {                       # catch
+        $self->logger->error( "Unable to load yaml file: $path: $@" );
+        return;
+    };
+
     $userdata->{username}   = lc( $username );
 
     $self->lastupdates->{$username} = $mtime;
@@ -203,7 +222,7 @@ App::Wubot::Reactor::User - try to identify user from the 'username' field
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
@@ -276,6 +295,28 @@ Using the example above, if a message had the username set to
 Each time a message comes through that has a username for which some
 user data is defined, the user's file will be scanned to see if it has
 been updated.  If so, the userdb file will be re-read.
+
+=head1 RULES
+
+You can now include a custom set of rules to run any time a message is
+received from a user by creating a rules tree in the user config file.
+
+  aliases:
+    - lebowski
+
+  rules:
+
+    - name: set foo field on messages from the dude
+      plugin: SetField
+      config:
+        field: foo
+        value: bar
+
+The rules will run after an other userdb config has been processed.
+This means that you could use it to things like set a custom color or
+image based on other fields in the message.  For example, you might
+set different colors for the user in different feeds, or based on the
+user alias being used.
 
 =head1 LIMITATIONS
 

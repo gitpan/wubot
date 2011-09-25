@@ -1,7 +1,7 @@
 package App::Wubot::Reactor::SetField;
 use Moose;
 
-our $VERSION = '0.3.3'; # VERSION
+our $VERSION = '0.3.4'; # VERSION
 
 use YAML;
 
@@ -59,7 +59,7 @@ App::Wubot::Reactor::SetField - set one or more fields on the message to a confi
 
 =head1 VERSION
 
-version 0.3.3
+version 0.3.4
 
 =head1 SYNOPSIS
 
